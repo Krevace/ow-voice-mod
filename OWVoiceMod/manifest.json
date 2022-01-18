@@ -1,0 +1,8 @@
+{
+  "filename": "OWVoiceMod.dll",
+  "author": "Krevace",
+  "name": "Voice Mod",
+  "uniqueName": "Krevace.VoiceMod",
+  "version": "0.1.0",
+  "owmlVersion": "2.3.0"
+}
