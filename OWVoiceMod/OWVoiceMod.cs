@@ -11,6 +11,7 @@ namespace OWVoiceMod
     public class OWVoiceMod : ModBehaviour
     {
         private static AssetBundle assetBundle;
+        private static GameObject player;
 
         private void Start()
         {
@@ -67,13 +68,18 @@ namespace OWVoiceMod
             return false;
         }
 
-        private void OnCompleteSceneLoad(OWScene scene, OWScene loadScene)
+        private void OnCompleteSceneLoad(OWScene orignalScene, OWScene loadScene)
         {
             if (loadScene != OWScene.SolarSystem) return;
+
+            player = GameObject.Find("Player_Body");
+            player.AddComponent<AudioSource>();
 
             CharacterDialogueTree[] characterDialogueTree = FindObjectsOfType<CharacterDialogueTree>();
             foreach (CharacterDialogueTree childCharacterDialogueTree in characterDialogueTree)
             {
+                childCharacterDialogueTree.OnAdvancePage += OnAdvancePage;
+                childCharacterDialogueTree.OnEndConversation += OnEndConversation;
                 foreach (TextAsset characterModdedDialogueFile in assetBundle.LoadAllAssets<TextAsset>())
                 {
                     if (characterModdedDialogueFile.name == TypeExtensions.GetValue<TextAsset>(childCharacterDialogueTree, "_xmlCharacterDialogueAsset").name)
@@ -81,7 +87,27 @@ namespace OWVoiceMod
                         TypeExtensions.SetValue(childCharacterDialogueTree, "_xmlCharacterDialogueAsset", characterModdedDialogueFile);
                     }
                 }
+            } 
+        }
+
+        private void OnAdvancePage(string nodeName, int pageNum)
+        {
+            player.GetComponent<AudioSource>().Stop();
+            foreach (AudioClip characterModdedAudioFile in assetBundle.LoadAllAssets<AudioClip>())
+            {
+                if (characterModdedAudioFile.name == nodeName + pageNum.ToString())
+                {
+                    player.GetComponent<AudioSource>().clip = characterModdedAudioFile;
+                    player.GetComponent<AudioSource>().Play();
+                }
             }
         }
+
+        private void OnEndConversation()
+        {
+            player.GetComponent<AudioSource>().Stop();
+        }
+
+        //make everything work for nomai walls as well
     }
 }
