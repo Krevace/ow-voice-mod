@@ -29,7 +29,6 @@
     - Esker
     - Feldspar
     - Filix
-    - Foli
     - Gabbro
     - Galena
     - Gneiss
