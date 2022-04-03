@@ -1,17 +1,15 @@
 ManifestFileVersion: 0
-CRC: 2677178824
+CRC: 320120047
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 279d2ad651e605d2d6517725e39f773b
+    Hash: e3bc98a5eff526844f6d388e45c1aced
   TypeTreeHash:
     serializedVersion: 2
-    Hash: a31e1505e189a9885bcbe2bbbab40e9b
+    Hash: 5ad585dd02dfb5016c0dad519eab8f49
 HashAppended: 0
 ClassTypes:
 - Class: 49
-  Script: {instanceID: 0}
-- Class: 83
   Script: {instanceID: 0}
 Assets:
 - Assets/AssetBundle/bundleoassets/GhostMatterPlaque.bytes
@@ -103,7 +101,6 @@ Assets:
 - Assets/AssetBundle/bundleoassets/Prisoner_Eye_Campfire.bytes
 - Assets/AssetBundle/bundleoassets/CT_Fossil_AnglerfishResearch.bytes
 - Assets/AssetBundle/bundleoassets/Riebeck_AttlerockRecording.bytes
-- Assets/AssetBundle/bundleoassets/Scientist1A2.mp3
 - Assets/AssetBundle/bundleoassets/DB_Vessel_OutgoingMessages.bytes
 - Assets/AssetBundle/bundleoassets/TT_TimeLoop_Timeline_3c.bytes
 - Assets/AssetBundle/bundleoassets/Esker_Eye.bytes
@@ -300,14 +297,12 @@ Assets:
 - Assets/AssetBundle/bundleoassets/Shared_TH_Mine_TT_TimeLoopInterior.bytes
 - Assets/AssetBundle/bundleoassets/QuantumShardPlaque_2.bytes
 - Assets/AssetBundle/bundleoassets/BH_OldSettlement_NoteAboutConstruction.bytes
-- Assets/AssetBundle/bundleoassets/Scientist1A1.mp3
 - Assets/AssetBundle/bundleoassets/Slate.bytes
 - Assets/AssetBundle/bundleoassets/Riebeck_SouthPoleRecording.bytes
 - Assets/AssetBundle/bundleoassets/ScoutPlaque_NorthWest.bytes
 - Assets/AssetBundle/bundleoassets/CT_Quantum_ColeusTrapped.bytes
 - Assets/AssetBundle/bundleoassets/OPC_Sunken_LastLaunchData.bytes
 - Assets/AssetBundle/bundleoassets/BH_Trail_BlackholeForge.bytes
-- Assets/AssetBundle/bundleoassets/Scientist1A0.mp3
 - Assets/AssetBundle/bundleoassets/QM_SolanumConvo_Response_Identify+QuantumMoon.bytes
 - Assets/AssetBundle/bundleoassets/TH_Mine_FindingHearthianLife.bytes
 - Assets/AssetBundle/bundleoassets/CT_City_SunStationHint.bytes

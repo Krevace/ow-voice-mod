@@ -12,13 +12,16 @@ namespace OWVoiceMod
     {
         private static AssetBundle assetBundle;
         private static GameObject player;
+        private static NomaiTranslatorProp nomaiTranslatorProp;
+        private static TextAsset xmlCharacterDialogueAsset;
+        private static string currentTextName;
+        private static string oldTextName = null;
 
         private void Start()
         {
             assetBundle = ModHelper.Assets.LoadBundle("bundleoassets");
 
             //Skip splash screen (from vesper's half life mod)
-            ModHelper.Console.WriteLine("Skipping splash screen...");
             TitleScreenAnimation titleScreenAnimation = FindObjectOfType<TitleScreenAnimation>();
             TypeExtensions.SetValue(titleScreenAnimation, "_fadeDuration", 0);
             TypeExtensions.SetValue(titleScreenAnimation, "_gamepadSplash", false);
@@ -30,9 +33,12 @@ namespace OWVoiceMod
             TypeExtensions.SetValue(titleAnimationController, "_optionsFadeDelay", 0.001f);
             TypeExtensions.SetValue(titleAnimationController, "_optionsFadeDuration", 0.001f);
             TypeExtensions.SetValue(titleAnimationController, "_optionsFadeSpacing", 0.001f);
-            ModHelper.Console.WriteLine("Done!");
 
+            ModHelper.HarmonyHelper.AddPrefix<CharacterDialogueTree>("StartConversation", typeof(OWVoiceMod), nameof(OWVoiceMod.StartConversation));
             ModHelper.HarmonyHelper.AddPrefix<TextTranslation>("SetLanguage", typeof(OWVoiceMod), nameof(OWVoiceMod.SetLanguage));
+            ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>("DisplayTextNode", typeof(OWVoiceMod), nameof(OWVoiceMod.DisplayTextNode));
+            ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>("ClearNomaiText", typeof(OWVoiceMod), nameof(OWVoiceMod.ClearNomaiText));
+            ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>("OnUnequipTool", typeof(OWVoiceMod), nameof(OWVoiceMod.OnUnequipTool));
 
             LoadManager.OnCompleteSceneLoad += OnCompleteSceneLoad;
 
@@ -87,7 +93,23 @@ namespace OWVoiceMod
                         TypeExtensions.SetValue(childCharacterDialogueTree, "_xmlCharacterDialogueAsset", characterModdedDialogueFile);
                     }
                 }
-            } 
+            }
+
+            NomaiText[] nomaiText = FindObjectsOfType<NomaiText>();
+            foreach (NomaiText childNomaiText in nomaiText)
+            {
+                foreach (TextAsset nomaiModdedTextFile in assetBundle.LoadAllAssets<TextAsset>())
+                {
+                    TypeExtensions.SetValue(childNomaiText, "_nomaiTextAseet", nomaiModdedTextFile);
+                }
+            }
+
+            nomaiTranslatorProp = FindObjectOfType<NomaiTranslatorProp>();
+        }
+
+        private static void StartConversation(ref TextAsset ____xmlCharacterDialogueAsset)
+        {
+            xmlCharacterDialogueAsset = ____xmlCharacterDialogueAsset;
         }
 
         private void OnAdvancePage(string nodeName, int pageNum)
@@ -95,7 +117,7 @@ namespace OWVoiceMod
             player.GetComponent<AudioSource>().Stop();
             foreach (AudioClip characterModdedAudioFile in assetBundle.LoadAllAssets<AudioClip>())
             {
-                if (characterModdedAudioFile.name == nodeName + pageNum.ToString())
+                if (characterModdedAudioFile.name == xmlCharacterDialogueAsset.name + nodeName + pageNum.ToString())
                 {
                     player.GetComponent<AudioSource>().clip = characterModdedAudioFile;
                     player.GetComponent<AudioSource>().Play();
@@ -108,6 +130,43 @@ namespace OWVoiceMod
             player.GetComponent<AudioSource>().Stop();
         }
 
-        //make everything work for nomai walls as well
+        private static void DisplayTextNode()
+        {
+            NomaiText nomaiText = TypeExtensions.GetValue<NomaiText>(nomaiTranslatorProp, "_nomaiTextComponent");
+            int currentTextID = TypeExtensions.GetValue<int>(nomaiTranslatorProp, "_currentTextID");
+            currentTextName = nomaiText._nomaiTextAsset.name + currentTextID.ToString();
+
+            if (currentTextName != oldTextName)
+            {
+                player.GetComponent<AudioSource>().Stop();
+                if (nomaiText.IsTranslated(currentTextID))
+                {
+                    foreach (AudioClip characterModdedAudioFile in assetBundle.LoadAllAssets<AudioClip>())
+                    {
+                        if (characterModdedAudioFile.name == currentTextName)
+                        {
+                            player.GetComponent<AudioSource>().clip = characterModdedAudioFile;
+                            player.GetComponent<AudioSource>().Play();
+                        }
+                    }
+                    oldTextName = currentTextName;
+                } else
+                {
+                    oldTextName = null;
+                }
+            }
+        }
+
+        private static void ClearNomaiText()
+        {
+            player.GetComponent<AudioSource>().Stop();
+            oldTextName = null;
+        }
+
+        private static void OnUnequipTool()
+        {
+            player.GetComponent<AudioSource>().Stop();
+            oldTextName = null;
+        }
     }
 }
