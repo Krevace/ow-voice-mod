@@ -1,7 +1,6 @@
 # Outer Wilds Voice Mod
 
 **TO DO:**
-* characters (work), walls (work), recordings
 * add config menu with:
   + enable/disable splash skip
   + enable/disable character voices
