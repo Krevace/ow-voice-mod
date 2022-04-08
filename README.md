@@ -7,4 +7,4 @@
   + enable/disable nomai wall voices
   + enable/disable nomai recording voices
   + enable/disable hearthian recording voices
-  + enable/disable specific characters:
+  + enable/disable specific characters
