@@ -65,6 +65,7 @@ namespace OWVoiceMod
 
         private static void StartConversation(ref TextAsset ____xmlCharacterDialogueAsset)
         {
+            //make new audio source here
             xmlCharacterDialogueAsset = ____xmlCharacterDialogueAsset;
         }
 
@@ -83,14 +84,17 @@ namespace OWVoiceMod
 
         private void OnEndConversation()
         {
+            //delete audio source here
             player.GetComponent<AudioSource>().Stop();
         }
 
         private static void DisplayTextNode()
         {
-            NomaiText nomaiText = TypeExtensions.GetValue<NomaiText>(nomaiTranslatorProp, "_nomaiTextComponent");
-            int currentTextID = TypeExtensions.GetValue<int>(nomaiTranslatorProp, "_currentTextID");
-            currentTextName = nomaiText._nomaiTextAsset.name + currentTextID.ToString();
+            NomaiText nomaiText = nomaiTranslatorProp._nomaiTextComponent;
+            int currentTextID = nomaiTranslatorProp._currentTextID;
+            if (nomaiText is NomaiComputer) currentTextName = "NomaiWarpComputer" + currentTextID.ToString();
+            else if (nomaiText is GhostWallText) currentTextName = currentTextName = "OwlkStatic";
+            else currentTextName = nomaiText._nomaiTextAsset.name + currentTextID.ToString();
 
             if (currentTextName != oldTextName)
             {
