@@ -54,6 +54,13 @@ namespace OWVoiceMod
             ModHelper.Console.WriteLine($"{nameof(OWVoiceMod)} is loaded!", MessageType.Success);
         }
 
+        public override void Configure(IModConfig config)
+        {
+            //ToggleMusic(config.GetSettingsValue<bool>("enableMusic"));
+            //slateVolume = config.GetSettingsValue<float>("Slate");
+            //_isCubesEnabled = config.GetSettingsValue<float>("Arkose");
+        }
+
         private void OnCompleteSceneLoad(OWScene orignalScene, OWScene loadScene)
         {
             if (loadScene != OWScene.SolarSystem) return;
