@@ -1,25 +1,35 @@
-﻿using System;
-using System.Reflection;
-using System.Xml;
-using OWML.ModHelper;
+﻿using OWML.ModHelper;
 using OWML.Common;
 using OWML.Utils;
 using UnityEngine;
+using System.Linq;
+using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 
 namespace OWVoiceMod
 {
     public class OWVoiceMod : ModBehaviour
     {
-        private static AssetBundle assetBundle;
+        private static IDictionary<string, AssetBundle> assetBundles = new Dictionary<string, AssetBundle>();
         private static GameObject player;
         private static NomaiTranslatorProp nomaiTranslatorProp;
         private static TextAsset xmlCharacterDialogueAsset;
         private static string currentTextName;
+        private static string currentBundleName;
         private static string oldTextName = null;
+        private static string bundleToReload = null;
 
         private void Start()
         {
-            assetBundle = ModHelper.Assets.LoadBundle("bundleoassets");
+            foreach (string assetFileName in Directory.GetFiles(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)))
+            {
+                string assetFileNameFormatted = assetFileName.Split('\\')[9];
+                if (!assetFileNameFormatted.Contains("manifest") && !assetFileNameFormatted.Contains("json") && !assetFileNameFormatted.Contains("dll") && !assetFileNameFormatted.Contains("pdb"))
+                {
+                    assetBundles.Add(char.ToUpper(assetFileNameFormatted[0]) + assetFileNameFormatted.Substring(1), ModHelper.Assets.LoadBundle(assetFileNameFormatted));
+                }
+            }
 
             //Skip splash screen (from vesper's half life mod)
             TitleScreenAnimation titleScreenAnimation = FindObjectOfType<TitleScreenAnimation>();
@@ -63,6 +73,15 @@ namespace OWVoiceMod
             nomaiTranslatorProp = FindObjectOfType<NomaiTranslatorProp>();
         }
 
+        void Update()
+        {
+            if (bundleToReload != null)
+            {
+                assetBundles[bundleToReload] = ModHelper.Assets.LoadBundle(bundleToReload);
+                bundleToReload = null;
+            }
+        }
+
         private static void StartConversation(ref TextAsset ____xmlCharacterDialogueAsset)
         {
             //make new audio source here
@@ -72,12 +91,15 @@ namespace OWVoiceMod
         private void OnAdvancePage(string nodeName, int pageNum)
         {
             player.GetComponent<AudioSource>().Stop();
-            foreach (AudioClip characterModdedAudioFile in assetBundle.LoadAllAssets<AudioClip>())
+            string currentAssetName = xmlCharacterDialogueAsset.name + nodeName + pageNum.ToString();
+            foreach (string characterModdedAudioName in assetBundles[xmlCharacterDialogueAsset.name].GetAllAssetNames()) 
             {
-                if (characterModdedAudioFile.name == xmlCharacterDialogueAsset.name + nodeName + pageNum.ToString())
+                string characterModdedAudioNameFormatted = characterModdedAudioName.Split('/')[3].TrimEnd('3', 'p', 'm', '.');
+                if (characterModdedAudioNameFormatted.Split('+').Any(x => x == currentAssetName.ToLower()))
                 {
-                    player.GetComponent<AudioSource>().clip = characterModdedAudioFile;
+                    player.GetComponent<AudioSource>().clip = assetBundles[xmlCharacterDialogueAsset.name].LoadAsset<AudioClip>(characterModdedAudioNameFormatted);
                     player.GetComponent<AudioSource>().Play();
+                    break;
                 }
             }
         }
@@ -86,30 +108,46 @@ namespace OWVoiceMod
         {
             //delete audio source here
             player.GetComponent<AudioSource>().Stop();
+            bundleToReload = xmlCharacterDialogueAsset.name;
+            assetBundles[xmlCharacterDialogueAsset.name].Unload(true);
         }
 
         private static void DisplayTextNode()
         {
             NomaiText nomaiText = nomaiTranslatorProp._nomaiTextComponent;
             int currentTextID = nomaiTranslatorProp._currentTextID;
-            if (nomaiText is NomaiComputer) currentTextName = "NomaiWarpComputer" + currentTextID.ToString();
-            else if (nomaiText is GhostWallText) currentTextName = currentTextName = "OwlkStatic";
-            else currentTextName = nomaiText._nomaiTextAsset.name + currentTextID.ToString();
+            if (nomaiText is NomaiComputer)
+            {
+                currentBundleName = "NomaiWarpComputer";
+                currentTextName = currentBundleName + currentTextID.ToString();
+            }
+            else if (nomaiText is GhostWallText)
+            {
+                currentBundleName = "OwlkStatic";
+                currentTextName = "OwlkStatic";
+            }
+            else
+            {
+                currentBundleName = nomaiText._nomaiTextAsset.name;
+                currentTextName = currentBundleName + currentTextID.ToString();
+            }
 
             if (currentTextName != oldTextName)
             {
                 player.GetComponent<AudioSource>().Stop();
                 if (nomaiText.IsTranslated(currentTextID))
                 {
-                    foreach (AudioClip characterModdedAudioFile in assetBundle.LoadAllAssets<AudioClip>())
+                    foreach (string characterModdedAudioName in assetBundles[currentBundleName].GetAllAssetNames())
                     {
-                        if (characterModdedAudioFile.name == currentTextName)
+                        string characterModdedAudioNameFormatted = characterModdedAudioName.Split('/')[3].TrimEnd('3', 'p', 'm', '.');
+                        if (characterModdedAudioNameFormatted.Split('+').Any(x => x == currentTextName.ToLower()))
                         {
-                            player.GetComponent<AudioSource>().clip = characterModdedAudioFile;
+                            player.GetComponent<AudioSource>().clip = assetBundles[currentBundleName].LoadAsset<AudioClip>(characterModdedAudioNameFormatted);
                             player.GetComponent<AudioSource>().Play();
+                            break;
                         }
                     }
-                    oldTextName = currentTextName;
+                    if (!(nomaiText is GhostWallText)) oldTextName = currentTextName;
                 } else
                 {
                     oldTextName = null;
@@ -126,6 +164,8 @@ namespace OWVoiceMod
         private static void OnUnequipTool()
         {
             player.GetComponent<AudioSource>().Stop();
+            bundleToReload = currentBundleName;
+            assetBundles[currentBundleName].Unload(true);
             oldTextName = null;
         }
     }
