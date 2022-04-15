@@ -99,14 +99,12 @@ namespace OWVoiceMod
             audioSource.volume = volume;
             loaded = true;
 
-            CharacterDialogueTree[] characterDialogueTree = FindObjectsOfType<CharacterDialogueTree>();
+            CharacterDialogueTree[] characterDialogueTree = Resources.FindObjectsOfTypeAll<CharacterDialogueTree>();
             foreach (CharacterDialogueTree childCharacterDialogueTree in characterDialogueTree)
             {
                 childCharacterDialogueTree.OnAdvancePage += OnAdvancePage;
                 childCharacterDialogueTree.OnEndConversation += OnEndConversation;
             }
-
-            NomaiText[] nomaiText = FindObjectsOfType<NomaiText>();
 
             nomaiTranslatorProp = FindObjectOfType<NomaiTranslatorProp>();
         }
