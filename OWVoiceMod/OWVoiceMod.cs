@@ -128,7 +128,7 @@ namespace OWVoiceMod
             string currentAssetName = xmlCharacterDialogueAsset.name + nodeName + pageNum.ToString();
             foreach (string characterModdedAudioName in assetBundles[xmlCharacterDialogueAsset.name].GetAllAssetNames()) 
             {
-                string characterModdedAudioNameFormatted = characterModdedAudioName.Split('/')[3].TrimEnd('v', 'a', 'w', '.');
+                string characterModdedAudioNameFormatted = Path.GetFileNameWithoutExtension(characterModdedAudioName);
                 if (characterModdedAudioNameFormatted.Split('+').Any(x => x == currentAssetName.ToLower()))
                 {
                     audioSource.clip = assetBundles[xmlCharacterDialogueAsset.name].LoadAsset<AudioClip>(characterModdedAudioNameFormatted);
@@ -181,7 +181,7 @@ namespace OWVoiceMod
                 {
                     foreach (string characterModdedAudioName in assetBundles[currentBundleName].GetAllAssetNames())
                     {
-                        string characterModdedAudioNameFormatted = characterModdedAudioName.Split('/')[3].TrimEnd('v', 'a', 'w', '.');
+                        string characterModdedAudioNameFormatted = Path.GetFileNameWithoutExtension(characterModdedAudioName);
                         if (characterModdedAudioNameFormatted.Split('+').Any(x => x == currentTextName.ToLower()))
                         {
                             audioSource.clip = assetBundles[currentBundleName].LoadAsset<AudioClip>(characterModdedAudioNameFormatted);
