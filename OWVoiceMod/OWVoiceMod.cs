@@ -15,10 +15,20 @@ namespace OWVoiceMod
         private static GameObject player;
         private static NomaiTranslatorProp nomaiTranslatorProp;
         private static TextAsset xmlCharacterDialogueAsset;
+        private static string characterName;
         private static string currentTextName;
         private static string currentBundleName;
         private static string oldTextName = null;
         private static string bundleToReload = null;
+        private static bool splashSkip;
+        private static bool conversations;
+        private static bool hearthianRecordings;
+        private static bool nomaiRecordings;
+        private static bool paperNotes;
+        private static bool nomaiScrolls;
+        private static bool nomaiComputers;
+        private static bool owlkWriting;
+        private static float volume;
 
         private void Start()
         {
@@ -31,18 +41,21 @@ namespace OWVoiceMod
                 }
             }
 
-            //Skip splash screen (from vesper's half life mod)
-            TitleScreenAnimation titleScreenAnimation = FindObjectOfType<TitleScreenAnimation>();
-            TypeExtensions.SetValue(titleScreenAnimation, "_fadeDuration", 0);
-            TypeExtensions.SetValue(titleScreenAnimation, "_gamepadSplash", false);
-            TypeExtensions.SetValue(titleScreenAnimation, "_introPan", false);
-            TypeExtensions.Invoke(titleScreenAnimation, "FadeInTitleLogo", new object[0]);
-            TitleAnimationController titleAnimationController = FindObjectOfType<TitleAnimationController>();
-            TypeExtensions.SetValue(titleAnimationController, "_logoFadeDelay", 0.001f);
-            TypeExtensions.SetValue(titleAnimationController, "_logoFadeDuration", 0.001f);
-            TypeExtensions.SetValue(titleAnimationController, "_optionsFadeDelay", 0.001f);
-            TypeExtensions.SetValue(titleAnimationController, "_optionsFadeDuration", 0.001f);
-            TypeExtensions.SetValue(titleAnimationController, "_optionsFadeSpacing", 0.001f);
+            if (splashSkip)
+            {
+                //Skip splash screen (from vesper's half life mod)
+                TitleScreenAnimation titleScreenAnimation = FindObjectOfType<TitleScreenAnimation>();
+                TypeExtensions.SetValue(titleScreenAnimation, "_fadeDuration", 0);
+                TypeExtensions.SetValue(titleScreenAnimation, "_gamepadSplash", false);
+                TypeExtensions.SetValue(titleScreenAnimation, "_introPan", false);
+                TypeExtensions.Invoke(titleScreenAnimation, "FadeInTitleLogo", new object[0]);
+                TitleAnimationController titleAnimationController = FindObjectOfType<TitleAnimationController>();
+                TypeExtensions.SetValue(titleAnimationController, "_logoFadeDelay", 0.001f);
+                TypeExtensions.SetValue(titleAnimationController, "_logoFadeDuration", 0.001f);
+                TypeExtensions.SetValue(titleAnimationController, "_optionsFadeDelay", 0.001f);
+                TypeExtensions.SetValue(titleAnimationController, "_optionsFadeDuration", 0.001f);
+                TypeExtensions.SetValue(titleAnimationController, "_optionsFadeSpacing", 0.001f);
+            }
 
             ModHelper.HarmonyHelper.AddPrefix<CharacterDialogueTree>("StartConversation", typeof(OWVoiceMod), nameof(OWVoiceMod.StartConversation));
             ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>("DisplayTextNode", typeof(OWVoiceMod), nameof(OWVoiceMod.DisplayTextNode));
@@ -50,15 +63,19 @@ namespace OWVoiceMod
             ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>("OnUnequipTool", typeof(OWVoiceMod), nameof(OWVoiceMod.OnUnequipTool));
 
             LoadManager.OnCompleteSceneLoad += OnCompleteSceneLoad;
-
-            ModHelper.Console.WriteLine($"{nameof(OWVoiceMod)} is loaded!", MessageType.Success);
         }
 
         public override void Configure(IModConfig config)
         {
-            //ToggleMusic(config.GetSettingsValue<bool>("enableMusic"));
-            //slateVolume = config.GetSettingsValue<float>("Slate");
-            //_isCubesEnabled = config.GetSettingsValue<float>("Arkose");
+            splashSkip = config.GetSettingsValue<bool>("splashSkip");
+            conversations = config.GetSettingsValue<bool>("conversations");
+            hearthianRecordings = config.GetSettingsValue<bool>("hearthianRecordings");
+            nomaiRecordings = config.GetSettingsValue<bool>("nomaiRecordings");
+            paperNotes = config.GetSettingsValue<bool>("paperNotes");
+            nomaiScrolls = config.GetSettingsValue<bool>("nomaiScrolls");
+            nomaiComputers = config.GetSettingsValue<bool>("nomaiComputers");
+            owlkWriting = config.GetSettingsValue<bool>("owlkWriting");
+            volume = config.GetSettingsValue<float>("volume");
         }
 
         private void OnCompleteSceneLoad(OWScene orignalScene, OWScene loadScene)
@@ -89,14 +106,18 @@ namespace OWVoiceMod
             }
         }
 
-        private static void StartConversation(ref TextAsset ____xmlCharacterDialogueAsset)
+        private static void StartConversation(ref TextAsset ____xmlCharacterDialogueAsset, ref string ____characterName)
         {
             //make new audio source here
             xmlCharacterDialogueAsset = ____xmlCharacterDialogueAsset;
+            characterName = ____characterName;
         }
 
         private void OnAdvancePage(string nodeName, int pageNum)
         {
+            if (!conversations && characterName != "NOTE" && characterName != "RECORDING") return;
+            if (!hearthianRecordings && characterName == "RECORDING") return;
+            if (!paperNotes && characterName == "NOTE") return; 
             player.GetComponent<AudioSource>().Stop();
             string currentAssetName = xmlCharacterDialogueAsset.name + nodeName + pageNum.ToString();
             foreach (string characterModdedAudioName in assetBundles[xmlCharacterDialogueAsset.name].GetAllAssetNames()) 
@@ -105,6 +126,7 @@ namespace OWVoiceMod
                 if (characterModdedAudioNameFormatted.Split('+').Any(x => x == currentAssetName.ToLower()))
                 {
                     player.GetComponent<AudioSource>().clip = assetBundles[xmlCharacterDialogueAsset.name].LoadAsset<AudioClip>(characterModdedAudioNameFormatted);
+                    player.GetComponent<AudioSource>().volume = volume;
                     player.GetComponent<AudioSource>().Play();
                     break;
                 }
@@ -123,18 +145,23 @@ namespace OWVoiceMod
         {
             NomaiText nomaiText = nomaiTranslatorProp._nomaiTextComponent;
             int currentTextID = nomaiTranslatorProp._currentTextID;
-            if (nomaiText is NomaiComputer)
+            if (nomaiText is NomaiComputer || nomaiText is NomaiVesselComputer)
             {
-                currentBundleName = "NomaiWarpComputer";
+                if (!nomaiComputers) return;
+                if (nomaiText.gameObject.TryGetComponent<NomaiWarpComputerLogger>(out NomaiWarpComputerLogger nomaiWarpComputerLogger)) currentBundleName = "NomaiWarpComputer";  
+                else currentBundleName = nomaiText._nomaiTextAsset.name;
                 currentTextName = currentBundleName + currentTextID.ToString();
             }
             else if (nomaiText is GhostWallText)
             {
+                if (!owlkWriting) return;
                 currentBundleName = "OwlkStatic";
                 currentTextName = "OwlkStatic";
             }
             else
             {
+                if (!nomaiScrolls && nomaiText is NomaiWallText) return;
+                if (!nomaiRecordings && !(nomaiText is NomaiWallText)) return;
                 currentBundleName = nomaiText._nomaiTextAsset.name;
                 currentTextName = currentBundleName + currentTextID.ToString();
             }
@@ -150,6 +177,7 @@ namespace OWVoiceMod
                         if (characterModdedAudioNameFormatted.Split('+').Any(x => x == currentTextName.ToLower()))
                         {
                             player.GetComponent<AudioSource>().clip = assetBundles[currentBundleName].LoadAsset<AudioClip>(characterModdedAudioNameFormatted);
+                            player.GetComponent<AudioSource>().volume = volume;
                             player.GetComponent<AudioSource>().Play();
                             break;
                         }
