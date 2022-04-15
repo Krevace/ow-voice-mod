@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 222996688
+CRC: 1626556396
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 378b5ffb6747607a0301b66046a5a0ff
+    Hash: 207fd24bdb25c3f076ea983051c6a0d9
   TypeTreeHash:
     serializedVersion: 2
     Hash: 3f7d0c5e0986ec71841622bcb2f9be1c
@@ -13,7 +13,7 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
-- Assets/AssetBundle/Slate/SlateScientist1A1.mp3
-- Assets/AssetBundle/Slate/SlateScientist1A0.mp3
-- Assets/AssetBundle/Slate/SlateScientist1A2.mp3
+- Assets/AssetBundle/Slate/SlateScientist1A2.wav
+- Assets/AssetBundle/Slate/SlateScientist1A1.wav
+- Assets/AssetBundle/Slate/SlateScientist1A0.wav
 Dependencies: []
