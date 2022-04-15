@@ -34,10 +34,10 @@ namespace OWVoiceMod
 
         private void Start()
         {
-            foreach (string assetFileName in Directory.GetFiles(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)))
+            foreach (string assetFileName in Directory.EnumerateFiles(ModHelper.Manifest.ModFolderPath))
             {
-                string assetFileNameFormatted = assetFileName.Split('\\')[9];
-                if (!assetFileNameFormatted.Contains("manifest") && !assetFileNameFormatted.Contains("json") && !assetFileNameFormatted.Contains("dll") && !assetFileNameFormatted.Contains("pdb"))
+                string assetFileNameFormatted = Path.GetFileName(assetFileName);
+                if (Path.GetExtension(assetFileNameFormatted) == string.Empty)
                 {
                     assetBundles.Add(char.ToUpper(assetFileNameFormatted[0]) + assetFileNameFormatted.Substring(1), ModHelper.Assets.LoadBundle(assetFileNameFormatted));
                 }
