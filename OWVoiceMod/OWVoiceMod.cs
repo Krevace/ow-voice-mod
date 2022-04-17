@@ -109,11 +109,11 @@ namespace OWVoiceMod
             nomaiTranslatorProp = FindObjectOfType<NomaiTranslatorProp>();
         }
 
-        private static void StartConversation(ref TextAsset ____xmlCharacterDialogueAsset, ref string ____characterName)
+        private static void StartConversation(ref CharacterDialogueTree __instance)
         {
-            //make new audio source here
-            xmlCharacterDialogueAsset = ____xmlCharacterDialogueAsset;
-            characterName = ____characterName;
+            xmlCharacterDialogueAsset = __instance._xmlCharacterDialogueAsset;
+            characterName = __instance._characterName;
+            if (characterName != "NOTE") audioSource = __instance.gameObject.AddComponent<AudioSource>(); //may not work without OWAudioSource?
         }
 
         private void OnAdvancePage(string nodeName, int pageNum)
@@ -138,7 +138,7 @@ namespace OWVoiceMod
 
         private void OnEndConversation()
         {
-            //delete audio source here
+            audioSource = player.GetComponent<AudioSource>();
             if (!assetBundles.ContainsKey(xmlCharacterDialogueAsset.name)) return;
             audioSource.Stop();
             bundleToReload = xmlCharacterDialogueAsset.name;
