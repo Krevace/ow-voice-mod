@@ -113,7 +113,6 @@ namespace OWVoiceMod
         {
             xmlCharacterDialogueAsset = __instance._xmlCharacterDialogueAsset;
             characterName = __instance._characterName;
-            if (characterName != "NOTE") audioSource = __instance.gameObject.AddComponent<AudioSource>(); //may not work without OWAudioSource?
         }
 
         private void OnAdvancePage(string nodeName, int pageNum)
@@ -141,7 +140,6 @@ namespace OWVoiceMod
 
         private void OnEndConversation()
         {
-            audioSource = player.GetComponent<AudioSource>();
             if (!assetBundles.ContainsKey(xmlCharacterDialogueAsset.name)) return;
             audioSource.Stop();
             bundleToReload = xmlCharacterDialogueAsset.name;
