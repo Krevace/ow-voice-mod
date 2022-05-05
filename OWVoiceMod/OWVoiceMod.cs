@@ -92,7 +92,13 @@ namespace OWVoiceMod
 
         private void OnCompleteSceneLoad(OWScene orignalScene, OWScene loadScene)
         {
-            if (loadScene != OWScene.SolarSystem) return;
+            if (loadScene == OWScene.Credits_Fast || loadScene == OWScene.Credits_Final)
+            {
+                CreditsAsset creditsAsset = FindObjectOfType<Credits>()._creditsAsset;
+                creditsAsset.xml = assetBundles["Credits"].LoadAsset<TextAsset>("credits");
+                return;
+            }
+            else if (loadScene != OWScene.SolarSystem) return;
 
             player = GameObject.Find("Player_Body");
             audioSource = player.AddComponent<AudioSource>();
