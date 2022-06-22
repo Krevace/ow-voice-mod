@@ -44,7 +44,7 @@
 		"volume": {
 			"title": "Voice Volume",
 			"type": "slider",
-			"value": "0.9",
+			"value": "1",
 			"min": 0,
 			"max": 1
 		}

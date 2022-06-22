@@ -12,7 +12,7 @@
     <DebugType>none</DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="OWML" Version="2.3.2" />
+    <PackageReference Include="OWML" Version="2.5.2" />
     <PackageReference Include="OuterWildsGameLibs" Version="1.1.12.168" />
   </ItemGroup>
   <ItemGroup>
@@ -27,6 +27,6 @@
     <Content Include="OWVoiceMod.csproj.user" />
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy /y &quot;$(ProjectDir)\assets&quot; &quot;$(OutputPath)&quot;" />
+    <Exec Command="Xcopy /y /s &quot;$(ProjectDir)\assets&quot; &quot;$(OutputPath)&quot;" />
   </Target>
 </Project>

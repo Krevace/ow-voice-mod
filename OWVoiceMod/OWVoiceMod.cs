@@ -2,25 +2,22 @@
 using OWML.Common;
 using OWML.Utils;
 using UnityEngine;
-using System.Linq;
-using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
 
 namespace OWVoiceMod
 {
     public class OWVoiceMod : ModBehaviour
     {
-        private static IDictionary<string, AssetBundle> assetBundles = new Dictionary<string, AssetBundle>();
+        private static IModAssets iModAssets;
+        private static IModConsole iModConsole;
         private static GameObject player;
         private static AudioSource audioSource;
         private static NomaiTranslatorProp nomaiTranslatorProp;
         private static TextAsset xmlCharacterDialogueAsset;
         private static string characterName;
         private static string currentTextName;
-        private static string currentBundleName;
+        private static string currentAssetName;
         private static string oldTextName = null;
-        private static string bundleToReload = null;
         private static bool splashSkip;
         private static bool conversations;
         private static bool hearthianRecordings;
@@ -34,14 +31,8 @@ namespace OWVoiceMod
 
         private void Start()
         {
-            foreach (string assetFileName in Directory.EnumerateFiles(ModHelper.Manifest.ModFolderPath))
-            {
-                string assetFileNameFormatted = Path.GetFileName(assetFileName);
-                if (Path.GetExtension(assetFileNameFormatted) == string.Empty)
-                {
-                    assetBundles.Add(char.ToUpper(assetFileNameFormatted[0]) + assetFileNameFormatted.Substring(1), ModHelper.Assets.LoadBundle(assetFileNameFormatted));
-                }
-            }
+            iModAssets = ModHelper.Assets;
+            iModConsole = ModHelper.Console;
 
             if (splashSkip)
             {
@@ -67,15 +58,6 @@ namespace OWVoiceMod
             LoadManager.OnCompleteSceneLoad += OnCompleteSceneLoad;
         }
 
-        void Update()
-        {
-            if (bundleToReload != null)
-            {
-                assetBundles[bundleToReload] = ModHelper.Assets.LoadBundle(bundleToReload.ToLower());
-                bundleToReload = null;
-            }
-        }
-
         public override void Configure(IModConfig config)
         {
             splashSkip = config.GetSettingsValue<bool>("splashSkip");
@@ -95,7 +77,8 @@ namespace OWVoiceMod
             if (loadScene == OWScene.Credits_Fast || loadScene == OWScene.Credits_Final)
             {
                 CreditsAsset creditsAsset = FindObjectOfType<Credits>()._creditsAsset;
-                creditsAsset.xml = assetBundles["Credits"].LoadAsset<TextAsset>("credits");
+                try { creditsAsset.xml = new TextAsset(File.ReadAllText(ModHelper.Manifest.ModFolderPath + "credits.bytes")); } 
+                catch { iModConsole.WriteLine("Credits file not found!", MessageType.Error); }
                 return;
             }
             else if (loadScene != OWScene.SolarSystem) return;
@@ -123,33 +106,24 @@ namespace OWVoiceMod
 
         private void OnAdvancePage(string nodeName, int pageNum)
         {
-            if (!assetBundles.ContainsKey(xmlCharacterDialogueAsset.name)) return;
             if (!conversations && characterName != "NOTE" && characterName != "RECORDING") return;
             if (!hearthianRecordings && characterName == "RECORDING") return;
             if (!paperNotes && characterName == "NOTE") return; 
+
             audioSource.Stop();
+            if (audioSource.clip != null) audioSource.clip.UnloadAudioData();
+            audioSource.clip = null;
+
             string currentAssetName = xmlCharacterDialogueAsset.name + nodeName + pageNum.ToString();
-            foreach (string characterModdedAudioName in assetBundles[xmlCharacterDialogueAsset.name].GetAllAssetNames()) 
-            {
-                string characterModdedAudioNameFormatted = Path.GetFileNameWithoutExtension(characterModdedAudioName)
-                    .Replace(" ", "")
-                    .Replace("(", "")
-                    .Replace(")", "");
-                if (characterModdedAudioNameFormatted.Split('+').Any(x => x == currentAssetName.ToLower()))
-                {
-                    audioSource.clip = assetBundles[xmlCharacterDialogueAsset.name].LoadAsset<AudioClip>(characterModdedAudioNameFormatted);
-                    if (volume > 0) audioSource.Play();
-                    break;
-                }
-            }
+            try { audioSource.clip = ModHelper.Assets.GetAudio(currentAssetName + ".wav"); } catch { }
+            if (volume > 0 && audioSource.clip != null) audioSource.Play();
         }
 
         private void OnEndConversation()
         {
-            if (!assetBundles.ContainsKey(xmlCharacterDialogueAsset.name)) return;
             audioSource.Stop();
-            bundleToReload = xmlCharacterDialogueAsset.name;
-            assetBundles[xmlCharacterDialogueAsset.name].Unload(true);
+            if (audioSource.clip != null) audioSource.clip.UnloadAudioData();
+            audioSource.clip = null;
         }
 
         private static void DisplayTextNode()
@@ -159,44 +133,35 @@ namespace OWVoiceMod
             if (nomaiText is NomaiComputer || nomaiText is NomaiVesselComputer)
             {
                 if (!nomaiComputers) return;
-                if (nomaiText.gameObject.TryGetComponent<NomaiWarpComputerLogger>(out NomaiWarpComputerLogger nomaiWarpComputerLogger)) currentBundleName = "NomaiWarpComputer";  
-                else currentBundleName = nomaiText._nomaiTextAsset.name;
-                currentTextName = currentBundleName + currentTextID.ToString();
+                if (nomaiText.gameObject.TryGetComponent<NomaiWarpComputerLogger>(out NomaiWarpComputerLogger nomaiWarpComputerLogger)) currentAssetName = "NomaiWarpComputer";  
+                else currentAssetName = nomaiText._nomaiTextAsset.name;
+                currentTextName = currentAssetName + currentTextID.ToString();
             }
             else if (nomaiText is GhostWallText)
             {
                 if (!owlkWriting) return;
-                currentBundleName = "OwlkStatic";
+                currentAssetName = "OwlkStatic";
                 currentTextName = "OwlkStatic";
             }
             else
             {
                 if (!nomaiScrolls && nomaiText is NomaiWallText) return;
                 if (!nomaiRecordings && !(nomaiText is NomaiWallText)) return;
-                currentBundleName = nomaiText._nomaiTextAsset.name;
-                currentTextName = currentBundleName + currentTextID.ToString();
+                currentAssetName = nomaiText._nomaiTextAsset.name;
+                currentTextName = currentAssetName + currentTextID.ToString();
             }
-
-            if (!assetBundles.ContainsKey(currentBundleName)) return;
 
             if (currentTextName != oldTextName)
             {
                 audioSource.Stop();
+                if (audioSource.clip != null) audioSource.clip.UnloadAudioData();
+                audioSource.clip = null;
+
                 if (nomaiText.IsTranslated(currentTextID))
                 {
-                    foreach (string characterModdedAudioName in assetBundles[currentBundleName].GetAllAssetNames())
-                    {
-                        string characterModdedAudioNameFormatted = Path.GetFileNameWithoutExtension(characterModdedAudioName)
-                            .Replace(" ", "")
-                            .Replace("(", "")
-                            .Replace(")", "");
-                        if (characterModdedAudioNameFormatted.Split('+').Any(x => x == currentTextName.ToLower()))
-                        {
-                            audioSource.clip = assetBundles[currentBundleName].LoadAsset<AudioClip>(characterModdedAudioNameFormatted);
-                            if (volume > 0) audioSource.Play();
-                            break;
-                        }
-                    }
+                    try { audioSource.clip = iModAssets.GetAudio(currentTextName + ".wav"); } catch { }
+                    if (volume > 0 && audioSource.clip != null) audioSource.Play();
+
                     if (!(nomaiText is GhostWallText)) oldTextName = currentTextName;
                 } else
                 {
@@ -208,15 +173,16 @@ namespace OWVoiceMod
         private static void ClearNomaiText()
         {
             audioSource.Stop();
+            if (audioSource.clip != null) audioSource.clip.UnloadAudioData();
+            audioSource.clip = null;
             oldTextName = null;
         }
 
         private static void OnUnequipTool()
         {
-            if (!assetBundles.ContainsKey(currentBundleName)) return;
             audioSource.Stop();
-            bundleToReload = currentBundleName;
-            assetBundles[currentBundleName].Unload(true);
+            if (audioSource.clip != null) audioSource.clip.UnloadAudioData();
+            audioSource.clip = null;
             oldTextName = null;
         }
     }
