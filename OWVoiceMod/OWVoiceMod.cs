@@ -144,7 +144,7 @@ namespace OWVoiceMod
             if (nomaiText is NomaiComputer or NomaiVesselComputer)
             {
                 if (!nomaiComputers) return;
-                if (nomaiText.gameObject.TryGetComponent<NomaiWarpComputerLogger>(out NomaiWarpComputerLogger nomaiWarpComputerLogger)) currentAssetName = "NomaiWarpComputer";
+                if (nomaiText.gameObject.TryGetComponent<NomaiWarpComputerLogger>(out _)) currentAssetName = "NomaiWarpComputer";
                 else currentAssetName = nomaiText._nomaiTextAsset.name;
                 currentTextName = currentAssetName + currentTextID.ToString();
             }
@@ -157,7 +157,7 @@ namespace OWVoiceMod
             else
             {
                 if (!nomaiScrolls && nomaiText is NomaiWallText) return;
-                if (!nomaiRecordings && !(nomaiText is NomaiWallText)) return;
+                if (!nomaiRecordings && nomaiText is not NomaiWallText) return;
                 currentAssetName = nomaiText._nomaiTextAsset.name;
                 currentTextName = currentAssetName + currentTextID.ToString();
             }
@@ -183,7 +183,7 @@ namespace OWVoiceMod
                         }
                     }
 
-                    if (!(nomaiText is GhostWallText)) oldTextName = currentTextName;
+                    if (nomaiText is not GhostWallText) oldTextName = currentTextName;
                 }
                 else
                 {
