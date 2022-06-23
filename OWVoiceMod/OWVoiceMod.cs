@@ -110,28 +110,15 @@ namespace OWVoiceMod
             if (!hearthianRecordings && characterName == "RECORDING") return;
             if (!paperNotes && characterName == "NOTE") return;
 
-            AudioUnload();
+            UnloadAudio();
 
             string currentAssetName = xmlCharacterDialogueAsset.name + nodeName + pageNum.ToString();
-            foreach (string assetPathS in Directory.EnumerateFiles(ModHelper.Manifest.ModFolderPath, "*.wav", SearchOption.AllDirectories))
-            {
-                string assetFileName = Path.GetFileNameWithoutExtension(assetPathS)
-                    .Replace(" ", "")
-                    .Replace("(", "")
-                    .Replace(")", "")
-                    .ToLower();
-                if (assetFileName.Split('+').Any(x => x == currentAssetName.ToLower()))
-                {
-                    audioSource.clip = ModHelper.Assets.GetAudio(assetPathS.Substring(ModHelper.Manifest.ModFolderPath.Length));
-                    if (volume > 0 && audioSource.clip != null) audioSource.Play();
-                    break;
-                }
-            }
+            LoadAudio(currentAssetName);
         }
 
         private static void OnEndConversation()
         {
-            AudioUnload();
+            UnloadAudio();
         }
 
         private static void DisplayTextNode()
@@ -161,24 +148,11 @@ namespace OWVoiceMod
 
             if (currentTextName != oldTextName)
             {
-                AudioUnload();
+                UnloadAudio();
 
                 if (nomaiText.IsTranslated(currentTextID))
                 {
-                    foreach (string assetPathS in Directory.EnumerateFiles(ModHelper.Manifest.ModFolderPath, "*.wav", SearchOption.AllDirectories))
-                    {
-                        string assetFileName = Path.GetFileNameWithoutExtension(assetPathS)
-                            .Replace(" ", "")
-                            .Replace("(", "")
-                            .Replace(")", "")
-                            .ToLower();
-                        if (assetFileName.Split('+').Any(x => x == currentTextName.ToLower()))
-                        {
-                            audioSource.clip = ModHelper.Assets.GetAudio(assetPathS.Substring(ModHelper.Manifest.ModFolderPath.Length));
-                            if (volume > 0 && audioSource.clip != null) audioSource.Play();
-                            break;
-                        }
-                    }
+                    LoadAudio(currentTextName);
 
                     if (nomaiText is not GhostWallText) oldTextName = currentTextName;
                 }
@@ -191,17 +165,35 @@ namespace OWVoiceMod
 
         private static void ClearNomaiText()
         {
-            AudioUnload();
+            UnloadAudio();
             oldTextName = null;
         }
 
         private static void OnUnequipTool()
         {
-            AudioUnload();
+            UnloadAudio();
             oldTextName = null;
         }
 
-        private static void AudioUnload()
+        private static void LoadAudio(string assetName)
+        {
+            foreach (string assetPath in Directory.EnumerateFiles(ModHelper.Manifest.ModFolderPath, "*.wav", SearchOption.AllDirectories))
+            {
+                string assetFileName = Path.GetFileNameWithoutExtension(assetPath)
+                    .Replace(" ", "")
+                    .Replace("(", "")
+                    .Replace(")", "")
+                    .ToLower();
+                if (assetFileName.Split('+').Any(x => x == assetName.ToLower()))
+                {
+                    audioSource.clip = ModHelper.Assets.GetAudio(assetPath.Substring(ModHelper.Manifest.ModFolderPath.Length));
+                    if (volume > 0 && audioSource.clip != null) audioSource.Play();
+                    break;
+                }
+            }
+        }
+
+        private static void UnloadAudio()
         {
             audioSource.Stop();
             if (audioSource.clip != null) audioSource.clip.UnloadAudioData();
