@@ -9,9 +9,7 @@ namespace OWVoiceMod
 {
     public class OWVoiceMod : ModBehaviour
     {
-        private static IModAssets iModAssets;
-        private static IModConsole iModConsole;
-        private static IModManifest iModManifest;
+        private static IModHelper iModHelper;
         private static GameObject player;
         private static AudioSource audioSource;
         private static NomaiTranslatorProp nomaiTranslatorProp;
@@ -33,9 +31,7 @@ namespace OWVoiceMod
 
         private void Start()
         {
-            iModAssets = ModHelper.Assets;
-            iModConsole = ModHelper.Console;
-            iModManifest = ModHelper.Manifest;
+            iModHelper = ModHelper;
 
             if (splashSkip)
             {
@@ -81,7 +77,7 @@ namespace OWVoiceMod
             {
                 CreditsAsset creditsAsset = FindObjectOfType<Credits>()._creditsAsset;
                 try { creditsAsset.xml = new TextAsset(File.ReadAllText(ModHelper.Manifest.ModFolderPath + "credits.bytes")); }
-                catch { iModConsole.WriteLine("Credits file not found!", MessageType.Error); }
+                catch { iModHelper.Console.WriteLine("Credits file not found!", MessageType.Error); }
                 return;
             }
             else if (loadScene != OWScene.SolarSystem) return;
@@ -118,7 +114,7 @@ namespace OWVoiceMod
             audioSource.clip = null;
 
             string currentAssetName = xmlCharacterDialogueAsset.name + nodeName + pageNum.ToString();
-            foreach (string assetPathS in Directory.EnumerateFiles(ModHelper.Manifest.ModFolderPath, "*.wav", SearchOption.AllDirectories))
+            foreach (string assetPathS in Directory.EnumerateFiles(ModHelper.Manifest.ModFolderPath, "*.wav"))
             {
                 string assetFileName = Path.GetFileNameWithoutExtension(assetPathS)
                     .Replace(" ", "")
@@ -174,7 +170,7 @@ namespace OWVoiceMod
 
                 if (nomaiText.IsTranslated(currentTextID))
                 {
-                    foreach (string assetPathS in Directory.EnumerateFiles(iModManifest.ModFolderPath, "*.wav", SearchOption.AllDirectories))
+                    foreach (string assetPathS in Directory.EnumerateFiles(iModHelper.Manifest.ModFolderPath, "*.wav"))
                     {
                         string assetFileName = Path.GetFileNameWithoutExtension(assetPathS)
                             .Replace(" ", "")
@@ -183,7 +179,7 @@ namespace OWVoiceMod
                             .ToLower();
                         if (assetFileName.Split('+').Any(x => x == currentTextName.ToLower()))
                         {
-                            audioSource.clip = iModAssets.GetAudio(Path.GetFileName(assetPathS));
+                            audioSource.clip = iModHelper.Assets.GetAudio(Path.GetFileName(assetPathS));
                             if (volume > 0 && audioSource.clip != null) audioSource.Play();
                             break;
                         }
