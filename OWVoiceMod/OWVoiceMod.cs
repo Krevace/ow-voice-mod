@@ -118,21 +118,18 @@ namespace OWVoiceMod
             audioSource.clip = null;
 
             string currentAssetName = xmlCharacterDialogueAsset.name + nodeName + pageNum.ToString();
-            foreach (string assetPathS in Directory.EnumerateFiles(ModHelper.Manifest.ModFolderPath))
+            foreach (string assetPathS in Directory.EnumerateFiles(ModHelper.Manifest.ModFolderPath, "*.wav", SearchOption.AllDirectories))
             {
-                if (Path.GetExtension(assetPathS) == ".wav")
+                string assetFileName = Path.GetFileNameWithoutExtension(assetPathS)
+                    .Replace(" ", "")
+                    .Replace("(", "")
+                    .Replace(")", "")
+                    .ToLower();
+                if (assetFileName.Split('+').Any(x => x == currentAssetName.ToLower()))
                 {
-                    string assetFileName = Path.GetFileNameWithoutExtension(assetPathS)
-                        .Replace(" ", "")
-                        .Replace("(", "")
-                        .Replace(")", "")
-                        .ToLower();
-                    if (assetFileName.Split('+').Any(x => x == currentAssetName.ToLower()))
-                    {
-                        audioSource.clip = ModHelper.Assets.GetAudio(Path.GetFileName(assetPathS));
-                        if (volume > 0 && audioSource.clip != null) audioSource.Play();
-                        break;
-                    }
+                    audioSource.clip = ModHelper.Assets.GetAudio(Path.GetFileName(assetPathS));
+                    if (volume > 0 && audioSource.clip != null) audioSource.Play();
+                    break;
                 }
             }
         }
@@ -177,21 +174,18 @@ namespace OWVoiceMod
 
                 if (nomaiText.IsTranslated(currentTextID))
                 {
-                    foreach (string assetPathS in Directory.EnumerateFiles(iModManifest.ModFolderPath))
+                    foreach (string assetPathS in Directory.EnumerateFiles(iModManifest.ModFolderPath, "*.wav", SearchOption.AllDirectories))
                     {
-                        if (Path.GetExtension(assetPathS) == ".wav")
+                        string assetFileName = Path.GetFileNameWithoutExtension(assetPathS)
+                            .Replace(" ", "")
+                            .Replace("(", "")
+                            .Replace(")", "")
+                            .ToLower();
+                        if (assetFileName.Split('+').Any(x => x == currentTextName.ToLower()))
                         {
-                            string assetFileName = Path.GetFileNameWithoutExtension(assetPathS)
-                                .Replace(" ", "")
-                                .Replace("(", "")
-                                .Replace(")", "")
-                                .ToLower();
-                            if (assetFileName.Split('+').Any(x => x == currentTextName.ToLower()))
-                            {
-                                audioSource.clip = iModAssets.GetAudio(Path.GetFileName(assetPathS));
-                                if (volume > 0 && audioSource.clip != null) audioSource.Play();
-                                break;
-                            }
+                            audioSource.clip = iModAssets.GetAudio(Path.GetFileName(assetPathS));
+                            if (volume > 0 && audioSource.clip != null) audioSource.Play();
+                            break;
                         }
                     }
 
