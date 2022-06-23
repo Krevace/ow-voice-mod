@@ -183,6 +183,7 @@ namespace OWVoiceMod
 
         private static void LoadAudio(string assetName)
         {
+            ModHelper.Console.WriteLine($"finding audio for {assetName}");
             assetName = assetName.ToLower();
             foreach (string assetPath in Directory.EnumerateFiles(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets"), "*.wav", SearchOption.AllDirectories)
                          .Concat(Directory.EnumerateFiles(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets"), "*.mp3", SearchOption.AllDirectories)))
