@@ -183,6 +183,7 @@ namespace OWVoiceMod
 
         private static void LoadAudio(string assetName)
         {
+            assetName = assetName.ToLower();
             foreach (string assetPath in Directory.EnumerateFiles(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets"), "*.wav", SearchOption.AllDirectories))
             {
                 string assetFileName = Path.GetFileNameWithoutExtension(assetPath)
@@ -190,7 +191,7 @@ namespace OWVoiceMod
                     .Replace("(", "")
                     .Replace(")", "")
                     .ToLower();
-                if (assetFileName.Split('+').Any(x => x == assetName.ToLower()))
+                if (assetFileName.Split('+').Any(x => x == assetName))
                 {
                     audioSource.clip = ModHelper.Assets.GetAudio(assetPath.Substring(ModHelper.Manifest.ModFolderPath.Length));
                     if (volume > 0 && audioSource.clip != null) audioSource.Play();
@@ -202,7 +203,7 @@ namespace OWVoiceMod
         private static void UnloadAudio()
         {
             audioSource.Stop();
-            if (audioSource.clip != null) audioSource.clip.UnloadAudioData();
+            if (audioSource.clip != null) Destroy(audioSource.clip);
             audioSource.clip = null;
         }
     }
