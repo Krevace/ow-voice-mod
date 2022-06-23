@@ -26,26 +26,6 @@
 			</layout>
 		</section>
 		
-		<section name = "Mods" platform = "All" type="Fade" fadeInTime = "1.3" displayTime = "1.7" fadeOutTime = "1.4" waitTime = "0.5"
-			padding-bottom = "-8" spacing = "16">
-			<layout type = "SingleColumnFadeCentered">
-				<title>Voice Acting Mod Contributors</title>
-			</layout>
-		</section>
-		<section name = "Krevace" platform = "All" type="Fade" fadeInTime = "1.3" displayTime = "1.7" fadeOutTime = "1.4" waitTime = "0.5"
-			padding-bottom = "8" spacing = "20">
-			<layout type = "SingleColumnFadeCentered">
-				Programmer
-				<header>Krevace</header>
-			</layout>
-		</section>
-		<section name = "JohnCorby" platform = "All" type="Fade" fadeInTime = "1.3" displayTime = "1.7" fadeOutTime = "1.4" waitTime = "0.5"
-			padding-bottom = "8" spacing = "20">
-			<layout type = "SingleColumnFadeCentered">
-				Programmer
-				<header>John Corby</header>
-			</layout>
-		</section>
 		<section name = "Mobius" platform = "All" type="Fade" fadeInTime = "1.3" displayTime = "1.7" fadeOutTime = "1.4" waitTime = "0.5"
 			padding-bottom = "-8" spacing = "16">
 			<layout type = "SingleColumnFadeCentered">
