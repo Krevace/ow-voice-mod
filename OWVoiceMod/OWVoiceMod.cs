@@ -76,26 +76,32 @@ namespace OWVoiceMod
 
         private static void OnCompleteSceneLoad(OWScene orignalScene, OWScene loadScene)
         {
-            if (loadScene is OWScene.Credits_Fast or OWScene.Credits_Final)
+            // gives time for Start to run
+            ModHelper.Events.Unity.FireOnNextUpdate(() =>
             {
-                CreditsAsset creditsAsset = FindObjectOfType<Credits>()._creditsAsset;
-                try { creditsAsset.xml = new TextAsset(File.ReadAllText(ModHelper.Manifest.ModFolderPath + "credits.bytes")); }
-                catch { ModHelper.Console.WriteLine("Credits file not found!", MessageType.Error); }
-                return;
-            }
-            else if (loadScene != OWScene.SolarSystem) return;
+                if (loadScene is OWScene.Credits_Fast or OWScene.Credits_Final)
+                {
+                    CreditsAsset creditsAsset = FindObjectOfType<Credits>()._creditsAsset;
+                    try { creditsAsset.xml = new TextAsset(File.ReadAllText(ModHelper.Manifest.ModFolderPath + "credits.bytes")); }
+                    catch { ModHelper.Console.WriteLine("Credits file not found!", MessageType.Error); }
 
-            audioSource = GameObject.Find("Player_Body").AddComponent<AudioSource>();
-            audioSource.volume = volume;
+                    return;
+                }
+                else if (loadScene != OWScene.SolarSystem) return;
 
-            CharacterDialogueTree[] characterDialogueTree = Resources.FindObjectsOfTypeAll<CharacterDialogueTree>();
-            foreach (CharacterDialogueTree childCharacterDialogueTree in characterDialogueTree)
-            {
-                childCharacterDialogueTree.OnAdvancePage += OnAdvancePage;
-                childCharacterDialogueTree.OnEndConversation += OnEndConversation;
-            }
+                audioSource = Locator.GetPlayerBody().gameObject.AddComponent<AudioSource>();
+                audioSource.volume = volume;
+                audioSource.outputAudioMixerGroup = Locator.GetAudioMixer().GetAudioMixerGroup(OWAudioMixer.TrackName.Environment);
 
-            nomaiTranslatorProp = FindObjectOfType<NomaiTranslatorProp>();
+                CharacterDialogueTree[] characterDialogueTree = Resources.FindObjectsOfTypeAll<CharacterDialogueTree>();
+                foreach (CharacterDialogueTree childCharacterDialogueTree in characterDialogueTree)
+                {
+                    childCharacterDialogueTree.OnAdvancePage += OnAdvancePage;
+                    childCharacterDialogueTree.OnEndConversation += OnEndConversation;
+                }
+
+                nomaiTranslatorProp = FindObjectOfType<NomaiTranslatorProp>();
+            });
         }
 
         private static void StartConversation(ref CharacterDialogueTree __instance)
