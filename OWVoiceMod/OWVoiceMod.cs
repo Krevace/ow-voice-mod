@@ -121,9 +121,10 @@ namespace OWVoiceMod
                     .Replace("(", "")
                     .Replace(")", "")
                     .ToLower();
+                string assetPath = assetPathS.Substring(ModHelper.Manifest.ModFolderPath.Length);
                 if (assetFileName.Split('+').Any(x => x == currentAssetName.ToLower()))
                 {
-                    audioSource.clip = ModHelper.Assets.GetAudio(Path.GetFileName(assetPathS));
+                    audioSource.clip = ModHelper.Assets.GetAudio(assetPath);
                     if (volume > 0 && audioSource.clip != null) audioSource.Play();
                     break;
                 }
@@ -177,9 +178,10 @@ namespace OWVoiceMod
                             .Replace("(", "")
                             .Replace(")", "")
                             .ToLower();
+                        string assetPath = assetPathS.Substring(iModHelper.Manifest.ModFolderPath.Length);
                         if (assetFileName.Split('+').Any(x => x == currentTextName.ToLower()))
                         {
-                            audioSource.clip = iModHelper.Assets.GetAudio(Path.GetFileName(assetPathS));
+                            audioSource.clip = iModHelper.Assets.GetAudio(assetPath);
                             if (volume > 0 && audioSource.clip != null) audioSource.Play();
                             break;
                         }
