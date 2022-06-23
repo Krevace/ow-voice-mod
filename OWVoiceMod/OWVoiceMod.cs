@@ -192,10 +192,8 @@ namespace OWVoiceMod
 
         private static void LoadAudio(string assetName)
         {
-            ModHelper.Console.WriteLine($"Attempting to find audio for {assetName}...");
             if (assetPaths.TryGetValue(assetName, out string assetPath))
             {
-                ModHelper.Console.WriteLine($"Found audio for {assetName}!", MessageType.Success);
                 audioSource.clip = ModHelper.Assets.GetAudio(assetPath.Substring(ModHelper.Manifest.ModFolderPath.Length));
                 if (volume > 0 && audioSource.clip != null) audioSource.Play();
             }
