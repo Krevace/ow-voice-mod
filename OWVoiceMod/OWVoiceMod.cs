@@ -10,15 +10,13 @@ namespace OWVoiceMod
     public class OWVoiceMod : ModBehaviour
     {
         private new static IModHelper ModHelper;
-        private static GameObject player;
         private static AudioSource audioSource;
         private static NomaiTranslatorProp nomaiTranslatorProp;
 
         private static TextAsset xmlCharacterDialogueAsset;
         private static string characterName;
         private static string currentTextName;
-        private static string currentAssetName;
-        private static string oldTextName = null;
+        private static string oldTextName;
 
         private static bool splashSkip;
         private static bool conversations;
@@ -29,7 +27,6 @@ namespace OWVoiceMod
         private static bool nomaiComputers;
         private static bool owlkWriting;
         private static float volume;
-        private static bool loaded = false;
 
         private void Start()
         {
@@ -74,7 +71,7 @@ namespace OWVoiceMod
             nomaiComputers = config.GetSettingsValue<bool>("nomaiComputers");
             owlkWriting = config.GetSettingsValue<bool>("owlkWriting");
             volume = config.GetSettingsValue<float>("volume");
-            if (loaded) audioSource.volume = volume;
+            if (audioSource != null) audioSource.volume = volume;
         }
 
         private static void OnCompleteSceneLoad(OWScene orignalScene, OWScene loadScene)
@@ -88,10 +85,8 @@ namespace OWVoiceMod
             }
             else if (loadScene != OWScene.SolarSystem) return;
 
-            player = GameObject.Find("Player_Body");
-            audioSource = player.AddComponent<AudioSource>();
+            audioSource = GameObject.Find("Player_Body").AddComponent<AudioSource>();
             audioSource.volume = volume;
-            loaded = true;
 
             CharacterDialogueTree[] characterDialogueTree = Resources.FindObjectsOfTypeAll<CharacterDialogueTree>();
             foreach (CharacterDialogueTree childCharacterDialogueTree in characterDialogueTree)
@@ -143,6 +138,7 @@ namespace OWVoiceMod
         {
             NomaiText nomaiText = nomaiTranslatorProp._nomaiTextComponent;
             int currentTextID = nomaiTranslatorProp._currentTextID;
+            string currentAssetName;
             if (nomaiText is NomaiComputer or NomaiVesselComputer)
             {
                 if (!nomaiComputers) return;
@@ -153,7 +149,6 @@ namespace OWVoiceMod
             else if (nomaiText is GhostWallText)
             {
                 if (!owlkWriting) return;
-                currentAssetName = "OwlkStatic";
                 currentTextName = "OwlkStatic";
             }
             else
