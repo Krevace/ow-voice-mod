@@ -77,7 +77,7 @@ namespace OWVoiceMod
 
         private void OnCompleteSceneLoad(OWScene orignalScene, OWScene loadScene)
         {
-            if (loadScene == OWScene.Credits_Fast || loadScene == OWScene.Credits_Final)
+            if (loadScene is OWScene.Credits_Fast or OWScene.Credits_Final)
             {
                 CreditsAsset creditsAsset = FindObjectOfType<Credits>()._creditsAsset;
                 try { creditsAsset.xml = new TextAsset(File.ReadAllText(ModHelper.Manifest.ModFolderPath + "credits.bytes")); }
@@ -141,7 +141,7 @@ namespace OWVoiceMod
         {
             NomaiText nomaiText = nomaiTranslatorProp._nomaiTextComponent;
             int currentTextID = nomaiTranslatorProp._currentTextID;
-            if (nomaiText is NomaiComputer || nomaiText is NomaiVesselComputer)
+            if (nomaiText is NomaiComputer or NomaiVesselComputer)
             {
                 if (!nomaiComputers) return;
                 if (nomaiText.gameObject.TryGetComponent<NomaiWarpComputerLogger>(out NomaiWarpComputerLogger nomaiWarpComputerLogger)) currentAssetName = "NomaiWarpComputer";
