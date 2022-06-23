@@ -34,9 +34,8 @@ namespace OWVoiceMod
 
             if (splashSkip)
             {
-                // Skip splash screen (from vesper's half life mod)
                 // https://github.com/Vesper-Works/OuterWildsOnline/blob/master/OuterWildsOnline/ConnectionController.cs#L106-L119
-                // Skip flash screen.
+                // Skip splash screen.
                 var titleScreenAnimation = FindObjectOfType<TitleScreenAnimation>();
                 titleScreenAnimation._fadeDuration = 0;
                 titleScreenAnimation._gamepadSplash = false;
@@ -104,7 +103,7 @@ namespace OWVoiceMod
             });
         }
 
-        private static void StartConversation(ref CharacterDialogueTree __instance)
+        private static void StartConversation(CharacterDialogueTree __instance)
         {
             xmlCharacterDialogueAsset = __instance._xmlCharacterDialogueAsset;
             characterName = __instance._characterName;
