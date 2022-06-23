@@ -3,6 +3,7 @@ using OWML.Common;
 using OWML.Utils;
 using UnityEngine;
 using System.IO;
+using System.Linq;
 
 namespace OWVoiceMod
 {
@@ -10,6 +11,7 @@ namespace OWVoiceMod
     {
         private static IModAssets iModAssets;
         private static IModConsole iModConsole;
+        private static IModManifest iModManifest;
         private static GameObject player;
         private static AudioSource audioSource;
         private static NomaiTranslatorProp nomaiTranslatorProp;
@@ -33,6 +35,7 @@ namespace OWVoiceMod
         {
             iModAssets = ModHelper.Assets;
             iModConsole = ModHelper.Console;
+            iModManifest = ModHelper.Manifest;
 
             if (splashSkip)
             {
@@ -77,7 +80,7 @@ namespace OWVoiceMod
             if (loadScene == OWScene.Credits_Fast || loadScene == OWScene.Credits_Final)
             {
                 CreditsAsset creditsAsset = FindObjectOfType<Credits>()._creditsAsset;
-                try { creditsAsset.xml = new TextAsset(File.ReadAllText(ModHelper.Manifest.ModFolderPath + "credits.bytes")); } 
+                try { creditsAsset.xml = new TextAsset(File.ReadAllText(ModHelper.Manifest.ModFolderPath + "credits.bytes")); }
                 catch { iModConsole.WriteLine("Credits file not found!", MessageType.Error); }
                 return;
             }
@@ -108,15 +111,30 @@ namespace OWVoiceMod
         {
             if (!conversations && characterName != "NOTE" && characterName != "RECORDING") return;
             if (!hearthianRecordings && characterName == "RECORDING") return;
-            if (!paperNotes && characterName == "NOTE") return; 
+            if (!paperNotes && characterName == "NOTE") return;
 
             audioSource.Stop();
             if (audioSource.clip != null) audioSource.clip.UnloadAudioData();
             audioSource.clip = null;
 
             string currentAssetName = xmlCharacterDialogueAsset.name + nodeName + pageNum.ToString();
-            try { audioSource.clip = ModHelper.Assets.GetAudio(currentAssetName + ".wav"); } catch { }
-            if (volume > 0 && audioSource.clip != null) audioSource.Play();
+            foreach (string assetPathS in Directory.EnumerateFiles(ModHelper.Manifest.ModFolderPath))
+            {
+                if (Path.GetExtension(assetPathS) == ".wav")
+                {
+                    string assetFileName = Path.GetFileNameWithoutExtension(assetPathS)
+                        .Replace(" ", "")
+                        .Replace("(", "")
+                        .Replace(")", "")
+                        .ToLower();
+                    if (assetFileName.Split('+').Any(x => x == currentAssetName.ToLower()))
+                    {
+                        audioSource.clip = ModHelper.Assets.GetAudio(Path.GetFileName(assetPathS));
+                        if (volume > 0 && audioSource.clip != null) audioSource.Play();
+                        break;
+                    }
+                }
+            }
         }
 
         private void OnEndConversation()
@@ -133,7 +151,7 @@ namespace OWVoiceMod
             if (nomaiText is NomaiComputer || nomaiText is NomaiVesselComputer)
             {
                 if (!nomaiComputers) return;
-                if (nomaiText.gameObject.TryGetComponent<NomaiWarpComputerLogger>(out NomaiWarpComputerLogger nomaiWarpComputerLogger)) currentAssetName = "NomaiWarpComputer";  
+                if (nomaiText.gameObject.TryGetComponent<NomaiWarpComputerLogger>(out NomaiWarpComputerLogger nomaiWarpComputerLogger)) currentAssetName = "NomaiWarpComputer";
                 else currentAssetName = nomaiText._nomaiTextAsset.name;
                 currentTextName = currentAssetName + currentTextID.ToString();
             }
@@ -159,11 +177,27 @@ namespace OWVoiceMod
 
                 if (nomaiText.IsTranslated(currentTextID))
                 {
-                    try { audioSource.clip = iModAssets.GetAudio(currentTextName + ".wav"); } catch { }
-                    if (volume > 0 && audioSource.clip != null) audioSource.Play();
+                    foreach (string assetPathS in Directory.EnumerateFiles(iModManifest.ModFolderPath))
+                    {
+                        if (Path.GetExtension(assetPathS) == ".wav")
+                        {
+                            string assetFileName = Path.GetFileNameWithoutExtension(assetPathS)
+                                .Replace(" ", "")
+                                .Replace("(", "")
+                                .Replace(")", "")
+                                .ToLower();
+                            if (assetFileName.Split('+').Any(x => x == currentTextName.ToLower()))
+                            {
+                                audioSource.clip = iModAssets.GetAudio(Path.GetFileName(assetPathS));
+                                if (volume > 0 && audioSource.clip != null) audioSource.Play();
+                                break;
+                            }
+                        }
+                    }
 
                     if (!(nomaiText is GhostWallText)) oldTextName = currentTextName;
-                } else
+                }
+                else
                 {
                     oldTextName = null;
                 }
