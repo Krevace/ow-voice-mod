@@ -84,23 +84,22 @@ namespace OWVoiceMod
                     CreditsAsset creditsAsset = FindObjectOfType<Credits>()._creditsAsset;
                     try { creditsAsset.xml = new TextAsset(File.ReadAllText(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets", "credits.bytes"))); }
                     catch { ModHelper.Console.WriteLine("Credits file not found!", MessageType.Error); }
-
-                    return;
                 }
-                else if (loadScene != OWScene.SolarSystem) return;
-
-                audioSource = Locator.GetPlayerBody().gameObject.AddComponent<AudioSource>();
-                audioSource.volume = volume;
-                audioSource.outputAudioMixerGroup = Locator.GetAudioMixer().GetAudioMixerGroup(OWAudioMixer.TrackName.Environment);
-
-                CharacterDialogueTree[] characterDialogueTree = Resources.FindObjectsOfTypeAll<CharacterDialogueTree>();
-                foreach (CharacterDialogueTree childCharacterDialogueTree in characterDialogueTree)
+                else if (loadScene is OWScene.SolarSystem or OWScene.EyeOfTheUniverse)
                 {
-                    childCharacterDialogueTree.OnAdvancePage += OnAdvancePage;
-                    childCharacterDialogueTree.OnEndConversation += OnEndConversation;
-                }
+                    audioSource = Locator.GetPlayerBody().gameObject.AddComponent<AudioSource>();
+                    audioSource.volume = volume;
+                    audioSource.outputAudioMixerGroup = Locator.GetAudioMixer().GetAudioMixerGroup(OWAudioMixer.TrackName.Environment);
 
-                nomaiTranslatorProp = FindObjectOfType<NomaiTranslatorProp>();
+                    CharacterDialogueTree[] characterDialogueTree = Resources.FindObjectsOfTypeAll<CharacterDialogueTree>();
+                    foreach (CharacterDialogueTree childCharacterDialogueTree in characterDialogueTree)
+                    {
+                        childCharacterDialogueTree.OnAdvancePage += OnAdvancePage;
+                        childCharacterDialogueTree.OnEndConversation += OnEndConversation;
+                    }
+
+                    nomaiTranslatorProp = FindObjectOfType<NomaiTranslatorProp>();
+                }
             });
         }
 
