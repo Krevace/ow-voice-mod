@@ -181,6 +181,7 @@ namespace OWVoiceMod
 
         private static void LoadAudio(string assetName)
         {
+            ModHelper.Console.WriteLine($"Attempting to find audio for {assetName}...");
             assetName = assetName.ToLower();
             foreach (string assetPath in Directory.EnumerateFiles(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets"), "*.wav", SearchOption.AllDirectories)
                          .Concat(Directory.EnumerateFiles(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets"), "*.mp3", SearchOption.AllDirectories)))
@@ -192,7 +193,7 @@ namespace OWVoiceMod
                     .ToLower();
                 if (assetFileName.Split('+').Any(x => x == assetName))
                 {
-                    ModHelper.Console.WriteLine($"found audio for {assetName}!");
+                    ModHelper.Console.WriteLine($"Found audio for {assetName}!", MessageType.Success);
                     audioSource.clip = ModHelper.Assets.GetAudio(assetPath.Substring(ModHelper.Manifest.ModFolderPath.Length));
                     if (volume > 0 && audioSource.clip != null) audioSource.Play();
                     break;
