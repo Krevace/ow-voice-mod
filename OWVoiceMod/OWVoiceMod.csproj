@@ -22,11 +22,11 @@
     <None Include="manifest.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="assets\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="OWVoiceMod.csproj.user" />
   </ItemGroup>
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="Xcopy /y /s &quot;$(ProjectDir)\assets&quot; &quot;$(OutputPath)&quot;" />
-  </Target>
 </Project>

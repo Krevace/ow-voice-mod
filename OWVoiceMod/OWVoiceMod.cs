@@ -82,7 +82,7 @@ namespace OWVoiceMod
                 if (loadScene is OWScene.Credits_Fast or OWScene.Credits_Final)
                 {
                     CreditsAsset creditsAsset = FindObjectOfType<Credits>()._creditsAsset;
-                    try { creditsAsset.xml = new TextAsset(File.ReadAllText(ModHelper.Manifest.ModFolderPath + "credits.bytes")); }
+                    try { creditsAsset.xml = new TextAsset(File.ReadAllText(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets", "credits.bytes"))); }
                     catch { ModHelper.Console.WriteLine("Credits file not found!", MessageType.Error); }
 
                     return;
@@ -183,7 +183,7 @@ namespace OWVoiceMod
 
         private static void LoadAudio(string assetName)
         {
-            foreach (string assetPath in Directory.EnumerateFiles(ModHelper.Manifest.ModFolderPath, "*.wav", SearchOption.AllDirectories))
+            foreach (string assetPath in Directory.EnumerateFiles(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets"), "*.wav", SearchOption.AllDirectories))
             {
                 string assetFileName = Path.GetFileNameWithoutExtension(assetPath)
                     .Replace(" ", "")
