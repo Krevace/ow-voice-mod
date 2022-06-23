@@ -1,5 +1,4 @@
-﻿using Harmony;
-using OWML.ModHelper;
+﻿using OWML.ModHelper;
 using OWML.Common;
 using OWML.Utils;
 using UnityEngine;
