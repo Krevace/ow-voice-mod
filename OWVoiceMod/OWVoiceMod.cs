@@ -90,11 +90,11 @@ namespace OWVoiceMod
                     audioSource.volume = volume;
                     audioSource.outputAudioMixerGroup = Locator.GetAudioMixer().GetAudioMixerGroup(OWAudioMixer.TrackName.Environment);
 
-                    CharacterDialogueTree[] characterDialogueTree = Resources.FindObjectsOfTypeAll<CharacterDialogueTree>();
-                    foreach (CharacterDialogueTree childCharacterDialogueTree in characterDialogueTree)
+                    CharacterDialogueTree[] characterDialogueTrees = Resources.FindObjectsOfTypeAll<CharacterDialogueTree>();
+                    foreach (CharacterDialogueTree characterDialogueTree in characterDialogueTrees)
                     {
-                        childCharacterDialogueTree.OnAdvancePage += OnAdvancePage;
-                        childCharacterDialogueTree.OnEndConversation += OnEndConversation;
+                        characterDialogueTree.OnAdvancePage += OnAdvancePage;
+                        characterDialogueTree.OnEndConversation += OnEndConversation;
                     }
 
                     nomaiTranslatorProp = FindObjectOfType<NomaiTranslatorProp>();
