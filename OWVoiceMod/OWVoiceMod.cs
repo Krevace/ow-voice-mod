@@ -109,22 +109,19 @@ namespace OWVoiceMod
             if (!hearthianRecordings && characterName == "RECORDING") return;
             if (!paperNotes && characterName == "NOTE") return;
 
-            audioSource.Stop();
-            if (audioSource.clip != null) audioSource.clip.UnloadAudioData();
-            audioSource.clip = null;
+            AudioUnload();
 
             string currentAssetName = xmlCharacterDialogueAsset.name + nodeName + pageNum.ToString();
-            foreach (string assetPathS in Directory.EnumerateFiles(ModHelper.Manifest.ModFolderPath, "*.wav"))
+            foreach (string assetPathS in Directory.EnumerateFiles(ModHelper.Manifest.ModFolderPath, "*.wav", SearchOption.AllDirectories))
             {
                 string assetFileName = Path.GetFileNameWithoutExtension(assetPathS)
                     .Replace(" ", "")
                     .Replace("(", "")
                     .Replace(")", "")
                     .ToLower();
-                string assetPath = assetPathS.Substring(ModHelper.Manifest.ModFolderPath.Length);
                 if (assetFileName.Split('+').Any(x => x == currentAssetName.ToLower()))
                 {
-                    audioSource.clip = ModHelper.Assets.GetAudio(assetPath);
+                    audioSource.clip = ModHelper.Assets.GetAudio(assetPathS.Substring(ModHelper.Manifest.ModFolderPath.Length));
                     if (volume > 0 && audioSource.clip != null) audioSource.Play();
                     break;
                 }
@@ -133,9 +130,7 @@ namespace OWVoiceMod
 
         private void OnEndConversation()
         {
-            audioSource.Stop();
-            if (audioSource.clip != null) audioSource.clip.UnloadAudioData();
-            audioSource.clip = null;
+            AudioUnload();
         }
 
         private static void DisplayTextNode()
@@ -165,23 +160,20 @@ namespace OWVoiceMod
 
             if (currentTextName != oldTextName)
             {
-                audioSource.Stop();
-                if (audioSource.clip != null) audioSource.clip.UnloadAudioData();
-                audioSource.clip = null;
+                AudioUnload();
 
                 if (nomaiText.IsTranslated(currentTextID))
                 {
-                    foreach (string assetPathS in Directory.EnumerateFiles(iModHelper.Manifest.ModFolderPath, "*.wav"))
+                    foreach (string assetPathS in Directory.EnumerateFiles(iModHelper.Manifest.ModFolderPath, "*.wav", SearchOption.AllDirectories))
                     {
                         string assetFileName = Path.GetFileNameWithoutExtension(assetPathS)
                             .Replace(" ", "")
                             .Replace("(", "")
                             .Replace(")", "")
                             .ToLower();
-                        string assetPath = assetPathS.Substring(iModHelper.Manifest.ModFolderPath.Length);
                         if (assetFileName.Split('+').Any(x => x == currentTextName.ToLower()))
                         {
-                            audioSource.clip = iModHelper.Assets.GetAudio(assetPath);
+                            audioSource.clip = iModHelper.Assets.GetAudio(assetPathS.Substring(iModHelper.Manifest.ModFolderPath.Length));
                             if (volume > 0 && audioSource.clip != null) audioSource.Play();
                             break;
                         }
@@ -198,18 +190,21 @@ namespace OWVoiceMod
 
         private static void ClearNomaiText()
         {
-            audioSource.Stop();
-            if (audioSource.clip != null) audioSource.clip.UnloadAudioData();
-            audioSource.clip = null;
+            AudioUnload();
             oldTextName = null;
         }
 
         private static void OnUnequipTool()
         {
+            AudioUnload();
+            oldTextName = null;
+        }
+
+        private static void AudioUnload()
+        {
             audioSource.Stop();
             if (audioSource.clip != null) audioSource.clip.UnloadAudioData();
             audioSource.clip = null;
-            oldTextName = null;
         }
     }
 }
