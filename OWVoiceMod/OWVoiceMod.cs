@@ -76,16 +76,16 @@ namespace OWVoiceMod
 
         private static void OnCompleteSceneLoad(OWScene orignalScene, OWScene loadScene)
         {
-            // gives time for Start to run
-            ModHelper.Events.Unity.FireOnNextUpdate(() =>
+            if (loadScene is OWScene.Credits_Fast or OWScene.Credits_Final)
             {
-                if (loadScene is OWScene.Credits_Fast or OWScene.Credits_Final)
-                {
-                    CreditsAsset creditsAsset = FindObjectOfType<Credits>()._creditsAsset;
-                    try { creditsAsset.xml = new TextAsset(File.ReadAllText(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets", "credits.bytes"))); }
-                    catch { ModHelper.Console.WriteLine("Credits file not found!", MessageType.Error); }
-                }
-                else if (loadScene is OWScene.SolarSystem or OWScene.EyeOfTheUniverse)
+                CreditsAsset creditsAsset = FindObjectOfType<Credits>()._creditsAsset;
+                try { creditsAsset.xml = new TextAsset(File.ReadAllText(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets", "credits.bytes"))); }
+                catch { ModHelper.Console.WriteLine("Credits file not found!", MessageType.Error); }
+            }
+            else if (loadScene is OWScene.SolarSystem or OWScene.EyeOfTheUniverse)
+            {
+                // gives time for Start to run
+                ModHelper.Events.Unity.FireOnNextUpdate(() =>
                 {
                     audioSource = Locator.GetPlayerBody().gameObject.AddComponent<AudioSource>();
                     audioSource.volume = volume;
@@ -99,8 +99,8 @@ namespace OWVoiceMod
                     }
 
                     nomaiTranslatorProp = FindObjectOfType<NomaiTranslatorProp>();
-                }
-            });
+                });
+            }
         }
 
         private static void StartConversation(ref CharacterDialogueTree __instance)
