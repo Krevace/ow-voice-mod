@@ -9,15 +9,17 @@ namespace OWVoiceMod
 {
     public class OWVoiceMod : ModBehaviour
     {
-        private static IModHelper iModHelper;
+        private new static IModHelper ModHelper;
         private static GameObject player;
         private static AudioSource audioSource;
         private static NomaiTranslatorProp nomaiTranslatorProp;
+
         private static TextAsset xmlCharacterDialogueAsset;
         private static string characterName;
         private static string currentTextName;
         private static string currentAssetName;
         private static string oldTextName = null;
+
         private static bool splashSkip;
         private static bool conversations;
         private static bool hearthianRecordings;
@@ -31,7 +33,7 @@ namespace OWVoiceMod
 
         private void Start()
         {
-            iModHelper = ModHelper;
+            ModHelper = base.ModHelper;
 
             if (splashSkip)
             {
@@ -75,13 +77,13 @@ namespace OWVoiceMod
             if (loaded) audioSource.volume = volume;
         }
 
-        private void OnCompleteSceneLoad(OWScene orignalScene, OWScene loadScene)
+        private static void OnCompleteSceneLoad(OWScene orignalScene, OWScene loadScene)
         {
             if (loadScene is OWScene.Credits_Fast or OWScene.Credits_Final)
             {
                 CreditsAsset creditsAsset = FindObjectOfType<Credits>()._creditsAsset;
                 try { creditsAsset.xml = new TextAsset(File.ReadAllText(ModHelper.Manifest.ModFolderPath + "credits.bytes")); }
-                catch { iModHelper.Console.WriteLine("Credits file not found!", MessageType.Error); }
+                catch { ModHelper.Console.WriteLine("Credits file not found!", MessageType.Error); }
                 return;
             }
             else if (loadScene != OWScene.SolarSystem) return;
@@ -107,7 +109,7 @@ namespace OWVoiceMod
             characterName = __instance._characterName;
         }
 
-        private void OnAdvancePage(string nodeName, int pageNum)
+        private static void OnAdvancePage(string nodeName, int pageNum)
         {
             if (!conversations && characterName != "NOTE" && characterName != "RECORDING") return;
             if (!hearthianRecordings && characterName == "RECORDING") return;
@@ -132,7 +134,7 @@ namespace OWVoiceMod
             }
         }
 
-        private void OnEndConversation()
+        private static void OnEndConversation()
         {
             AudioUnload();
         }
@@ -168,7 +170,7 @@ namespace OWVoiceMod
 
                 if (nomaiText.IsTranslated(currentTextID))
                 {
-                    foreach (string assetPathS in Directory.EnumerateFiles(iModHelper.Manifest.ModFolderPath, "*.wav", SearchOption.AllDirectories))
+                    foreach (string assetPathS in Directory.EnumerateFiles(ModHelper.Manifest.ModFolderPath, "*.wav", SearchOption.AllDirectories))
                     {
                         string assetFileName = Path.GetFileNameWithoutExtension(assetPathS)
                             .Replace(" ", "")
@@ -177,7 +179,7 @@ namespace OWVoiceMod
                             .ToLower();
                         if (assetFileName.Split('+').Any(x => x == currentTextName.ToLower()))
                         {
-                            audioSource.clip = iModHelper.Assets.GetAudio(assetPathS.Substring(iModHelper.Manifest.ModFolderPath.Length));
+                            audioSource.clip = ModHelper.Assets.GetAudio(assetPathS.Substring(ModHelper.Manifest.ModFolderPath.Length));
                             if (volume > 0 && audioSource.clip != null) audioSource.Play();
                             break;
                         }
