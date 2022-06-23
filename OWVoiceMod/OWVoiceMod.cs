@@ -11,7 +11,7 @@ namespace OWVoiceMod
     public class OWVoiceMod : ModBehaviour
     {
         private new static IModHelper ModHelper;
-        private static IDictionary<string, string> assetPaths = new Dictionary<string, string>();
+        private static readonly IDictionary<string, string> assetPaths = new Dictionary<string, string>();
         private static AudioSource audioSource;
         private static NomaiTranslatorProp nomaiTranslatorProp;
 
@@ -37,14 +37,9 @@ namespace OWVoiceMod
             foreach (string assetPath in Directory.EnumerateFiles(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets"), "*.wav", SearchOption.AllDirectories)
                          .Concat(Directory.EnumerateFiles(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets"), "*.mp3", SearchOption.AllDirectories)))
             {
-                string assetFileName = Path.GetFileNameWithoutExtension(assetPath)
-                    .Replace(" ", "")
-                    .Replace("(", "")
-                    .Replace(")", "")
-                    .ToLower();
-                foreach (string assetFileNamePart in assetFileName.Split('+'))
+                foreach (string assetName in Path.GetFileNameWithoutExtension(assetPath).Split('+'))
                 {
-                    assetPaths.Add(assetFileNamePart, assetPath);
+                    assetPaths.Add(assetName, assetPath);
                 }
             }
 
@@ -199,12 +194,13 @@ namespace OWVoiceMod
         {
             ModHelper.Console.WriteLine($"Attempting to find audio for {assetName}...");
             assetName = assetName.ToLower();
-            if (assetPaths.ContainsKey(assetName))
+            if (assetPaths.TryGetValue(assetName, out string assetPath))
             {
                 ModHelper.Console.WriteLine($"Found audio for {assetName}!", MessageType.Success);
-                audioSource.clip = ModHelper.Assets.GetAudio(assetPaths[assetName].Substring(ModHelper.Manifest.ModFolderPath.Length));
+                audioSource.clip = ModHelper.Assets.GetAudio(assetPath.Substring(ModHelper.Manifest.ModFolderPath.Length));
                 if (volume > 0 && audioSource.clip != null) audioSource.Play();
-            } else
+            }
+            else
             {
                 ModHelper.Console.WriteLine($"Couldn't find audio for {assetName}!", MessageType.Error);
             }
