@@ -35,18 +35,22 @@ namespace OWVoiceMod
 
             if (splashSkip)
             {
-                //Skip splash screen (from vesper's half life mod)
-                TitleScreenAnimation titleScreenAnimation = FindObjectOfType<TitleScreenAnimation>();
-                TypeExtensions.SetValue(titleScreenAnimation, "_fadeDuration", 0);
-                TypeExtensions.SetValue(titleScreenAnimation, "_gamepadSplash", false);
-                TypeExtensions.SetValue(titleScreenAnimation, "_introPan", false);
-                TypeExtensions.Invoke(titleScreenAnimation, "FadeInTitleLogo", new object[0]);
-                TitleAnimationController titleAnimationController = FindObjectOfType<TitleAnimationController>();
-                TypeExtensions.SetValue(titleAnimationController, "_logoFadeDelay", 0.001f);
-                TypeExtensions.SetValue(titleAnimationController, "_logoFadeDuration", 0.001f);
-                TypeExtensions.SetValue(titleAnimationController, "_optionsFadeDelay", 0.001f);
-                TypeExtensions.SetValue(titleAnimationController, "_optionsFadeDuration", 0.001f);
-                TypeExtensions.SetValue(titleAnimationController, "_optionsFadeSpacing", 0.001f);
+                // Skip splash screen (from vesper's half life mod)
+                // https://github.com/Vesper-Works/OuterWildsOnline/blob/master/OuterWildsOnline/ConnectionController.cs#L106-L119
+                // Skip flash screen.
+                var titleScreenAnimation = FindObjectOfType<TitleScreenAnimation>();
+                titleScreenAnimation._fadeDuration = 0;
+                titleScreenAnimation._gamepadSplash = false;
+                titleScreenAnimation._introPan = false;
+                titleScreenAnimation.Invoke("FadeInTitleLogo");
+
+                // Skip menu fade.
+                var titleAnimationController = FindObjectOfType<TitleAnimationController>();
+                titleAnimationController._logoFadeDelay = 0.001f;
+                titleAnimationController._logoFadeDuration = 0.001f;
+                titleAnimationController._optionsFadeDelay = 0.001f;
+                titleAnimationController._optionsFadeDuration = 0.001f;
+                titleAnimationController._optionsFadeSpacing = 0.001f;
             }
 
             ModHelper.HarmonyHelper.AddPrefix<CharacterDialogueTree>("StartConversation", typeof(OWVoiceMod), nameof(OWVoiceMod.StartConversation));
