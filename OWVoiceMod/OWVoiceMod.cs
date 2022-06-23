@@ -34,9 +34,8 @@ namespace OWVoiceMod
 
             if (splashSkip)
             {
-                // Skip splash screen (from vesper's half life mod)
                 // https://github.com/Vesper-Works/OuterWildsOnline/blob/master/OuterWildsOnline/ConnectionController.cs#L106-L119
-                // Skip flash screen.
+                // Skip splash screen.
                 var titleScreenAnimation = FindObjectOfType<TitleScreenAnimation>();
                 titleScreenAnimation._fadeDuration = 0;
                 titleScreenAnimation._gamepadSplash = false;
@@ -103,7 +102,7 @@ namespace OWVoiceMod
             }
         }
 
-        private static void StartConversation(ref CharacterDialogueTree __instance)
+        private static void StartConversation(CharacterDialogueTree __instance)
         {
             xmlCharacterDialogueAsset = __instance._xmlCharacterDialogueAsset;
             characterName = __instance._characterName;
@@ -182,7 +181,7 @@ namespace OWVoiceMod
 
         private static void LoadAudio(string assetName)
         {
-            ModHelper.Console.WriteLine($"finding audio for {assetName}");
+            ModHelper.Console.WriteLine($"Attempting to find audio for {assetName}...");
             assetName = assetName.ToLower();
             foreach (string assetPath in Directory.EnumerateFiles(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets"), "*.wav", SearchOption.AllDirectories)
                          .Concat(Directory.EnumerateFiles(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets"), "*.mp3", SearchOption.AllDirectories)))
@@ -194,6 +193,7 @@ namespace OWVoiceMod
                     .ToLower();
                 if (assetFileName.Split('+').Any(x => x == assetName))
                 {
+                    ModHelper.Console.WriteLine($"Found audio for {assetName}!", MessageType.Success);
                     audioSource.clip = ModHelper.Assets.GetAudio(assetPath.Substring(ModHelper.Manifest.ModFolderPath.Length));
                     if (volume > 0 && audioSource.clip != null) audioSource.Play();
                     break;
