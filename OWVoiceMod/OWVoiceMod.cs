@@ -193,7 +193,6 @@ namespace OWVoiceMod
         private static void LoadAudio(string assetName)
         {
             ModHelper.Console.WriteLine($"Attempting to find audio for {assetName}...");
-            assetName = assetName.ToLower();
             if (assetPaths.TryGetValue(assetName, out string assetPath))
             {
                 ModHelper.Console.WriteLine($"Found audio for {assetName}!", MessageType.Success);
