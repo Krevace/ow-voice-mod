@@ -5,6 +5,7 @@ using UnityEngine;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
+using System.Xml;
 
 namespace OWVoiceMod
 {
@@ -62,10 +63,11 @@ namespace OWVoiceMod
                 titleAnimationController._optionsFadeSpacing = 0.001f;
             }
 
-            ModHelper.HarmonyHelper.AddPrefix<CharacterDialogueTree>("StartConversation", typeof(OWVoiceMod), nameof(OWVoiceMod.StartConversation));
-            ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>("DisplayTextNode", typeof(OWVoiceMod), nameof(OWVoiceMod.DisplayTextNode));
-            ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>("ClearNomaiText", typeof(OWVoiceMod), nameof(OWVoiceMod.ClearNomaiText));
-            ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>("OnUnequipTool", typeof(OWVoiceMod), nameof(OWVoiceMod.OnUnequipTool));
+            ModHelper.HarmonyHelper.AddPrefix<TextTranslation>("SetLanguage", typeof(OWVoiceMod), nameof(SetLanguage));
+            ModHelper.HarmonyHelper.AddPrefix<CharacterDialogueTree>("StartConversation", typeof(OWVoiceMod), nameof(StartConversation));
+            ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>("DisplayTextNode", typeof(OWVoiceMod), nameof(DisplayTextNode));
+            ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>("ClearNomaiText", typeof(OWVoiceMod), nameof(ClearNomaiText));
+            ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>("OnUnequipTool", typeof(OWVoiceMod), nameof(OnUnequipTool));
 
             LoadManager.OnCompleteSceneLoad += OnCompleteSceneLoad;
         }
@@ -111,6 +113,39 @@ namespace OWVoiceMod
                     nomaiTranslatorProp = FindObjectOfType<NomaiTranslatorProp>();
                 });
             }
+        }
+
+        private static bool SetLanguage()
+        {
+            try 
+            { 
+                TextAsset translation = new(File.ReadAllText(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets", "Translation.bytes")));
+                string xml = OWUtilities.RemoveByteOrderMark(translation);
+                XmlDocument xmlDocument = new XmlDocument();
+                xmlDocument.LoadXml(xml);
+                XmlNode xmlNode = xmlDocument.SelectSingleNode("TranslationTable_XML");
+                XmlNodeList xmlNodeList = xmlNode.SelectNodes("entry");
+                TextTranslation.TranslationTable_XML translationTable_XML = new TextTranslation.TranslationTable_XML();
+                foreach (object obj in xmlNodeList)
+                {
+                    XmlNode xmlNode2 = (XmlNode)obj;
+                    translationTable_XML.table.Add(new TextTranslation.TranslationTableEntry(xmlNode2.SelectSingleNode("key").InnerText, xmlNode2.SelectSingleNode("value").InnerText));
+                }
+                foreach (object obj2 in xmlNode.SelectSingleNode("table_shipLog").SelectNodes("TranslationTableEntry"))
+                {
+                    XmlNode xmlNode3 = (XmlNode)obj2;
+                    translationTable_XML.table_shipLog.Add(new TextTranslation.TranslationTableEntry(xmlNode3.SelectSingleNode("key").InnerText, xmlNode3.SelectSingleNode("value").InnerText));
+                }
+                foreach (object obj3 in xmlNode.SelectSingleNode("table_ui").SelectNodes("TranslationTableEntryUI"))
+                {
+                    XmlNode xmlNode4 = (XmlNode)obj3;
+                    translationTable_XML.table_ui.Add(new TextTranslation.TranslationTableEntryUI(int.Parse(xmlNode4.SelectSingleNode("key").InnerText), xmlNode4.SelectSingleNode("value").InnerText));
+                }
+                TextTranslation textTranslation = FindObjectOfType<TextTranslation>();
+                TypeExtensions.SetValue(textTranslation, "m_table", new TextTranslation.TranslationTable(translationTable_XML));
+            }
+            catch { ModHelper.Console.WriteLine("Translation file not found, game needs to be reloaded!", MessageType.Error); }
+            return false;
         }
 
         private static void StartConversation(CharacterDialogueTree __instance)
