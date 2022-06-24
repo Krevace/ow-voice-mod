@@ -64,12 +64,12 @@ namespace OWVoiceMod
                 titleAnimationController._optionsFadeSpacing = 0.001f;
             }
 
-            ModHelper.HarmonyHelper.AddPrefix<TextTranslation>("SetLanguage", typeof(OWVoiceMod), nameof(SetLanguage));
-            ModHelper.HarmonyHelper.AddPrefix<DialogueText>("GetDisplayStringList", typeof(OWVoiceMod), nameof(GetDisplayStringList));
-            ModHelper.HarmonyHelper.AddPrefix<CharacterDialogueTree>("StartConversation", typeof(OWVoiceMod), nameof(StartConversation));
-            ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>("DisplayTextNode", typeof(OWVoiceMod), nameof(DisplayTextNode));
-            ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>("ClearNomaiText", typeof(OWVoiceMod), nameof(ClearNomaiText));
-            ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>("OnUnequipTool", typeof(OWVoiceMod), nameof(OnUnequipTool));
+            ModHelper.HarmonyHelper.AddPrefix<TextTranslation>(nameof(TextTranslation.SetLanguage), typeof(OWVoiceMod), nameof(SetLanguage));
+            ModHelper.HarmonyHelper.AddPrefix<DialogueText>(nameof(DialogueText.GetDisplayStringList), typeof(OWVoiceMod), nameof(GetDisplayStringList));
+            ModHelper.HarmonyHelper.AddPrefix<CharacterDialogueTree>(nameof(CharacterDialogueTree.StartConversation), typeof(OWVoiceMod), nameof(StartConversation));
+            ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>(nameof(NomaiTranslatorProp.DisplayTextNode), typeof(OWVoiceMod), nameof(DisplayTextNode));
+            ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>(nameof(NomaiTranslatorProp.ClearNomaiText), typeof(OWVoiceMod), nameof(ClearNomaiText));
+            ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>(nameof(NomaiTranslatorProp.OnUnequipTool), typeof(OWVoiceMod), nameof(OnUnequipTool));
 
             LoadManager.OnCompleteSceneLoad += OnCompleteSceneLoad;
         }
