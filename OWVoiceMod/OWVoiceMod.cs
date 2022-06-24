@@ -20,6 +20,7 @@ namespace OWVoiceMod
         private static string characterName;
         private static string currentTextName;
         private static string oldTextName;
+        private static int randomDialogueNum;
 
         private static bool splashSkip;
         private static bool conversations;
@@ -64,6 +65,7 @@ namespace OWVoiceMod
             }
 
             ModHelper.HarmonyHelper.AddPrefix<TextTranslation>("SetLanguage", typeof(OWVoiceMod), nameof(SetLanguage));
+            ModHelper.HarmonyHelper.AddPrefix<DialogueText>("GetDisplayStringList", typeof(OWVoiceMod), nameof(GetDisplayStringList));
             ModHelper.HarmonyHelper.AddPrefix<CharacterDialogueTree>("StartConversation", typeof(OWVoiceMod), nameof(StartConversation));
             ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>("DisplayTextNode", typeof(OWVoiceMod), nameof(DisplayTextNode));
             ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>("ClearNomaiText", typeof(OWVoiceMod), nameof(ClearNomaiText));
@@ -142,10 +144,22 @@ namespace OWVoiceMod
                     translationTable_XML.table_ui.Add(new TextTranslation.TranslationTableEntryUI(int.Parse(xmlNode4.SelectSingleNode("key").InnerText), xmlNode4.SelectSingleNode("value").InnerText));
                 }
                 TextTranslation textTranslation = FindObjectOfType<TextTranslation>();
-                TypeExtensions.SetValue(textTranslation, "m_table", new TextTranslation.TranslationTable(translationTable_XML));
+                textTranslation.m_table = new TextTranslation.TranslationTable(translationTable_XML);
             }
             catch { ModHelper.Console.WriteLine("Translation file not found, game needs to be reloaded!", MessageType.Error); }
             return false;
+        }
+
+        private static void GetDisplayStringList(DialogueText __instance)
+        {
+            if (__instance._randomize)
+            {
+                //maybe add (list.count > 0) test or blocksatisfiesconditions() test idk
+                randomDialogueNum = Random.Range(0, __instance._listTextBlocks.Count);
+                DialogueText.TextBlock textBlock = __instance._listTextBlocks[randomDialogueNum];
+                __instance._listTextBlocks.Clear();
+                __instance._listTextBlocks.Add(textBlock);
+            }
         }
 
         private static void StartConversation(CharacterDialogueTree __instance)
@@ -162,7 +176,9 @@ namespace OWVoiceMod
 
             UnloadAudio();
 
-            string currentAssetName = xmlCharacterDialogueAsset.name + nodeName + pageNum.ToString();
+            string currentAssetName = xmlCharacterDialogueAsset.name + nodeName;
+            currentAssetName += nodeName == "GabbroMain" ? randomDialogueNum : pageNum;
+
             LoadAudio(currentAssetName);
         }
 
