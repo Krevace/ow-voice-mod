@@ -150,16 +150,16 @@ namespace OWVoiceMod
             return false;
         }
 
-        private static void GetDisplayStringList(DialogueText __instance)
+        private static bool GetDisplayStringList(DialogueText __instance, ref List<string> __result)
         {
             if (__instance._randomize)
             {
                 //maybe add (list.count > 0) test or blocksatisfiesconditions() test idk
                 randomDialogueNum = Random.Range(0, __instance._listTextBlocks.Count);
-                DialogueText.TextBlock textBlock = __instance._listTextBlocks[randomDialogueNum];
-                __instance._listTextBlocks.Clear();
-                __instance._listTextBlocks.Add(textBlock);
+                __result = __instance._listTextBlocks[randomDialogueNum].listPageText;
+                return false;
             }
+            return true;
         }
 
         private static void StartConversation(CharacterDialogueTree __instance)
