@@ -12,8 +12,10 @@ namespace OWVoiceMod
 {
     public class OWVoiceMod : ModBehaviour
     {
-        private new static IModHelper ModHelper;
-        private static readonly Dictionary<string, string> assetPaths = new();
+        public new static IModHelper ModHelper;
+        public static readonly Dictionary<string, string> assetPaths = new();
+        public static string creditsAssetPath;
+        public static string translationAssetPath;
         private static AudioSource audioSource;
         private static NomaiTranslatorProp nomaiTranslatorProp;
 
@@ -37,20 +39,14 @@ namespace OWVoiceMod
         {
             ModHelper = base.ModHelper;
 
-            foreach (string assetPath in Directory.EnumerateFiles(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets"), "*.wav", SearchOption.AllDirectories)
-                         .Concat(Directory.EnumerateFiles(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets"), "*.mp3", SearchOption.AllDirectories))
-                         .Concat(Directory.EnumerateFiles(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets"), "*.ogg", SearchOption.AllDirectories)))
-            {
-                foreach (string assetName in Path.GetFileNameWithoutExtension(assetPath).Split('+'))
-                {
-                    assetPaths[assetName] = assetPath;
-                }
-            }
+            string assetsFolderPath = Path.Combine(ModHelper.Manifest.ModFolderPath, "assets");
+            VoiceModApi.AddAudioAssets(assetsFolderPath);
+            VoiceModApi.AddTextAssets(assetsFolderPath);
 
             if (splashSkip)
             {
                 // copied from https://github.com/Vesper-Works/OuterWildsOnline/blob/master/OuterWildsOnline/ConnectionController.cs#L106-L119
-                // Skip splash screen.
+                // Skip flash screen.
                 var titleScreenAnimation = FindObjectOfType<TitleScreenAnimation>();
                 titleScreenAnimation._fadeDuration = 0;
                 titleScreenAnimation._gamepadSplash = false;
@@ -76,6 +72,11 @@ namespace OWVoiceMod
             LoadManager.OnCompleteSceneLoad += OnCompleteSceneLoad;
         }
 
+        public override object GetApi()
+        {
+            return new VoiceModApi();
+        }
+
         public override void Configure(IModConfig config)
         {
             splashSkip = config.GetSettingsValue<bool>("splashSkip");
@@ -95,7 +96,7 @@ namespace OWVoiceMod
             if (loadScene is OWScene.Credits_Fast or OWScene.Credits_Final)
             {
                 CreditsAsset creditsAsset = FindObjectOfType<Credits>()._creditsAsset;
-                try { creditsAsset.xml = new TextAsset(File.ReadAllText(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets", "credits.bytes"))); }
+                try { creditsAsset.xml = new TextAsset(File.ReadAllText(creditsAssetPath)); }
                 catch { ModHelper.Console.WriteLine("Credits file not found!", MessageType.Error); }
             }
             else if (loadScene is OWScene.SolarSystem or OWScene.EyeOfTheUniverse)
@@ -123,7 +124,7 @@ namespace OWVoiceMod
         {
             try
             {
-                TextAsset translation = new(File.ReadAllText(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets", "Translation.bytes")));
+                TextAsset translation = new(File.ReadAllText(translationAssetPath));
                 string xml = OWUtilities.RemoveByteOrderMark(translation);
                 XmlDocument xmlDocument = new XmlDocument();
                 xmlDocument.LoadXml(xml);
@@ -273,6 +274,38 @@ namespace OWVoiceMod
             var clip = AudioClip.Create(path, sampleCount / reader.WaveFormat.Channels, reader.WaveFormat.Channels, reader.WaveFormat.SampleRate, false);
             clip.SetData(outputSamples, 0);
             return clip;
+        }
+    }
+    public class VoiceModApi
+    {
+        public static void AddAudioAssets(string assetFolder)
+        {
+            foreach (string assetPath in Directory.EnumerateFiles(assetFolder, "*.wav", SearchOption.AllDirectories)
+                         .Concat(Directory.EnumerateFiles(assetFolder, "*.mp3", SearchOption.AllDirectories))
+                         .Concat(Directory.EnumerateFiles(assetFolder, "*.ogg", SearchOption.AllDirectories)))
+            {
+                foreach (string assetName in Path.GetFileNameWithoutExtension(assetPath).Split('+'))
+                {
+                    OWVoiceMod.assetPaths[assetName] = assetPath;
+                }
+            }
+        }
+
+        public static void AddTextAssets(string assetFolder)
+        {
+            foreach (string assetPath in Directory.EnumerateFiles(assetFolder, "credits.bytes", SearchOption.AllDirectories))
+            {
+                OWVoiceMod.creditsAssetPath = assetPath;
+            }
+            foreach (string assetPath in Directory.EnumerateFiles(assetFolder, "translation.bytes", SearchOption.AllDirectories))
+            {
+                OWVoiceMod.translationAssetPath = assetPath;
+            }
+        }
+
+        public static void RemoveOriginalAudioAssets()
+        {
+            OWVoiceMod.assetPaths.Clear();
         }
     }
 }
