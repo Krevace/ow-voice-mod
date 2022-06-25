@@ -11,8 +11,8 @@ namespace OWVoiceMod
 {
     public class OWVoiceMod : ModBehaviour
     {
-        public new static IModHelper ModHelper;
-        public static readonly Dictionary<string, string> assetPaths = new();
+        private new static IModHelper ModHelper;
+        private static readonly Dictionary<string, string> assetPaths = new();
         private static AudioSource audioSource;
         private static NomaiTranslatorProp nomaiTranslatorProp;
 
