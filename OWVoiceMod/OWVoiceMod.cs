@@ -36,14 +36,20 @@ namespace OWVoiceMod
         {
             ModHelper = base.ModHelper;
 
-            foreach (string assetPath in Directory.EnumerateFiles(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets"), "*.wav", SearchOption.AllDirectories)
-                         .Concat(Directory.EnumerateFiles(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets"), "*.mp3", SearchOption.AllDirectories)))
+            //temporary fix
+            if (!Directory.Exists(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets/External")))
             {
-                foreach (string assetName in Path.GetFileNameWithoutExtension(assetPath).Split('+'))
-                {
-                    assetPaths.Add(assetName, assetPath);
-                }
+                Directory.CreateDirectory(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets/External"));
             }
+            foreach (string file in Directory.EnumerateFiles(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets/External")))
+            {
+                File.Delete(file);
+            }
+            foreach (string subDirectory in Directory.GetDirectories(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets/External")))
+            {
+                Directory.Delete(subDirectory);
+            }
+            VoiceModApi.SetAssetPaths(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets"));
 
             if (splashSkip)
             {
@@ -268,23 +274,41 @@ namespace OWVoiceMod
     }
     public class VoiceModApi
     {
+        //need to add all the .bytes files
         public static void AddCustomAssets(string assetFolder)
+        {
+            CopyDirectories(assetFolder, Path.Combine(OWVoiceMod.ModHelper.Manifest.ModFolderPath, "assets/External", Path.GetFileName(assetFolder)));
+            SetAssetPaths(Path.Combine(OWVoiceMod.ModHelper.Manifest.ModFolderPath, "assets/External"));
+        }
+
+        public static void ClearOriginalAssets()
+        {
+            OWVoiceMod.assetPaths.Clear();
+        }
+
+        public static void CopyDirectories(string sourceDir, string destDir)
+        {
+            Directory.CreateDirectory(destDir);
+            foreach (string file in Directory.EnumerateFiles(sourceDir))
+            {
+                File.Copy(file, Path.Combine(destDir, Path.GetFileName(file)));
+            }
+            foreach (string subDir in Directory.GetDirectories(sourceDir))
+            {
+                CopyDirectories(subDir, Path.Combine(destDir, Path.GetFileName(subDir)));
+            }
+        }
+
+        public static void SetAssetPaths(string assetFolder)
         {
             foreach (string assetPath in Directory.EnumerateFiles(assetFolder, "*.wav", SearchOption.AllDirectories)
                          .Concat(Directory.EnumerateFiles(assetFolder, "*.mp3", SearchOption.AllDirectories)))
             {
-                string destPath = Path.Combine(OWVoiceMod.ModHelper.Manifest.ModFolderPath, "assets/external", Path.GetFileNameWithoutExtension(assetPath));
-                File.Copy(assetPath, destPath);
                 foreach (string assetName in Path.GetFileNameWithoutExtension(assetPath).Split('+'))
                 {
-                    if (!OWVoiceMod.assetPaths.TryAdd(assetName, assetPath)) OWVoiceMod.assetPaths[assetName] = destPath;
+                    if (!OWVoiceMod.assetPaths.TryAdd(assetName, assetPath)) OWVoiceMod.assetPaths[assetName] = assetPath;
                 }
             }
-        }
-
-        public static void EmptyAssetPaths()
-        {
-            OWVoiceMod.assetPaths.Clear();
         }
     }
 }
