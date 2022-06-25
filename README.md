@@ -2,4 +2,4 @@
 
 # Outer Wilds Voice Acting Mod
 
-This mod will eventually add voice acting to all Outer Wilds characters! Hearthians, Nomai, the Prisoner, and even you. THIS IS A VERY EARLY VERSION! Currently, there are only some demo voice lines for Slate (which are in no way final) that show how the mod works. All voice acting will be gathered by the community. If you want to contribute to the project, come join us on Discord: https://discord.gg/daHHqkKChm.
+This mod will soon add voice acting to all Outer Wilds characters! Hearthians, Nomai, the Prisoner, and even you. THE MOD'S ALMOST FINISHED! Slate, Mica, and Tuff are all fully voiced as a taste of what's to come. However, the current voiceovers are not the final product. All voice acting has been gathered by the community. If you want to help vote for the winning VAs for each character, come join us on Discord: https://discord.gg/daHHqkKChm.
