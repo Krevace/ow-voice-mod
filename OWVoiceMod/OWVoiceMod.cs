@@ -13,8 +13,7 @@ namespace OWVoiceMod
     {
         private new static IModHelper ModHelper;
         private static readonly Dictionary<string, string> assetPaths = new();
-        private static string assetFolderPath;
-        private static string creditsAssetPath;
+        private static string assetFolderPath; 
         private static AudioSource audioSource;
         private static NomaiTranslatorProp nomaiTranslatorProp;
 
@@ -38,8 +37,8 @@ namespace OWVoiceMod
         {
             ModHelper = base.ModHelper;
 
-            assetFolderPath = Path.Combine(ModHelper.Manifest.ModFolderPath, "assets");
-            RegisterAssets(assetFolderPath);
+            assetsFolder = Path.Combine(ModHelper.Manifest.ModFolderPath, "assets");
+            RegisterAssets(assetsFolder);
 
             if (splashSkip)
             {
