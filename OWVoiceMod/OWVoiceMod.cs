@@ -1,4 +1,5 @@
-﻿using OWML.ModHelper;
+﻿using NAudio.Wave;
+using OWML.ModHelper;
 using OWML.Common;
 using OWML.Utils;
 using UnityEngine;
@@ -48,7 +49,7 @@ namespace OWVoiceMod
 
             if (splashSkip)
             {
-                // https://github.com/Vesper-Works/OuterWildsOnline/blob/master/OuterWildsOnline/ConnectionController.cs#L106-L119
+                // copied from https://github.com/Vesper-Works/OuterWildsOnline/blob/master/OuterWildsOnline/ConnectionController.cs#L106-L119
                 // Skip splash screen.
                 var titleScreenAnimation = FindObjectOfType<TitleScreenAnimation>();
                 titleScreenAnimation._fadeDuration = 0;
@@ -246,7 +247,7 @@ namespace OWVoiceMod
         {
             if (assetPaths.TryGetValue(assetName, out string assetPath))
             {
-                audioSource.clip = ModHelper.Assets.GetAudio(assetPath.Substring(ModHelper.Manifest.ModFolderPath.Length));
+                audioSource.clip = GetAudio(assetPath);
                 if (volume > 0 && audioSource.clip != null) audioSource.Play();
             }
             else
@@ -260,6 +261,18 @@ namespace OWVoiceMod
             audioSource.Stop();
             if (audioSource.clip != null) Destroy(audioSource.clip);
             audioSource.clip = null;
+        }
+
+        private static AudioClip GetAudio(string path)
+        {
+            // modified from https://github.com/amazingalek/owml/blob/master/src/OWML.ModHelper.Assets/ModAssets.cs#L99-L110
+            using var reader = new AudioFileReader(path);
+            var sampleCount = (int)(reader.Length * 8 / reader.WaveFormat.BitsPerSample);
+            var outputSamples = new float[sampleCount];
+            reader.Read(outputSamples, 0, sampleCount);
+            var clip = AudioClip.Create(path, sampleCount / reader.WaveFormat.Channels, reader.WaveFormat.Channels, reader.WaveFormat.SampleRate, false);
+            clip.SetData(outputSamples, 0);
+            return clip;
         }
     }
 }
