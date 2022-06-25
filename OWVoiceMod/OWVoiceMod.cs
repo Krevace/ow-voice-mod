@@ -11,7 +11,7 @@ namespace OWVoiceMod
 {
     public class OWVoiceMod : ModBehaviour
     {
-        private new static IModHelper ModHelper;
+        public new static IModHelper ModHelper;
         public static readonly Dictionary<string, string> assetPaths = new();
         private static AudioSource audioSource;
         private static NomaiTranslatorProp nomaiTranslatorProp;
@@ -36,7 +36,14 @@ namespace OWVoiceMod
         {
             ModHelper = base.ModHelper;
 
-            VoiceModApi.GetAssetPaths(ModHelper.Manifest.ModFolderPath);
+            foreach (string assetPath in Directory.EnumerateFiles(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets"), "*.wav", SearchOption.AllDirectories)
+                         .Concat(Directory.EnumerateFiles(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets"), "*.mp3", SearchOption.AllDirectories)))
+            {
+                foreach (string assetName in Path.GetFileNameWithoutExtension(assetPath).Split('+'))
+                {
+                    assetPaths.Add(assetName, assetPath);
+                }
+            }
 
             if (splashSkip)
             {
@@ -261,15 +268,16 @@ namespace OWVoiceMod
     }
     public class VoiceModApi
     {
-        //may not work because GetAudio is from this mod folder
-        public static void GetAssetPaths(string assetFolder)
+        public static void AddCustomAssets(string assetFolder)
         {
-            foreach (string assetPath in Directory.EnumerateFiles(Path.Combine(assetFolder, "assets"), "*.wav", SearchOption.AllDirectories)
-                         .Concat(Directory.EnumerateFiles(Path.Combine(assetFolder, "assets"), "*.mp3", SearchOption.AllDirectories)))
+            foreach (string assetPath in Directory.EnumerateFiles(assetFolder, "*.wav", SearchOption.AllDirectories)
+                         .Concat(Directory.EnumerateFiles(assetFolder, "*.mp3", SearchOption.AllDirectories)))
             {
+                string destPath = Path.Combine(OWVoiceMod.ModHelper.Manifest.ModFolderPath, "assets/external", Path.GetFileNameWithoutExtension(assetPath));
+                File.Copy(assetPath, destPath);
                 foreach (string assetName in Path.GetFileNameWithoutExtension(assetPath).Split('+'))
                 {
-                    if (!OWVoiceMod.assetPaths.TryAdd(assetName, assetPath)) OWVoiceMod.assetPaths[assetName] = assetPath;
+                    if (!OWVoiceMod.assetPaths.TryAdd(assetName, assetPath)) OWVoiceMod.assetPaths[assetName] = destPath;
                 }
             }
         }
