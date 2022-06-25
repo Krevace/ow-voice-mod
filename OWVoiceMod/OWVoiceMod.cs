@@ -42,7 +42,7 @@ namespace OWVoiceMod
             {
                 foreach (string assetName in Path.GetFileNameWithoutExtension(assetPath).Split('+'))
                 {
-                    assetPaths.TryAdd(assetName, assetPath);
+                    assetPaths[assetName] = assetPath;
                 }
             }
 
