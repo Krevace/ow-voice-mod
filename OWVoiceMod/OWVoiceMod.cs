@@ -13,7 +13,8 @@ namespace OWVoiceMod
     {
         private new static IModHelper ModHelper;
         private static readonly Dictionary<string, string> assetPaths = new();
-        private static string assetFolderPath; 
+        private static string assetFolderPath;
+        private static string creditsAssetPath;
         private static AudioSource audioSource;
         private static NomaiTranslatorProp nomaiTranslatorProp;
 
@@ -70,6 +71,10 @@ namespace OWVoiceMod
 
         public static void RegisterAssets(string assetsFolder)
         {
+            foreach (string assetPath in Directory.EnumerateFiles(assetsFolder, "credits.bytes", SearchOption.AllDirectories))
+            {
+                creditsAssetPath = assetPath;
+            }
             foreach (string assetPath in Directory.EnumerateFiles(assetsFolder, "*.wav", SearchOption.AllDirectories)
                          .Concat(Directory.EnumerateFiles(assetsFolder, "*.mp3", SearchOption.AllDirectories))
                          .Concat(Directory.EnumerateFiles(assetsFolder, "*.ogg", SearchOption.AllDirectories)))
@@ -105,7 +110,7 @@ namespace OWVoiceMod
             if (loadScene is OWScene.Credits_Fast or OWScene.Credits_Final)
             {
                 CreditsAsset creditsAsset = FindObjectOfType<Credits>()._creditsAsset;
-                try { creditsAsset.xml = new TextAsset(File.ReadAllText(Path.Combine(assetFolderPath, "credits.bytes"))); }
+                try { creditsAsset.xml = new TextAsset(File.ReadAllText(creditsAssetPath)); }
                 catch { ModHelper.Console.WriteLine("Credits file not found!", MessageType.Error); }
             }
             else if (loadScene is OWScene.SolarSystem or OWScene.EyeOfTheUniverse)
