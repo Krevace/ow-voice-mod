@@ -13,7 +13,8 @@ namespace OWVoiceMod
     {
         private new static IModHelper ModHelper;
         private static readonly Dictionary<string, string> assetPaths = new();
-        private static string assetFolderPath; 
+        private static string assetsFolder;
+        private static string creditsAssetPath;
         private static AudioSource audioSource;
         private static NomaiTranslatorProp nomaiTranslatorProp;
 
