@@ -36,7 +36,7 @@ namespace OWVoiceMod
         {
             ModHelper = base.ModHelper;
 
-            AddAssets(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets"));
+            RegisterAssets(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets"));
 
             if (splashSkip)
             {
@@ -66,7 +66,7 @@ namespace OWVoiceMod
             LoadManager.OnCompleteSceneLoad += OnCompleteSceneLoad;
         }
 
-        public static void AddAssets(string assetsFolder)
+        public static void RegisterAssets(string assetsFolder)
         {
             foreach (string assetPath in Directory.EnumerateFiles(assetsFolder, "*.wav", SearchOption.AllDirectories)
                          .Concat(Directory.EnumerateFiles(assetsFolder, "*.mp3", SearchOption.AllDirectories))
@@ -254,9 +254,9 @@ namespace OWVoiceMod
 
     public class VoiceModApi
     {
-        public void AddAssets(string assetsFolder)
+        public void RegisterAssets(string assetsFolder)
         {
-            OWVoiceMod.AddAssets(assetsFolder);
+            OWVoiceMod.RegisterAssets(assetsFolder);
         }
     }
 }
