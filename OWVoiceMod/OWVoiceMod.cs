@@ -12,7 +12,7 @@ namespace OWVoiceMod
     public class OWVoiceMod : ModBehaviour
     {
         private new static IModHelper ModHelper;
-        private static readonly Dictionary<string, string> assetPaths = new();
+        public static readonly Dictionary<string, string> assetPaths = new();
         private static AudioSource audioSource;
         private static NomaiTranslatorProp nomaiTranslatorProp;
 
@@ -36,14 +36,7 @@ namespace OWVoiceMod
         {
             ModHelper = base.ModHelper;
 
-            foreach (string assetPath in Directory.EnumerateFiles(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets"), "*.wav", SearchOption.AllDirectories)
-                         .Concat(Directory.EnumerateFiles(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets"), "*.mp3", SearchOption.AllDirectories)))
-            {
-                foreach (string assetName in Path.GetFileNameWithoutExtension(assetPath).Split('+'))
-                {
-                    assetPaths.Add(assetName, assetPath);
-                }
-            }
+            VoiceModApi.GetAssetPaths(ModHelper.Manifest.ModFolderPath);
 
             if (splashSkip)
             {
@@ -72,6 +65,11 @@ namespace OWVoiceMod
             ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>(nameof(NomaiTranslatorProp.OnUnequipTool), typeof(OWVoiceMod), nameof(OnUnequipTool));
 
             LoadManager.OnCompleteSceneLoad += OnCompleteSceneLoad;
+        }
+
+        public override object GetApi()
+        {
+            return new VoiceModApi();
         }
 
         public override void Configure(IModConfig config)
@@ -119,8 +117,8 @@ namespace OWVoiceMod
 
         private static bool SetLanguage()
         {
-            try 
-            { 
+            try
+            {
                 TextAsset translation = new(File.ReadAllText(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets", "Translation.bytes")));
                 string xml = OWUtilities.RemoveByteOrderMark(translation);
                 XmlDocument xmlDocument = new XmlDocument();
@@ -259,6 +257,26 @@ namespace OWVoiceMod
             audioSource.Stop();
             if (audioSource.clip != null) Destroy(audioSource.clip);
             audioSource.clip = null;
+        }
+    }
+    public class VoiceModApi
+    {
+        //may not work because GetAudio is from this mod folder
+        public static void GetAssetPaths(string assetFolder)
+        {
+            foreach (string assetPath in Directory.EnumerateFiles(Path.Combine(assetFolder, "assets"), "*.wav", SearchOption.AllDirectories)
+                         .Concat(Directory.EnumerateFiles(Path.Combine(assetFolder, "assets"), "*.mp3", SearchOption.AllDirectories)))
+            {
+                foreach (string assetName in Path.GetFileNameWithoutExtension(assetPath).Split('+'))
+                {
+                    if (!OWVoiceMod.assetPaths.TryAdd(assetName, assetPath)) OWVoiceMod.assetPaths[assetName] = assetPath;
+                }
+            }
+        }
+
+        public static void EmptyAssetPaths()
+        {
+            OWVoiceMod.assetPaths.Clear();
         }
     }
 }
