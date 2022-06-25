@@ -37,7 +37,7 @@ namespace OWVoiceMod
             ModHelper = base.ModHelper;
 
             AddAssets(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets"));
-            
+
             if (splashSkip)
             {
                 // copied from https://github.com/Vesper-Works/OuterWildsOnline/blob/master/OuterWildsOnline/ConnectionController.cs#L106-L119
@@ -136,6 +136,7 @@ namespace OWVoiceMod
                 __result = __instance._listTextBlocks[randomDialogueNum].listPageText;
                 return false;
             }
+
             return true;
         }
 
