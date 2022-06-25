@@ -36,20 +36,15 @@ namespace OWVoiceMod
         {
             ModHelper = base.ModHelper;
 
-            //temporary fix
-            if (!Directory.Exists(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets/External")))
+            foreach (string assetPath in Directory.EnumerateFiles(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets"), "*.wav", SearchOption.AllDirectories)
+                         .Concat(Directory.EnumerateFiles(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets"), "*.mp3", SearchOption.AllDirectories))
+                         .Concat(Directory.EnumerateFiles(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets"), "*.ogg", SearchOption.AllDirectories)))
             {
-                Directory.CreateDirectory(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets/External"));
+                foreach (string assetName in Path.GetFileNameWithoutExtension(assetPath).Split('+'))
+                {
+                    assetPaths.TryAdd(assetName, assetPath);
+                }
             }
-            foreach (string file in Directory.EnumerateFiles(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets/External")))
-            {
-                File.Delete(file);
-            }
-            foreach (string subDirectory in Directory.GetDirectories(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets/External")))
-            {
-                Directory.Delete(subDirectory);
-            }
-            VoiceModApi.SetAssetPaths(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets"));
 
             if (splashSkip)
             {
@@ -78,11 +73,6 @@ namespace OWVoiceMod
             ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>(nameof(NomaiTranslatorProp.OnUnequipTool), typeof(OWVoiceMod), nameof(OnUnequipTool));
 
             LoadManager.OnCompleteSceneLoad += OnCompleteSceneLoad;
-        }
-
-        public override object GetApi()
-        {
-            return new VoiceModApi();
         }
 
         public override void Configure(IModConfig config)
@@ -270,45 +260,6 @@ namespace OWVoiceMod
             audioSource.Stop();
             if (audioSource.clip != null) Destroy(audioSource.clip);
             audioSource.clip = null;
-        }
-    }
-    public class VoiceModApi
-    {
-        //need to add all the .bytes files
-        public static void AddCustomAssets(string assetFolder)
-        {
-            CopyDirectories(assetFolder, Path.Combine(OWVoiceMod.ModHelper.Manifest.ModFolderPath, "assets/External", Path.GetFileName(assetFolder)));
-            SetAssetPaths(Path.Combine(OWVoiceMod.ModHelper.Manifest.ModFolderPath, "assets/External"));
-        }
-
-        public static void ClearOriginalAssets()
-        {
-            OWVoiceMod.assetPaths.Clear();
-        }
-
-        public static void CopyDirectories(string sourceDir, string destDir)
-        {
-            Directory.CreateDirectory(destDir);
-            foreach (string file in Directory.EnumerateFiles(sourceDir))
-            {
-                File.Copy(file, Path.Combine(destDir, Path.GetFileName(file)));
-            }
-            foreach (string subDir in Directory.GetDirectories(sourceDir))
-            {
-                CopyDirectories(subDir, Path.Combine(destDir, Path.GetFileName(subDir)));
-            }
-        }
-
-        public static void SetAssetPaths(string assetFolder)
-        {
-            foreach (string assetPath in Directory.EnumerateFiles(assetFolder, "*.wav", SearchOption.AllDirectories)
-                         .Concat(Directory.EnumerateFiles(assetFolder, "*.mp3", SearchOption.AllDirectories)))
-            {
-                foreach (string assetName in Path.GetFileNameWithoutExtension(assetPath).Split('+'))
-                {
-                    if (!OWVoiceMod.assetPaths.TryAdd(assetName, assetPath)) OWVoiceMod.assetPaths[assetName] = assetPath;
-                }
-            }
         }
     }
 }
