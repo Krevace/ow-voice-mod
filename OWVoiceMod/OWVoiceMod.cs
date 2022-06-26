@@ -22,7 +22,7 @@ namespace OWVoiceMod
         private static string characterName;
         private static string currentTextName;
         private static string oldTextName;
-        private static int randomDialogueNum;
+        private static int randomDialogueNum = -1;
 
         private static bool splashSkip;
         private static bool conversations;
@@ -140,12 +140,12 @@ namespace OWVoiceMod
         {
             if (__instance._randomize)
             {
-                //maybe add (list.count > 0) test or blocksatisfiesconditions() test idk
                 randomDialogueNum = Random.Range(0, __instance._listTextBlocks.Count);
                 __result = __instance._listTextBlocks[randomDialogueNum].listPageText;
                 return false;
             }
 
+            randomDialogueNum = -1;
             return true;
         }
 
@@ -164,7 +164,7 @@ namespace OWVoiceMod
             UnloadAudio();
 
             string currentAssetName = xmlCharacterDialogueAsset.name + nodeName;
-            currentAssetName += nodeName == "GabbroMain" ? randomDialogueNum : pageNum;
+            currentAssetName += randomDialogueNum != -1 ? randomDialogueNum : pageNum;
 
             LoadAudio(currentAssetName);
         }
