@@ -100,7 +100,7 @@ This mod will soon add voice acting to all Outer Wilds characters! Hearthians, N
 
 `Zinc` Mallow
 
-`Baron` Marl
+`InhumanBaron` Marl
 
 `Lealdade` Melorae
 
