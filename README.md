@@ -10,6 +10,7 @@ This mod will soon add voice acting to all Outer Wilds characters! Hearthians, N
 
 `John Corby` Programmer
 
+</br>
 
 `JustARogueAI` Annona
 
