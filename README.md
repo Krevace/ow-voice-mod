@@ -32,13 +32,13 @@ This mod will soon add voice acting to all Outer Wilds characters! Hearthians, N
 
 `Kiki Willows` Clary
 
-`Eternal` Clem
+`Rachel Ilan` Clem
 
 `ComTom` Coleus
 
 `Blue Nip 《馮康》` Conoy
 
-`Eternal` Cycad
+`Tamir Ilan` Cycad
 
 `Asleep0natra1n` Daz
 
@@ -80,7 +80,7 @@ This mod will soon add voice acting to all Outer Wilds characters! Hearthians, N
 
 `Blue Nip 《馮康》` Gneiss
 
-`Eternal` Gossan
+`Tamir Ilan` Gossan
 
 `Coyote Starch` Hal
 
@@ -96,7 +96,7 @@ This mod will soon add voice acting to all Outer Wilds characters! Hearthians, N
 
 `Speedbun` Laevi
 
-`Eternal` Lami
+`Rachel Ilan` Lami
 
 `Zinc` Mallow
 
