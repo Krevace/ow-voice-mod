@@ -71,7 +71,7 @@ namespace OWVoiceMod
 
         public static void RegisterAssets(string assetsFolder)
         {
-            foreach (string assetPath in Directory.EnumerateFiles(assetsFolder, "credits.bytes", SearchOption.AllDirectories))
+            foreach (string assetPath in Directory.EnumerateFiles(assetsFolder, "credits.xml", SearchOption.AllDirectories))
             {
                 creditsAssetPath = assetPath;
             }
