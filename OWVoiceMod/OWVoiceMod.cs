@@ -74,6 +74,7 @@ namespace OWVoiceMod
             foreach (string assetPath in Directory.EnumerateFiles(assetsFolder, "credits.xml", SearchOption.AllDirectories))
             {
                 creditsAssetPath = assetPath;
+                break;
             }
 
             foreach (string assetPath in Directory.EnumerateFiles(assetsFolder, "*.wav", SearchOption.AllDirectories)
