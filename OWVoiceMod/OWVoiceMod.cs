@@ -75,6 +75,7 @@ namespace OWVoiceMod
             {
                 creditsAssetPath = assetPath;
             }
+
             foreach (string assetPath in Directory.EnumerateFiles(assetsFolder, "*.wav", SearchOption.AllDirectories)
                          .Concat(Directory.EnumerateFiles(assetsFolder, "*.mp3", SearchOption.AllDirectories))
                          .Concat(Directory.EnumerateFiles(assetsFolder, "*.ogg", SearchOption.AllDirectories)))
