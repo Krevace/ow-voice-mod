@@ -81,7 +81,7 @@ namespace OWVoiceMod
                          .Concat(Directory.EnumerateFiles(assetsFolder, "*.mp3", SearchOption.AllDirectories))
                          .Concat(Directory.EnumerateFiles(assetsFolder, "*.ogg", SearchOption.AllDirectories)))
             {
-                foreach (string assetName in Path.GetFileNameWithoutExtension(assetPath).Split('+'))
+                foreach (string assetName in Path.GetFileNameWithoutExtension(assetPath).Split('-'))
                 {
                     assetPaths[assetName] = assetPath;
                 }
