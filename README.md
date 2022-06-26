@@ -8,7 +8,7 @@ This mod will soon add voice acting to all Outer Wilds characters! Hearthians, N
 
 `Krevace` Programmer
 
-`John Corby` Programmer
+`JohnCorby` Programmer
 
 <br/>
 
@@ -68,7 +68,7 @@ This mod will soon add voice acting to all Outer Wilds characters! Hearthians, N
 
 `Speedbun` Eye Museum Chorus
 
-`The_Ninja_Boy` Eye Museum Chorus
+`Embor12` Eye Museum Chorus
 
 `Jenywlfersn` Feldspar
 
@@ -120,7 +120,7 @@ This mod will soon add voice acting to all Outer Wilds characters! Hearthians, N
 
 `ImFloof` Phlox
 
-`The_Ninja_Boy` Plume
+`Embor12` Plume
 
 `sunshinemcgee` Poke
 
@@ -138,7 +138,7 @@ This mod will soon add voice acting to all Outer Wilds characters! Hearthians, N
 
 `Sasquatch` Rhus
 
-`The_Ninja_Boy` Riebeck
+`Embor12` Riebeck
 
 `matak12m` Root
 
@@ -162,7 +162,7 @@ This mod will soon add voice acting to all Outer Wilds characters! Hearthians, N
 
 `Shiloh Kae` Tephra
 
-`The_Ninja_Boy` Thatch
+`Embor12` Thatch
 
 `Asleep0natra1n` Tuff
 
