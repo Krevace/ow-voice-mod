@@ -10,7 +10,7 @@ This mod will soon add voice acting to all Outer Wilds characters! Hearthians, N
 
 `John Corby` Programmer
 
-</br>
+<br/>
 
 `JustARogueAI` Annona
 
@@ -22,7 +22,7 @@ This mod will soon add voice acting to all Outer Wilds characters! Hearthians, N
 
 `ThiccShibe` Bromi
 
-`TerrificTrifid` Bur
+`Trifid` Bur
 
 `Sasquatch` Canna
 
@@ -40,9 +40,9 @@ This mod will soon add voice acting to all Outer Wilds characters! Hearthians, N
 
 `Eternal` Cycad
 
-`Patrick` Daz
+`Asleep0natra1n` Daz
 
-`TerrificTrifid` Din
+`Trifid` Din
 
 `Nickster` Escall
 
@@ -50,23 +50,23 @@ This mod will soon add voice acting to all Outer Wilds characters! Hearthians, N
 
 `Chronarch` Eye Museum Chorus
 
-`ComTom` Eye Museum Chorus 
+`ComTom` Eye Museum Chorus
 
-`Hella Bi System` Eye Museum Chorus 
+`Hella Bi System` Eye Museum Chorus
 
-`Jenywlfersn` Eye Museum Chorus 
+`Jenywlfersn` Eye Museum Chorus
 
-`matak12m` Eye Museum Chorus 
+`matak12m` Eye Museum Chorus
 
-`Mutant_Cacti` Eye Museum Chorus 
+`Mutant_Cacti` Eye Museum Chorus
 
-`Patrick` Eye Museum Chorus 
+`Asleep0natra1n` Eye Museum Chorus
 
-`Poketchu` Eye Museum Chorus 
+`Poketchu` Eye Museum Chorus
 
 `Shiloh Kae` Eye Museum Chorus
 
-`Speedbun` Eye Museum Chorus 
+`Speedbun` Eye Museum Chorus
 
 `The_Ninja_Boy` Eye Museum Chorus
 
@@ -86,13 +86,13 @@ This mod will soon add voice acting to all Outer Wilds characters! Hearthians, N
 
 `ImFloof` Hornfels
 
-`Patrick` Hyssop
+`Asleep0natra1n` Hyssop
 
 `Agonarch` Idaea
 
 `ThatTrandomGuy` Ilex
 
-`Patrick` Kousa
+`Asleep0natra1n` Kousa
 
 `Speedbun` Laevi
 
@@ -108,7 +108,7 @@ This mod will soon add voice acting to all Outer Wilds characters! Hearthians, N
 
 `Speedbun` Mitis
 
-`TerrificTrifid` Moraine
+`Trifid` Moraine
 
 `Speedbun` Neem
 
@@ -126,7 +126,7 @@ This mod will soon add voice acting to all Outer Wilds characters! Hearthians, N
 
 `Speedbun` Porphy
 
-`Patrick` Prisoner
+`Asleep0natra1n` Prisoner
 
 `Shiloh Kae` Privet
 
@@ -152,11 +152,11 @@ This mod will soon add voice acting to all Outer Wilds characters! Hearthians, N
 
 `Shiloh Kae` Child Solanum
 
-`Patrick` Spinel
+`Asleep0natra1n` Spinel
 
 `Chronarch` Spire
 
-`TerrificTrifid` Taget
+`Trifid` Taget
 
 `pandisia` Tektite
 
@@ -164,6 +164,6 @@ This mod will soon add voice acting to all Outer Wilds characters! Hearthians, N
 
 `The_Ninja_Boy` Thatch
 
-`Patrick` Tuff
+`Asleep0natra1n` Tuff
 
 `Chronarch` Yarrow
