@@ -14,11 +14,11 @@ This mod will soon add voice acting to all Outer Wilds characters! Hearthians, N
 
 `JustARogueAI` Annona
 
-`SebastianThePirate` Arkose
+`Kiki Willows` Arkose
 
 `solemn lemon` Avens
 
-`SebastianThePirate` Bells
+`Kiki Willows` Bells
 
 `ThiccShibe` Bromi
 
@@ -30,7 +30,7 @@ This mod will soon add voice acting to all Outer Wilds characters! Hearthians, N
 
 `Jenywlfersn` Chert
 
-`SebastianThePirate` Clary
+`Kiki Willows` Clary
 
 `Eternal` Clem
 
