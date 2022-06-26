@@ -112,7 +112,7 @@ This mod will soon add voice acting to all Outer Wilds characters! Hearthians, N
 
 `Speedbun` Neem
 
-`Jonky-Boi` Old Nomai Computers
+`Laundryjx` Old Nomai Computers
 
 `Speedbun` New Nomai Computers
 
