@@ -52,7 +52,7 @@ This mod will soon add voice acting to all Outer Wilds characters! Hearthians, N
 
 `ComTom` Eye Museum Chorus
 
-`Hella Bi System` Eye Museum Chorus
+`Lexi` Eye Museum Chorus
 
 `Jenywlfersn` Eye Museum Chorus
 
@@ -132,7 +132,7 @@ This mod will soon add voice acting to all Outer Wilds characters! Hearthians, N
 
 `Jenywlfersn` Protagonist
 
-`Hella Bi System` Pye
+`Lexi` Pye
 
 `sunshinemcgee` Ramie
 
@@ -142,7 +142,7 @@ This mod will soon add voice acting to all Outer Wilds characters! Hearthians, N
 
 `matak12m` Root
 
-`Hella Bi System` Rutile
+`Lexi` Rutile
 
 `Speedbun` Secca
 
