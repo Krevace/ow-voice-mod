@@ -43,7 +43,7 @@ namespace OWVoiceMod
 
             if (splashSkip)
             {
-                // copied from https://github.com/Vesper-Works/OuterWildsOnline/blob/master/OuterWildsOnline/ConnectionController.cs#L106-L119
+                // Copied from https://github.com/Vesper-Works/OuterWildsOnline/blob/master/OuterWildsOnline/ConnectionController.cs#L106-L119
                 // Skip flash screen.
                 var titleScreenAnimation = FindObjectOfType<TitleScreenAnimation>();
                 titleScreenAnimation._fadeDuration = 0;
@@ -81,6 +81,7 @@ namespace OWVoiceMod
                          .Concat(Directory.EnumerateFiles(assetsFolder, "*.mp3", SearchOption.AllDirectories))
                          .Concat(Directory.EnumerateFiles(assetsFolder, "*.ogg", SearchOption.AllDirectories)))
             {
+                // Conjoins audio files of the same content with different names using &
                 foreach (string assetName in Path.GetFileNameWithoutExtension(assetPath).Split('&'))
                 {
                     assetPaths[assetName] = assetPath;
@@ -117,12 +118,13 @@ namespace OWVoiceMod
             }
             else if (loadScene is OWScene.SolarSystem or OWScene.EyeOfTheUniverse)
             {
-                // gives time for Start to run
+                // Gives time for Start to run
                 ModHelper.Events.Unity.FireOnNextUpdate(() =>
                 {
                     audioSource = Locator.GetPlayerBody().gameObject.AddComponent<AudioSource>();
                     audioSource.volume = volume;
                     audioSource.outputAudioMixerGroup = Locator.GetAudioMixer().GetAudioMixerGroup(OWAudioMixer.TrackName.Environment);
+                    // Placed on the Environment track to get environmental effects like reverb
 
                     CharacterDialogueTree[] characterDialogueTrees = Resources.FindObjectsOfTypeAll<CharacterDialogueTree>();
                     foreach (CharacterDialogueTree characterDialogueTree in characterDialogueTrees)
@@ -138,6 +140,7 @@ namespace OWVoiceMod
 
         private static bool GetDisplayStringList(DialogueText __instance, ref List<string> __result)
         {
+            // Ensures that the correct ID is used if dialogue uses randomization (ex. Gabbro intro lines)
             if (__instance._randomize)
             {
                 randomDialogueNum = Random.Range(0, __instance._listTextBlocks.Count);
@@ -250,7 +253,7 @@ namespace OWVoiceMod
 
         private static AudioClip GetAudio(string path)
         {
-            // modified from https://github.com/amazingalek/owml/blob/master/src/OWML.ModHelper.Assets/ModAssets.cs#L99-L110
+            // Modified from https://github.com/amazingalek/owml/blob/master/src/OWML.ModHelper.Assets/ModAssets.cs#L99-L110
             using var reader = new AudioFileReader(path);
             var sampleCount = (int)(reader.Length * 8 / reader.WaveFormat.BitsPerSample);
             var outputSamples = new float[sampleCount];
