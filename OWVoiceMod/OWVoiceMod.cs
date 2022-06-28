@@ -91,10 +91,7 @@ namespace OWVoiceMod
             }
         }
 
-        public override object GetApi()
-        {
-            return new VoiceModApi();
-        }
+        public override object GetApi() => new VoiceModApi();
 
         public override void Configure(IModConfig config)
         {
@@ -174,10 +171,7 @@ namespace OWVoiceMod
             LoadAudio(currentAssetName);
         }
 
-        private static void OnEndConversation()
-        {
-            UnloadAudio();
-        }
+        private static void OnEndConversation() => UnloadAudio();
 
         private static void DisplayTextNode()
         {
@@ -274,9 +268,6 @@ namespace OWVoiceMod
 
     public class VoiceModApi
     {
-        public void RegisterAssets(string assetsFolder)
-        {
-            OWVoiceMod.RegisterAssets(assetsFolder);
-        }
+        public void RegisterAssets(string assetsFolder) => OWVoiceMod.RegisterAssets(assetsFolder);
     }
 }
