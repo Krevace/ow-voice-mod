@@ -69,6 +69,8 @@ namespace OWVoiceMod
             LoadManager.OnCompleteSceneLoad += OnCompleteSceneLoad;
         }
 
+        private static string FormatAssetName(string assetName) => assetName.Replace(" ", "").ToLower();
+
         public static void RegisterAssets(string assetsFolder)
         {
             foreach (string assetPath in Directory.EnumerateFiles(assetsFolder, "credits.xml", SearchOption.AllDirectories))
@@ -84,7 +86,7 @@ namespace OWVoiceMod
                 // Conjoins audio files of the same content with different names using &
                 foreach (string assetName in Path.GetFileNameWithoutExtension(assetPath).Split('&'))
                 {
-                    assetPaths[assetName] = assetPath;
+                    assetPaths[FormatAssetName(assetName)] = assetPath;
                 }
             }
         }
@@ -233,7 +235,7 @@ namespace OWVoiceMod
 
         private static void LoadAudio(string assetName)
         {
-            if (assetPaths.TryGetValue(assetName, out string assetPath))
+            if (assetPaths.TryGetValue(FormatAssetName(assetName), out string assetPath))
             {
                 audioSource.clip = GetAudio(assetPath);
                 if (volume > 0 && audioSource.clip != null) audioSource.Play();
