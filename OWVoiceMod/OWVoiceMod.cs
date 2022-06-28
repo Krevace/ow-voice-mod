@@ -258,6 +258,12 @@ namespace OWVoiceMod
             var sampleCount = (int)(reader.Length * 8 / reader.WaveFormat.BitsPerSample);
             var outputSamples = new float[sampleCount];
             reader.Read(outputSamples, 0, sampleCount);
+
+            // normalize
+            // TODO remove after mixing, this is just for testing, lol
+            var max = outputSamples.Select(Mathf.Abs).Max();
+            for (var i = 0; i < outputSamples.Length; i++) outputSamples[i] /= max;
+
             var clip = AudioClip.Create(path, sampleCount / reader.WaveFormat.Channels, reader.WaveFormat.Channels, reader.WaveFormat.SampleRate, false);
             clip.SetData(outputSamples, 0);
             return clip;
