@@ -13,7 +13,6 @@ namespace OWVoiceMod
     {
         private new static IModHelper ModHelper;
         private static readonly Dictionary<string, string> assetPaths = new();
-        private static string assetsFolder;
         private static string creditsAssetPath;
         private static AudioSource audioSource;
 
@@ -35,8 +34,7 @@ namespace OWVoiceMod
         {
             ModHelper = base.ModHelper;
 
-            assetsFolder = Path.Combine(ModHelper.Manifest.ModFolderPath, "assets");
-            RegisterAssets(assetsFolder);
+            RegisterAssets(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets"));
 
             if (splashSkip)
             {
