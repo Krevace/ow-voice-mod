@@ -16,7 +16,6 @@ namespace OWVoiceMod
         private static string assetsFolder;
         private static string creditsAssetPath;
         private static AudioSource audioSource;
-        private static NomaiTranslatorProp nomaiTranslatorProp;
 
         private static string currentTextName;
         private static string oldTextName;
@@ -128,8 +127,6 @@ namespace OWVoiceMod
                         characterDialogueTree.OnAdvancePage += (nodeName, pageNum) => OnAdvancePage(characterDialogueTree, nodeName, pageNum);
                         characterDialogueTree.OnEndConversation += OnEndConversation;
                     }
-
-                    nomaiTranslatorProp = FindObjectOfType<NomaiTranslatorProp>();
                 });
             }
         }
@@ -167,10 +164,10 @@ namespace OWVoiceMod
 
         private static void OnEndConversation() => UnloadAudio();
 
-        private static void DisplayTextNode()
+        private static void DisplayTextNode(NomaiTranslatorProp __instance)
         {
-            NomaiText nomaiText = nomaiTranslatorProp._nomaiTextComponent;
-            int currentTextID = nomaiTranslatorProp._currentTextID;
+            NomaiText nomaiText = __instance._nomaiTextComponent;
+            int currentTextID = __instance._currentTextID;
             string currentAssetName;
             if (nomaiText is NomaiComputer or NomaiVesselComputer)
             {
