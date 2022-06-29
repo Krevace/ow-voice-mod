@@ -168,6 +168,7 @@ namespace OWVoiceMod
         {
             NomaiText nomaiText = __instance._nomaiTextComponent;
             int currentTextID = __instance._currentTextID;
+
             string currentAssetName;
             if (nomaiText is NomaiComputer or NomaiVesselComputer)
             {
