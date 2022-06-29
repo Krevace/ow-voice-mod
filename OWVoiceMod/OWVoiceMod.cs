@@ -18,8 +18,6 @@ namespace OWVoiceMod
         private static AudioSource audioSource;
         private static NomaiTranslatorProp nomaiTranslatorProp;
 
-        private static TextAsset xmlCharacterDialogueAsset;
-        private static string characterName;
         private static string currentTextName;
         private static string oldTextName;
         private static int randomDialogueNum = -1;
@@ -61,7 +59,6 @@ namespace OWVoiceMod
             }
 
             ModHelper.HarmonyHelper.AddPrefix<DialogueText>(nameof(DialogueText.GetDisplayStringList), typeof(OWVoiceMod), nameof(GetDisplayStringList));
-            ModHelper.HarmonyHelper.AddPrefix<CharacterDialogueTree>(nameof(CharacterDialogueTree.StartConversation), typeof(OWVoiceMod), nameof(StartConversation));
             ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>(nameof(NomaiTranslatorProp.DisplayTextNode), typeof(OWVoiceMod), nameof(DisplayTextNode));
             ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>(nameof(NomaiTranslatorProp.ClearNomaiText), typeof(OWVoiceMod), nameof(ClearNomaiText));
             ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>(nameof(NomaiTranslatorProp.OnUnequipTool), typeof(OWVoiceMod), nameof(OnUnequipTool));
@@ -128,7 +125,7 @@ namespace OWVoiceMod
                     CharacterDialogueTree[] characterDialogueTrees = Resources.FindObjectsOfTypeAll<CharacterDialogueTree>();
                     foreach (CharacterDialogueTree characterDialogueTree in characterDialogueTrees)
                     {
-                        characterDialogueTree.OnAdvancePage += OnAdvancePage;
+                        characterDialogueTree.OnAdvancePage += (nodeName, pageNum) => OnAdvancePage(characterDialogueTree, nodeName, pageNum);
                         characterDialogueTree.OnEndConversation += OnEndConversation;
                     }
 
@@ -151,14 +148,11 @@ namespace OWVoiceMod
             return true;
         }
 
-        private static void StartConversation(CharacterDialogueTree __instance)
+        private static void OnAdvancePage(CharacterDialogueTree characterDialogueTree, string nodeName, int pageNum)
         {
-            xmlCharacterDialogueAsset = __instance._xmlCharacterDialogueAsset;
-            characterName = __instance._characterName;
-        }
+            var xmlCharacterDialogueAsset = characterDialogueTree._xmlCharacterDialogueAsset;
+            var characterName = characterDialogueTree._characterName;
 
-        private static void OnAdvancePage(string nodeName, int pageNum)
-        {
             if (!conversations && characterName != "NOTE" && characterName != "RECORDING") return;
             if (!hearthianRecordings && characterName == "RECORDING") return;
             if (!paperNotes && characterName == "NOTE") return;
