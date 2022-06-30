@@ -220,13 +220,13 @@ namespace OWVoiceMod
         {
             if (assetPaths.TryGetValue(FormatAssetName(assetName), out string assetPath))
             {
-                ModHelper.Console.WriteLine($"Found audio for {assetName}!", MessageType.Success);
+                ModHelper.Console.WriteLine($"Found audio for {assetName}", MessageType.Success);
                 audioSource.clip = GetAudio(assetPath);
                 if (volume > 0 && audioSource.clip != null) audioSource.Play();
             }
             else
             {
-                ModHelper.Console.WriteLine($"Couldn't find audio for {assetName}!", MessageType.Error);
+                ModHelper.Console.WriteLine($"Couldn't find audio for {assetName}", MessageType.Error);
             }
         }
 
