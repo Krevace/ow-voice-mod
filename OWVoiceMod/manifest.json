@@ -4,5 +4,6 @@
   "name": "Voice Acting Mod",
   "uniqueName": "Krevace.VoiceMod",
   "version": "0.3.1",
-  "owmlVersion": "2.5.2"
+  "owmlVersion": "2.5.2",
+  "priorityLoad": true
 }
