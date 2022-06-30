@@ -154,8 +154,7 @@ namespace OWVoiceMod
 
             UnloadAudio();
 
-            string currentAssetName = xmlCharacterDialogueAsset.name + nodeName;
-            currentAssetName += randomDialogueNum != -1 ? randomDialogueNum : pageNum;
+            string currentAssetName = $"{xmlCharacterDialogueAsset.name} {nodeName} {(randomDialogueNum != -1 ? randomDialogueNum : pageNum)}";
 
             LoadAudio(currentAssetName);
         }
@@ -173,7 +172,7 @@ namespace OWVoiceMod
                 if (!nomaiComputers) return;
                 if (nomaiText.gameObject.TryGetComponent<NomaiWarpComputerLogger>(out _)) currentAssetName = "NomaiWarpComputer";
                 else currentAssetName = nomaiText._nomaiTextAsset.name;
-                currentTextName = currentAssetName + currentTextID.ToString();
+                currentTextName = $"{currentAssetName} {currentTextID}";
             }
             else if (nomaiText is GhostWallText)
             {
@@ -185,7 +184,7 @@ namespace OWVoiceMod
                 if (!nomaiScrolls && nomaiText is NomaiWallText) return;
                 if (!nomaiRecordings && nomaiText is not NomaiWallText) return;
                 currentAssetName = nomaiText._nomaiTextAsset.name;
-                currentTextName = currentAssetName + currentTextID.ToString();
+                currentTextName = $"{currentAssetName} {currentTextID}";
             }
 
             if (currentTextName != oldTextName)
