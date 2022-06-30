@@ -145,8 +145,8 @@ namespace OWVoiceMod
 
         private static void OnAdvancePage(CharacterDialogueTree characterDialogueTree, string nodeName, int pageNum)
         {
-            var xmlCharacterDialogueAsset = characterDialogueTree._xmlCharacterDialogueAsset;
-            var characterName = characterDialogueTree._characterName;
+            TextAsset xmlCharacterDialogueAsset = characterDialogueTree._xmlCharacterDialogueAsset;
+            string characterName = characterDialogueTree._characterName;
 
             if (!conversations && characterName != "NOTE" && characterName != "RECORDING") return;
             if (!hearthianRecordings && characterName == "RECORDING") return;
