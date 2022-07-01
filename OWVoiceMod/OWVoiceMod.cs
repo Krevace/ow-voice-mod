@@ -3,9 +3,11 @@ using OWML.Common;
 using OWML.ModHelper;
 using OWML.Utils;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace OWVoiceMod
 {
@@ -216,12 +218,13 @@ namespace OWVoiceMod
 			oldTextName = null;
 		}
 
-		private static void LoadAudio(string assetName)
+		private static async void LoadAudio(string assetName)
 		{
 			if (assetPaths.TryGetValue(FormatAssetName(assetName), out var assetPath))
 			{
 				ModHelper.Console.WriteLine($"Found audio for {assetName}", MessageType.Success);
-				audioSource.clip = GetAudio(assetPath);
+				if (Path.GetExtension(assetPath) == ".ogg") audioSource.clip = await GetOggAudio(assetPath);
+				else audioSource.clip = GetAudio(assetPath);
 				if (volume > 0 && audioSource.clip != null) audioSource.Play();
 			}
 			else
@@ -252,6 +255,25 @@ namespace OWVoiceMod
 
 			var clip = AudioClip.Create(path, sampleCount / reader.WaveFormat.Channels, reader.WaveFormat.Channels, reader.WaveFormat.SampleRate, false);
 			clip.SetData(outputSamples, 0);
+			return clip;
+		}
+
+		private static async Task<AudioClip> GetOggAudio(string path)
+		{
+			AudioClip clip = null;
+			using (UnityWebRequest uwr = UnityWebRequestMultimedia.GetAudioClip(path, UnityEngine.AudioType.OGGVORBIS))
+			{
+				uwr.SendWebRequest();
+
+				while (!uwr.isDone) await Task.Delay(5);
+
+				if (uwr.isNetworkError || uwr.isHttpError) ModHelper.Console.WriteLine($"{uwr.error}");
+				else
+				{
+					clip = DownloadHandlerAudioClip.GetContent(uwr);
+				}
+			}
+
 			return clip;
 		}
 	}
