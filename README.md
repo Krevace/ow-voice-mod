@@ -8,164 +8,166 @@ There's also addon support! Check [here](https://github.com/Krevace/ow-voice-mod
 
 # Credits
 
-`Krevace` Programmer
+`Krevace` Project Director, Programmer
 
-`JohnCorby` Programmer
+`JohnCorby` Project Manager, Programmer
+
+`Trifid` Project Manager
 
 <br/>
 
-`JustARogueAI` Annona
+`JustARogueAI` Annona VA
 
-`Kiki Willows` Arkose
+`Kiki Willows` Arkose VA
 
-`solemn lemon` Avens
+`solemn lemon` Avens VA
 
-`Kiki Willows` Bells
+`Kiki Willows` Bells VA
 
-`ThiccShibe` Bromi
+`ThiccShibe` Bromi VA
 
-`Trifid` Bur
+`Trifid` Bur VA
 
-`Sasquatch` Canna
+`Sasquatch` Canna VA
 
-`Mutant_Cacti` Cassava
+`Mutant_Cacti` Cassava VA
 
-`Jenywlfersn` Chert
+`Jenywlfersn` Chert VA
 
-`Kiki Willows` Clary
+`Kiki Willows` Clary VA
 
-`Rachel Ilan` Clem
+`Rachel Ilan` Clem VA
 
-`ComTom` Coleus
+`ComTom` Coleus VA
 
-`Blue Nip 《馮康》` Conoy
+`Blue Nip 《馮康》` Conoy VA
 
-`Tamir Ilan` Cycad
+`Tamir Ilan` Cycad VA
 
-`Asleep0natra1n` Daz
+`Asleep0natra1n` Daz VA
 
-`Trifid` Din
+`Trifid` Din VA
 
-`Nickster` Escall
+`Nickster` Escall VA
 
-`Gurdy Enjoyer` Esker
+`Gurdy Enjoyer` Esker VA
 
-`Chronarch` Eye Museum Chorus
+`Chronarch` Eye Museum Chorus VA
 
-`ComTom` Eye Museum Chorus
+`ComTom` Eye Museum Chorus VA
 
-`Lexi` Eye Museum Chorus
+`Lexi` Eye Museum Chorus VA
 
-`Jenywlfersn` Eye Museum Chorus
+`Jenywlfersn` Eye Museum Chorus VA
 
-`matak12m` Eye Museum Chorus
+`matak12m` Eye Museum Chorus VA
 
-`Mutant_Cacti` Eye Museum Chorus
+`Mutant_Cacti` Eye Museum Chorus VA
 
-`Asleep0natra1n` Eye Museum Chorus
+`Asleep0natra1n` Eye Museum Chorus VA
 
-`Poketchu` Eye Museum Chorus
+`Poketchu` Eye Museum Chorus VA
 
-`Shiloh Kae` Eye Museum Chorus
+`Shiloh Kae` Eye Museum Chorus VA
 
-`Speedbun` Eye Museum Chorus
+`Speedbun` Eye Museum Chorus VA
 
-`Embor12` Eye Museum Chorus
+`Embor12` Eye Museum Chorus VA
 
-`Jenywlfersn` Feldspar
+`Jenywlfersn` Feldspar VA
 
-`KillerChara177` Filix
+`KillerChara177` Filix VA
 
-`Chronarch` Gabbro
+`Chronarch` Gabbro VA
 
-`Shiloh Kae` Galena
+`Shiloh Kae` Galena VA
 
-`Blue Nip 《馮康》` Gneiss
+`Blue Nip 《馮康》` Gneiss VA
 
-`Tamir Ilan` Gossan
+`Tamir Ilan` Gossan VA
 
-`Coyote Starch` Hal
+`Coyote Starch` Hal VA
 
-`ImFloof` Hornfels
+`ImFloof` Hornfels VA
 
-`Asleep0natra1n` Hyssop
+`Asleep0natra1n` Hyssop VA
 
-`Agonarch` Idaea
+`Agonarch` Idaea VA
 
-`ThatTrandomGuy` Ilex
+`ThatTrandomGuy` Ilex VA
 
-`Asleep0natra1n` Kousa
+`Asleep0natra1n` Kousa VA
 
-`Speedbun` Laevi
+`Speedbun` Laevi VA
 
-`Rachel Ilan` Lami
+`Rachel Ilan` Lami VA
 
-`Zinc` Mallow
+`Zinc` Mallow VA
 
-`InhumanBaron` Marl
+`InhumanBaron` Marl VA
 
-`Lealdade` Melorae
+`Lealdade` Melorae VA
 
-`JohnCorby` Mica
+`JohnCorby` Mica VA
 
-`Speedbun` Mitis
+`Speedbun` Mitis VA
 
-`Trifid` Moraine
+`Trifid` Moraine VA
 
-`Speedbun` Neem
+`Speedbun` Neem VA
 
-`Laundryjx` Old Nomai Computers
+`Laundryjx` Old Nomai Computers VA
 
-`Speedbun` New Nomai Computers
+`Speedbun` New Nomai Computers VA
 
-`Fionn McManamon` Oeno
+`Fionn McManamon` Oeno VA
 
-`ImFloof` Phlox
+`ImFloof` Phlox VA
 
-`Embor12` Plume
+`Embor12` Plume VA
 
-`sunshinemcgee` Poke
+`sunshinemcgee` Poke VA
 
-`Speedbun` Porphy
+`Speedbun` Porphy VA
 
-`Asleep0natra1n` Prisoner
+`Asleep0natra1n` Prisoner VA
 
-`Shiloh Kae` Privet
+`Shiloh Kae` Privet VA
 
-`Jenywlfersn` Protagonist
+`Jenywlfersn` Protagonist VA
 
-`Lexi` Pye
+`Lexi` Pye VA
 
-`sunshinemcgee` Ramie
+`sunshinemcgee` Ramie VA
 
-`Sasquatch` Rhus
+`Sasquatch` Rhus VA
 
-`Embor12` Riebeck
+`Embor12` Riebeck VA
 
-`matak12m` Root
+`matak12m` Root VA
 
-`Lexi` Rutile
+`Lexi` Rutile VA
 
-`Speedbun` Secca
+`Speedbun` Secca VA
 
-`Krevace` Slate
+`Krevace` Slate VA
 
-`ChaosChaos` Solanum
+`ChaosChaos` Solanum VA
 
-`Shiloh Kae` Child Solanum
+`Shiloh Kae` Child Solanum VA
 
-`Asleep0natra1n` Spinel
+`Asleep0natra1n` Spinel VA
 
-`Chronarch` Spire
+`Chronarch` Spire VA
 
-`Trifid` Taget
+`Trifid` Taget VA
 
-`pandisia` Tektite
+`pandisia` Tektite VA
 
-`Shiloh Kae` Tephra
+`Shiloh Kae` Tephra VA
 
-`Embor12` Thatch
+`Embor12` Thatch VA
 
-`Asleep0natra1n` Tuff
+`Asleep0natra1n` Tuff VA
 
-`Chronarch` Yarrow
+`Chronarch` Yarrow VA
