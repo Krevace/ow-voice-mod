@@ -207,6 +207,7 @@ public class OWVoiceMod : ModBehaviour
 			if (owlkWriting && isTargetingGhostText)
 			{
 				UnloadAudio();
+				audioSource.loop = true;
 				LoadAudio("OwlkStatic");
 			}
 		}
@@ -221,11 +222,12 @@ public class OWVoiceMod : ModBehaviour
 			}
 		}
 
-	private static void ClearNomaiText()
-	{
-		UnloadAudio();
-		oldTextName = null;
-	}
+		private static void ClearNomaiText(NomaiTranslatorProp __instance)
+		{
+			if (__instance._nomaiTextComponent == null) return;
+			UnloadAudio();
+			oldTextName = null;
+		}
 
 	private static void OnUnequipTool()
 	{
@@ -247,12 +249,13 @@ public class OWVoiceMod : ModBehaviour
 		}
 	}
 
-	private static void UnloadAudio()
-	{
-		audioSource.Stop();
-		if (audioSource.clip != null) Destroy(audioSource.clip);
-		audioSource.clip = null;
-	}
+		private static void UnloadAudio()
+		{
+			audioSource.Stop();
+			if (audioSource.clip != null) Destroy(audioSource.clip);
+			audioSource.clip = null;
+			audioSource.loop = false;
+		}
 
 	private static async Task<AudioClip> GetAudio(string path)
 	{
