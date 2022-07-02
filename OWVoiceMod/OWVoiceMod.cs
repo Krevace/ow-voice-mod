@@ -34,7 +34,7 @@ public class OWVoiceMod : ModBehaviour
 	{
 		ModHelper = base.ModHelper;
 
-		RegisterAssets(Path.Combine(ModHelper.Manifest.ModFolderPath, "assets"));
+		RegisterAssets(Path.Combine(ModHelper.Manifest.ModFolderPath, "Assets"));
 
 		if (splashSkip)
 		{
