@@ -186,18 +186,17 @@ namespace OWVoiceMod
 				currentTextName = $"{currentAssetName} {currentTextID}";
 			}
 
-			if (currentTextName != oldTextName)
-			{
-				UnloadAudio();
+			if (currentTextName == oldTextName) return;
 
-				if (nomaiText.IsTranslated(currentTextID))
-				{
-					LoadAudio(currentTextName);
-				}
-				else
-				{
-					oldTextName = null;
-				}
+			UnloadAudio();
+
+			if (nomaiText.IsTranslated(currentTextID))
+			{
+				LoadAudio(currentTextName);
+			}
+			else
+			{
+				oldTextName = null;
 			}
 		}
 
