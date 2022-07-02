@@ -207,6 +207,7 @@ namespace OWVoiceMod
 			if (owlkWriting && isTargetingGhostText)
 			{
 				UnloadAudio();
+				audioSource.loop = true;
 				LoadAudio("OwlkStatic");
 			}
 		}
@@ -221,8 +222,9 @@ namespace OWVoiceMod
 			}
 		}
 
-		private static void ClearNomaiText()
+		private static void ClearNomaiText(NomaiTranslatorProp __instance)
 		{
+			if (__instance._nomaiTextComponent == null) return;
 			UnloadAudio();
 			oldTextName = null;
 		}
@@ -252,6 +254,7 @@ namespace OWVoiceMod
 			audioSource.Stop();
 			if (audioSource.clip != null) Destroy(audioSource.clip);
 			audioSource.clip = null;
+			audioSource.loop = false;
 		}
 
 		private static async Task<AudioClip> GetAudio(string path)
