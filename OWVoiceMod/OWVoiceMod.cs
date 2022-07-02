@@ -20,7 +20,7 @@ public class OWVoiceMod : ModBehaviour
 
 	private static string currentTextName;
 	private static string oldTextName;
-	private static int randomDialogueNum = -1;
+	public static int randomDialogueNum = -1;
 
 	private static bool splashSkip;
 	private static bool conversations;
@@ -56,8 +56,7 @@ public class OWVoiceMod : ModBehaviour
 			titleAnimationController._optionsFadeDuration = 0.001f;
 			titleAnimationController._optionsFadeSpacing = 0.001f;
 		}
-
-		ModHelper.HarmonyHelper.AddPrefix<DialogueText>(nameof(DialogueText.GetDisplayStringList), typeof(OWVoiceMod), nameof(GetDisplayStringList));
+		
 		ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>(nameof(NomaiTranslatorProp.DisplayTextNode), typeof(OWVoiceMod), nameof(DisplayTextNode));
 		ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>(nameof(NomaiTranslatorProp.SetTargetingGhostText), typeof(OWVoiceMod), nameof(SetTargetingGhostText));
 		ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>(nameof(NomaiTranslatorProp.SetTooCloseToTarget), typeof(OWVoiceMod), nameof(SetTooCloseToTarget));
@@ -131,20 +130,6 @@ public class OWVoiceMod : ModBehaviour
 				}
 			});
 		}
-	}
-
-	private static bool GetDisplayStringList(DialogueText __instance, ref List<string> __result)
-	{
-		// Ensures that the correct ID is used if dialogue uses randomization (ex. Gabbro intro lines)
-		if (__instance._randomize)
-		{
-			randomDialogueNum = UnityEngine.Random.Range(0, __instance._listTextBlocks.Count);
-			__result = __instance._listTextBlocks[randomDialogueNum].listPageText;
-			return false;
-		}
-
-		randomDialogueNum = -1;
-		return true;
 	}
 
 	private static void OnAdvancePage(CharacterDialogueTree characterDialogueTree, string nodeName, int pageNum)
