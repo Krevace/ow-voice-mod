@@ -3,9 +3,9 @@ using OWML.Common;
 using OWML.ModHelper;
 using OWML.Utils;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -260,21 +260,18 @@ namespace OWVoiceMod
 
 		private static async Task<AudioClip> GetOggAudio(string path)
 		{
-			AudioClip clip = null;
-			using (UnityWebRequest uwr = UnityWebRequestMultimedia.GetAudioClip(path, UnityEngine.AudioType.OGGVORBIS))
+			using var uwr = UnityWebRequestMultimedia.GetAudioClip(path, UnityEngine.AudioType.OGGVORBIS);
+			uwr.SendWebRequest();
+
+			while (!uwr.isDone) await Task.Yield();
+
+			if (uwr.isNetworkError || uwr.isHttpError)
 			{
-				uwr.SendWebRequest();
-
-				while (!uwr.isDone) await Task.Delay(5);
-
-				if (uwr.isNetworkError || uwr.isHttpError) ModHelper.Console.WriteLine($"{uwr.error}");
-				else
-				{
-					clip = DownloadHandlerAudioClip.GetContent(uwr);
-				}
+				ModHelper.Console.WriteLine($"{uwr.error}");
+				return null;
 			}
 
-			return clip;
+			return DownloadHandlerAudioClip.GetContent(uwr);
 		}
 	}
 
