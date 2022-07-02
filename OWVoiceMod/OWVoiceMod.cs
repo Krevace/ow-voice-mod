@@ -25,11 +25,11 @@ public class OWVoiceMod : ModBehaviour
 	private static bool splashSkip;
 	private static bool conversations;
 	private static bool hearthianRecordings;
-	public static bool nomaiRecordings;
+	public static bool nomaiRecordings { get; private set; }
 	private static bool paperNotes;
-	public static bool nomaiScrolls;
-	public static bool nomaiComputers;
-	public static bool owlkWriting;
+	public static bool nomaiScrolls { get; private set; }
+	public static bool nomaiComputers { get; private set; }
+	public static bool owlkWriting { get; private set; }
 	private static float volume;
 
 	private void Start()
