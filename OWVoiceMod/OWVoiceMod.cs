@@ -89,7 +89,7 @@ public class OWVoiceMod : ModBehaviour
 		}
 	}
 
-	public override object GetApi() => new VoiceModApi();
+	public override object GetApi() => new OWVoiceModAPI();
 
 	public override void Configure(IModConfig config)
 	{
@@ -280,9 +280,4 @@ public class OWVoiceMod : ModBehaviour
 
 		return DownloadHandlerAudioClip.GetContent(uwr);
 	}
-}
-
-public class VoiceModApi
-{
-	public void RegisterAssets(string assetsFolder) => OWVoiceMod.RegisterAssets(assetsFolder);
 }
