@@ -61,6 +61,7 @@ namespace OWVoiceMod
 			ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>(nameof(NomaiTranslatorProp.DisplayTextNode), typeof(OWVoiceMod), nameof(DisplayTextNode));
 			ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>(nameof(NomaiTranslatorProp.ClearNomaiText), typeof(OWVoiceMod), nameof(ClearNomaiText));
 			ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>(nameof(NomaiTranslatorProp.OnUnequipTool), typeof(OWVoiceMod), nameof(OnUnequipTool));
+			ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>(nameof(NomaiTranslatorProp.SetTooCloseToTarget), typeof(OWVoiceMod), nameof(SetTooCloseToTarget));
 
 			LoadManager.OnCompleteSceneLoad += OnCompleteSceneLoad;
 		}
@@ -214,6 +215,14 @@ namespace OWVoiceMod
 
 		private static void OnUnequipTool()
 		{
+			UnloadAudio();
+			oldTextName = null;
+		}
+
+		private static void SetTooCloseToTarget(NomaiTranslatorProp __instance, bool value)
+		{
+			if (__instance._isTooCloseToTarget == value) return;
+			if (!value) return;
 			UnloadAudio();
 			oldTextName = null;
 		}
