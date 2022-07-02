@@ -190,34 +190,36 @@ public class OWVoiceMod : ModBehaviour
 		{
 			UnloadAudio();
 
-			if (nomaiText.IsTranslated(currentTextID))
-			{
-				LoadAudio(currentTextName);
+				if (nomaiText.IsTranslated(currentTextID))
+				{
+					LoadAudio(currentTextName);
+				}
+				else
+				{
+					oldTextName = null;
+				}
 			}
-			else
+		}
+
+		private static void SetTargetingGhostText(NomaiTranslatorProp __instance, bool isTargetingGhostText)
+		{
+			if (__instance._isTargetingGhostText == isTargetingGhostText) return;
+			if (owlkWriting && isTargetingGhostText)
 			{
+				UnloadAudio();
+				LoadAudio("OwlkStatic");
+			}
+		}
+
+		private static void SetTooCloseToTarget(NomaiTranslatorProp __instance, bool value)
+		{
+			if (__instance._isTooCloseToTarget == value) return;
+			if (value)
+			{
+				UnloadAudio();
 				oldTextName = null;
 			}
 		}
-	}
-	
-	private static void SetTargetingGhostText(NomaiTranslatorProp __instance, bool isTargetingGhostText)
-        {
-		if (__instance._isTargetingGhostText == isTargetingGhostText) return;
-		if (isTargetingGhostText && owlkWriting)
-            {
-			UnloadAudio();
-			LoadAudio("OwlkStatic");
-            }
-        }
-
-	private static void SetTooCloseToTarget(NomaiTranslatorProp __instance, bool value)
-	{
-		if (__instance._isTooCloseToTarget == value) return;
-		if (!value) return;
-		UnloadAudio();
-		oldTextName = null;
-	}
 
 	private static void ClearNomaiText()
 	{
@@ -267,11 +269,11 @@ public class OWVoiceMod : ModBehaviour
 		uwr.SendWebRequest();
 		while (!uwr.isDone) await Task.Yield();
 
-		if (uwr.isNetworkError || uwr.isHttpError)
-		{
-			ModHelper.Console.WriteLine($"{uwr.error}");
-			return null;
-		}
+			if (uwr.isNetworkError || uwr.isHttpError)
+			{
+				ModHelper.Console.WriteLine(uwr.error, MessageType.Error);
+				return null;
+			}
 
 		return DownloadHandlerAudioClip.GetContent(uwr);
 	}
