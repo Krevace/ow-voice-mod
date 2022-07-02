@@ -200,23 +200,25 @@ namespace OWVoiceMod
 				}
 			}
 		}
-		
+
 		private static void SetTargetingGhostText(NomaiTranslatorProp __instance, bool isTargetingGhostText)
-        {
+		{
 			if (__instance._isTargetingGhostText == isTargetingGhostText) return;
-			if (isTargetingGhostText && owlkWriting)
-            {
+			if (owlkWriting && isTargetingGhostText)
+			{
 				UnloadAudio();
 				LoadAudio("OwlkStatic");
-            }
-        }
+			}
+		}
 
 		private static void SetTooCloseToTarget(NomaiTranslatorProp __instance, bool value)
 		{
 			if (__instance._isTooCloseToTarget == value) return;
-			if (!value) return;
-			UnloadAudio();
-			oldTextName = null;
+			if (value)
+			{
+				UnloadAudio();
+				oldTextName = null;
+			}
 		}
 
 		private static void ClearNomaiText()
