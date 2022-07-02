@@ -86,6 +86,20 @@ public class OWVoiceMod : ModBehaviour
 
 	public override object GetApi() => new OWVoiceModAPI();
 
+	public override void Configure(IModConfig config)
+	{
+		splashSkip = config.GetSettingsValue<bool>("splashSkip");
+		conversations = config.GetSettingsValue<bool>("conversations");
+		hearthianRecordings = config.GetSettingsValue<bool>("hearthianRecordings");
+		nomaiRecordings = config.GetSettingsValue<bool>("nomaiRecordings");
+		paperNotes = config.GetSettingsValue<bool>("paperNotes");
+		nomaiScrolls = config.GetSettingsValue<bool>("nomaiScrolls");
+		nomaiComputers = config.GetSettingsValue<bool>("nomaiComputers");
+		owlkWriting = config.GetSettingsValue<bool>("owlkWriting");
+		volume = config.GetSettingsValue<float>("volume");
+		if (audioSource != null) audioSource.volume = volume;
+	}
+
 	private static void OnCompleteSceneLoad(OWScene orignalScene, OWScene loadScene)
 	{
 		if (loadScene is OWScene.Credits_Fast or OWScene.Credits_Final)
