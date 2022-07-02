@@ -59,9 +59,10 @@ namespace OWVoiceMod
 
 			ModHelper.HarmonyHelper.AddPrefix<DialogueText>(nameof(DialogueText.GetDisplayStringList), typeof(OWVoiceMod), nameof(GetDisplayStringList));
 			ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>(nameof(NomaiTranslatorProp.DisplayTextNode), typeof(OWVoiceMod), nameof(DisplayTextNode));
+			ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>(nameof(NomaiTranslatorProp.SetTargetingGhostText), typeof(OWVoiceMod), nameof(SetTargetingGhostText));
+			ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>(nameof(NomaiTranslatorProp.SetTooCloseToTarget), typeof(OWVoiceMod), nameof(SetTooCloseToTarget));
 			ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>(nameof(NomaiTranslatorProp.ClearNomaiText), typeof(OWVoiceMod), nameof(ClearNomaiText));
 			ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>(nameof(NomaiTranslatorProp.OnUnequipTool), typeof(OWVoiceMod), nameof(OnUnequipTool));
-			ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>(nameof(NomaiTranslatorProp.SetTooCloseToTarget), typeof(OWVoiceMod), nameof(SetTooCloseToTarget));
 
 			LoadManager.OnCompleteSceneLoad += OnCompleteSceneLoad;
 		}
@@ -177,11 +178,6 @@ namespace OWVoiceMod
 				else currentAssetName = nomaiText._nomaiTextAsset.name;
 				currentTextName = $"{currentAssetName} {currentTextID}";
 			}
-			else if (nomaiText is GhostWallText)
-			{
-				if (!owlkWriting) return;
-				currentTextName = "OwlkStatic";
-			}
 			else
 			{
 				if (!nomaiScrolls && nomaiText is NomaiWallText) return;
@@ -194,11 +190,9 @@ namespace OWVoiceMod
 			{
 				UnloadAudio();
 
-				if (nomaiText.IsTranslated(currentTextID) || nomaiText is GhostWallText)
+				if (nomaiText.IsTranslated(currentTextID))
 				{
 					LoadAudio(currentTextName);
-
-					if (nomaiText is not GhostWallText) oldTextName = currentTextName;
 				}
 				else
 				{
@@ -206,6 +200,16 @@ namespace OWVoiceMod
 				}
 			}
 		}
+		
+		private static void SetTargetingGhostText(NomaiTranslatorProp __instance, bool isTargetingGhostText)
+        {
+			if (__instance._isTargetingGhostText == isTargetingGhostText) return;
+			if (isTargetingGhostText && owlkWriting)
+            {
+				UnloadAudio();
+				LoadAudio("OwlkStatic");
+            }
+        }
 
 		private static void SetTooCloseToTarget(NomaiTranslatorProp __instance, bool value)
 		{
