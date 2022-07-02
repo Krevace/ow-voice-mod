@@ -1,7 +1,7 @@
 ﻿namespace OWVoiceMod.Patches;
 
 public class NomaiTranslatorPropPatches
-    {
+{
 	private static string currentTextName;
 	private static string oldTextName;
 
