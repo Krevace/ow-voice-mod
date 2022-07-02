@@ -186,47 +186,47 @@ public class OWVoiceMod : ModBehaviour
 			currentTextName = $"{currentAssetName} {currentTextID}";
 		}
 
-			if (currentTextName == oldTextName) return;
+		if (currentTextName == oldTextName) return;
 
+		UnloadAudio();
+
+		if (nomaiText.IsTranslated(currentTextID))
+		{
+			LoadAudio(currentTextName);
+		}
+		else
+		{
+			oldTextName = null;
+		}
+	}
+
+	private static void SetTargetingGhostText(NomaiTranslatorProp __instance, bool isTargetingGhostText)
+	{
+		if (__instance._isTargetingGhostText == isTargetingGhostText) return;
+		if (owlkWriting && isTargetingGhostText)
+		{
 			UnloadAudio();
-
-			if (nomaiText.IsTranslated(currentTextID))
-			{
-				LoadAudio(currentTextName);
-			}
-			else
-			{
-				oldTextName = null;
-			}
+			audioSource.loop = true;
+			LoadAudio("OwlkStatic");
 		}
+	}
 
-		private static void SetTargetingGhostText(NomaiTranslatorProp __instance, bool isTargetingGhostText)
+	private static void SetTooCloseToTarget(NomaiTranslatorProp __instance, bool value)
+	{
+		if (__instance._isTooCloseToTarget == value) return;
+		if (value)
 		{
-			if (__instance._isTargetingGhostText == isTargetingGhostText) return;
-			if (owlkWriting && isTargetingGhostText)
-			{
-				UnloadAudio();
-				audioSource.loop = true;
-				LoadAudio("OwlkStatic");
-			}
-		}
-
-		private static void SetTooCloseToTarget(NomaiTranslatorProp __instance, bool value)
-		{
-			if (__instance._isTooCloseToTarget == value) return;
-			if (value)
-			{
-				UnloadAudio();
-				oldTextName = null;
-			}
-		}
-
-		private static void ClearNomaiText(NomaiTranslatorProp __instance)
-		{
-			if (__instance._nomaiTextComponent == null) return;
 			UnloadAudio();
 			oldTextName = null;
 		}
+	}
+
+	private static void ClearNomaiText(NomaiTranslatorProp __instance)
+	{
+		if (__instance._nomaiTextComponent == null) return;
+		UnloadAudio();
+		oldTextName = null;
+	}
 
 	private static void OnUnequipTool()
 	{
@@ -248,13 +248,13 @@ public class OWVoiceMod : ModBehaviour
 		}
 	}
 
-		private static void UnloadAudio()
-		{
-			audioSource.Stop();
-			if (audioSource.clip != null) Destroy(audioSource.clip);
-			audioSource.clip = null;
-			audioSource.loop = false;
-		}
+	private static void UnloadAudio()
+	{
+		audioSource.Stop();
+		if (audioSource.clip != null) Destroy(audioSource.clip);
+		audioSource.clip = null;
+		audioSource.loop = false;
+	}
 
 	private static async Task<AudioClip> GetAudio(string path)
 	{
@@ -271,11 +271,11 @@ public class OWVoiceMod : ModBehaviour
 		uwr.SendWebRequest();
 		while (!uwr.isDone) await Task.Yield();
 
-			if (uwr.isNetworkError || uwr.isHttpError)
-			{
-				ModHelper.Console.WriteLine(uwr.error, MessageType.Error);
-				return null;
-			}
+		if (uwr.isNetworkError || uwr.isHttpError)
+		{
+			ModHelper.Console.WriteLine(uwr.error, MessageType.Error);
+			return null;
+		}
 
 		return DownloadHandlerAudioClip.GetContent(uwr);
 	}
