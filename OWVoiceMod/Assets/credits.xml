@@ -1,0 +1,1269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Credits xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<!--final game credits with all platforms-->
+	<section name = "CreditsFinal" credits-type = "Final" base_fadeInTime = "1.3" base_fadeOutTime = "1.4"> 
+	<!--sections are a versatile way of grouping parts of credits. They're used to define platform-specific
+	or other condition-specific parts of credits. They're also required to define fade in/out parts and scrolling parts of credits. Lastly,
+	sections with no types or platforms can just be used to organize the credits file! -->
+	
+		<!--our first encounter with a fade section - notice the type of "Fade". Fade sections can have fade in, display, fade out, and 
+		wait after fade out times defined in their attributes -->
+		<section name = "BlackHold" platform = "All" type="Fade" fadeInTime = "1.3" displayTime = "0.5" fadeOutTime = "1.4" waitTime = "0">
+			<!--just a blank page to hold on black for 2 seconds-->
+		</section>
+		
+		<section name = "Title" platform = "All" type="Fade" fadeInTime = "1.3" displayTime = "1.7" fadeOutTime = "1.4" waitTime = "0.5"
+			padding-bottom = "25"> 
+			<!-- Sections can have padding defined as a way to lay out its contents. padding-left, right, top, or bottom shifts a section's content
+			in a particular direction. Note that layout attributes (e.g. padding, spacing) only works on sections that have types!
+			A section's padding values correspond 1:1 to the padding values in its VerticalLayoutGroup component in Unity -->
+			
+			<!-- Below we see a layout element. Layouts have types defined for them to draw from specific templates. Inside a layout are rows
+			of credits contents. A layout element can also have spacing attributes defined in them, as we will see later. -->
+			<layout type = "SingleColumnFadeCentered">
+				<title>Outer Wilds</title>
+			</layout>
+		</section>
+		
+		<section name = "Mobius" platform = "All" type="Fade" fadeInTime = "1.3" displayTime = "1.7" fadeOutTime = "1.4" waitTime = "0.5"
+			padding-bottom = "-8" spacing = "16">
+			<layout type = "SingleColumnFadeCentered">
+				A
+				<title>Mobius Digital Games</title>
+				<content height = "59" text-align = "LowerCenter">Production</content>
+			</layout>
+		</section>
+		<section name = "Masi" platform = "All" type="Fade" fadeInTime = "1.3" displayTime = "1.7" fadeOutTime = "1.4" waitTime = "0.5"
+			padding-bottom = "8" spacing = "20">
+			<layout type = "SingleColumnFadeCentered">
+				Executive Producer
+				<header>Masi Oka</header>
+			</layout>
+		</section>
+		<section name = "Alex" platform = "All" type="Fade" fadeInTime = "1.3" displayTime = "1.7" fadeOutTime = "1.4" waitTime = "0.5"
+			padding-bottom = "8" spacing = "20">
+			<layout type = "SingleColumnFadeCentered">
+				Creative Director
+				<header>Alex Beachum</header>
+			</layout>
+		</section>
+		<section name = "Loan" platform = "All" type="Fade" fadeInTime = "1.3" displayTime = "1.7" fadeOutTime = "1.4" waitTime = "0.5"
+			padding-bottom = "8" spacing = "20">
+			<layout type = "SingleColumnFadeCentered">
+				Game Designer
+				<header>Loan Verneau</header>
+			</layout>
+		</section>
+		<section platform = "All" type="Fade" fadeInTime = "1.3" displayTime = "1.7" fadeOutTime = "1.4" waitTime = "0.5"
+			padding-bottom = "8" spacing = "20">
+			<layout type = "SingleColumnFadeCentered">
+				Art Director
+				<header>Wesley Martin</header>
+			</layout>
+		</section>
+		<section platform = "All" type="Fade" fadeInTime = "1.3" displayTime = "1.7" fadeOutTime = "1.4" waitTime = "0.5"
+			padding-bottom = "8" spacing = "20">
+			<layout type = "SingleColumnFadeCentered">
+				Graphics Engineer
+				<header>Logan Ver Hoef</header>
+			</layout>
+		</section>
+		<section platform = "All" type="Fade" fadeInTime = "1.3" displayTime = "2.55" fadeOutTime = "1.4" waitTime = "0.5"
+			padding-bottom = "8" spacing = "20">
+			<layout type = "SingleColumnFadeCentered">
+				Software Engineers
+				<header>Satrio Dewantono</header>
+				<header>Jeffrey Yu</header>
+			</layout>
+		</section>
+		<section platform = "All" type="Fade" fadeInTime = "1.3" displayTime = "3.4" fadeOutTime = "1.4" waitTime = "0.5"
+			padding-bottom = "8" spacing = "20">
+			<layout type = "SingleColumnFadeCentered">
+				Lead 3D Artists
+				<header>Lara Colson</header>
+				<header>Eilish Lambrechtsen</header>
+				<header>Alena Leontyeva</header>
+			</layout>
+		</section>
+		<section platform = "All" type="Fade" fadeInTime = "1.3" displayTime = "3.4" fadeOutTime = "1.4" waitTime = "0.5"
+			padding-bottom = "8" spacing = "20">
+			<layout type = "SingleColumnFadeCentered">
+				3D Environment Artists
+				<header>Emily Blatnicky</header>
+				<header>Kindra Dantone</header>
+				<header>Jon Oppenheimer</header>
+			</layout>
+		</section>
+		<section platform = "All" type="Fade" fadeInTime = "1.3" displayTime = "2.55" fadeOutTime = "1.4" waitTime = "0.5"
+			padding-bottom = "8" spacing = "20">
+			<layout type = "SingleColumnFadeCentered">
+				3D Artists
+				<header>Lanaea Bowie</header>
+				<header>Nicholas Kim</header>
+			</layout>
+		</section>
+		<section platform = "All" type="Fade" fadeInTime = "1.3" displayTime = "1.7" fadeOutTime = "1.4" waitTime = "0.5"
+			padding-bottom = "8" spacing = "20">
+			<layout type = "SingleColumnFadeCentered">
+				Concept Artist
+				<header>Ian Jacobson</header>
+			</layout>
+		</section>
+		<section platform = "All" type="Fade" fadeInTime = "1.3" displayTime = "2.55" fadeOutTime = "1.4" waitTime = "0.5"
+			padding-bottom = "8" spacing = "20">
+			<layout type = "SingleColumnFadeCentered">
+				2D Artists
+				<header>Alice Li</header>
+				<header>James Murlin</header>
+			</layout>
+		</section>
+		<section platform = "All" type="Fade" fadeInTime = "1.3" displayTime = "1.7" fadeOutTime = "1.4" waitTime = "0.5"
+			padding-bottom = "8" spacing = "20">
+			<layout type = "SingleColumnFadeCentered">
+				Writer
+				<header>Kelsey Beachum</header>
+			</layout>
+		</section>
+		<section platform = "All" type="Fade" fadeInTime = "1.3" displayTime = "1.7" fadeOutTime = "1.4" waitTime = "0.5"
+			padding-bottom = "8" spacing = "20">
+			<layout type = "SingleColumnFadeCentered">
+				Composer
+				<header>Andrew Prahlow</header>
+			</layout>
+		</section>
+		<section platform = "All" type="Fade" fadeInTime = "1.3" displayTime = "1.7" fadeOutTime = "1.4" waitTime = "0.5"
+			padding-bottom = "8" spacing = "20">
+			<layout type = "SingleColumnFadeCentered">
+				QA Manager
+				<header>Adam Root</header>
+			</layout>
+		</section>
+		<section platform = "All" type="Fade" fadeInTime = "1.3" displayTime = "3.4" fadeOutTime = "1.4" waitTime = "0.5"
+			padding-bottom = "8" spacing = "20">
+			<layout type = "SingleColumnFadeCentered">
+				Producers
+				<header>Kelsey Rice</header>
+				<header>Avimaan Syam</header>
+				<header>Katherine Wang</header>
+			</layout>
+		</section>
+		<section platform = "All" type="Fade" fadeInTime = "1.3" displayTime = "2.55" fadeOutTime = "1.4" waitTime = "0.5"
+			padding-bottom = "8" spacing = "20">
+			<layout type = "SingleColumnFadeCentered">
+				Associate Producers
+				<header>Laura Herzberg</header>
+				<header>Ana Solimano</header>
+			</layout>
+		</section>	
+		<section platform = "All" type="Fade" fadeInTime = "1.3" displayTime = "1.7" fadeOutTime = "1.4" waitTime = "0.5"
+			padding-bottom = "8" spacing = "20">
+			<layout type = "SingleColumnFadeCentered">
+				Producer
+				<header>Sarah Scialli</header>
+			</layout>
+		</section>
+		<section name = "MainScrollSection" platform = "All" type="Scroll" scrollDuration = "214" spacing = "12" width = "1590">
+			<layout type = "SingleColumnScrollCentered">
+				<title text-align = "UpperCenter" height = "122">Voice Acting Mod Contributors</title>
+			</layout>
+			<layout type = "TwoColumnScrollAlignRightLeft" spacer-base-height = "10">
+				Krevace#Programmer
+				<spacer />
+				JohnCorby#Programmer
+				<spacer height="100"/>
+				JustARogueAI#Annona
+				<spacer />
+				Kiki Willows#Arkose
+				<spacer />
+				solemn lemon#Avens
+				<spacer />
+				Kiki Willows#Bells
+				<spacer />
+				ThiccShibe#Bromi
+				<spacer />
+				Trifid#Bur
+				<spacer />
+				Sasquatch#Canna
+				<spacer />
+				Mutant_Cacti#Cassava
+				<spacer />
+				Jenywlfersn#Chert
+				<spacer />
+				Kiki Willows#Clary
+				<spacer />
+				Rachel Ilan#Clem
+				<spacer />
+				ComTom#Coleus
+				<spacer />
+				Blue Nip 《馮康》#Conoy
+				<spacer />
+				Tamir Ilan#Cycad
+				<spacer />
+				Asleep0natra1n#Daz
+				<spacer />
+				Trifid#Din
+				<spacer />
+				Nickster#Escall
+				<spacer />
+				Gurdy Enjoyer#Esker
+				<spacer />
+				Chronarch#Eye Museum Chorus
+				<spacer />
+				ComTom#Eye Museum Chorus 
+				<spacer />
+				Lexi#Eye Museum Chorus 
+				<spacer />
+				Jenywlfersn#Eye Museum Chorus 
+				<spacer />
+				matak12m#Eye Museum Chorus 
+				<spacer />
+				Mutant_Cacti#Eye Museum Chorus 
+				<spacer />
+				Asleep0natra1n#Eye Museum Chorus 
+				<spacer />
+				Poketchu#Eye Museum Chorus 
+				<spacer />
+				Shiloh Kae#Eye Museum Chorus
+				<spacer />
+				Speedbun#Eye Museum Chorus 
+				<spacer />
+				Embor12#Eye Museum Chorus
+				<spacer />
+				Jenywlfersn#Feldspar
+				<spacer />
+				KillerChara177#Filix
+				<spacer />
+				Chronarch#Gabbro
+				<spacer />
+				Shiloh Kae#Galena
+				<spacer />
+				Blue Nip 《馮康》#Gneiss
+				<spacer />
+				Tamir Ilan#Gossan
+				<spacer />
+				Coyote Starch#Hal
+				<spacer />
+				ImFloof#Hornfels
+				<spacer />
+				Asleep0natra1n#Hyssop
+				<spacer />
+				Agonarch#Idaea
+				<spacer />
+				ThatTrandomGuy#Ilex
+				<spacer />
+				Asleep0natra1n#Kousa
+				<spacer />
+				Speedbun#Laevi
+				<spacer />
+				Rachel Ilan#Lami
+				<spacer />
+				Zinc#Mallow
+				<spacer />
+				InhumanBaron#Marl
+				<spacer />
+				Lealdade#Melorae
+				<spacer />
+				JohnCorby#Mica
+				<spacer />
+				Speedbun#Mitis
+				<spacer />
+				Trifid#Moraine
+				<spacer />
+				Speedbun#Neem
+				<spacer />
+				Laundryjx#Old Nomai Computers
+				<spacer />
+				Speedbun#New Nomai Computers
+				<spacer />
+				Fionn McManamon#Oeno
+				<spacer />
+				ImFloof#Phlox
+				<spacer />
+				Embor12#Plume
+				<spacer />
+				sunshinemcgee#Poke
+				<spacer />
+				Speedbun#Porphy
+				<spacer />
+				Asleep0natra1n#Prisoner
+				<spacer />
+				Shiloh Kae#Privet
+				<spacer />
+				Jenywlfersn#Protagonist
+				<spacer />
+				Lexi#Pye
+				<spacer />
+				sunshinemcgee#Ramie
+				<spacer />
+				Sasquatch#Rhus
+				<spacer />
+				Embor12#Riebeck
+				<spacer />
+				matak12m#Root
+				<spacer />
+				Lexi#Rutile
+				<spacer />
+				Speedbun#Secca
+				<spacer />
+				Krevace#Slate
+				<spacer />
+				ChaosChaos#Solanum
+				<spacer />
+				Shiloh Kae#Child Solanum
+				<spacer />
+				Asleep0natra1n#Spinel
+				<spacer />
+				Chronarch#Spire
+				<spacer />
+				Trifid#Taget
+				<spacer />
+				pandisia#Tektite
+				<spacer />
+				Shiloh Kae#Tephra
+				<spacer />
+				Embor12#Thatch
+				<spacer />
+				Asleep0natra1n#Tuff
+				<spacer />
+				Chronarch#Yarrow
+				<spacer height = "295" />
+			</layout>
+			<layout type = "SingleColumnScrollCentered">
+				<title text-align = "UpperCenter" height = "122">Mobius Digital Games</title>
+			</layout>
+			<section name = "SeriousMobious" credits-type = "Final Fast">
+				<layout type = "TwoColumnScrollAlignRightLeft" spacer-base-height = "10">
+					Alex Beachum#Creative Director
+								#Game Design &amp; Programming
+								#Story Development
+					<spacer />
+					Kelsey Beachum#Writer
+								#Story Development
+					<spacer />
+					Emily Blatnicky#3D Artist
+								#Nomai Architecture &amp; Tech
+								#Stranger Tech
+					<spacer />
+					Lanaea Bowie#Junior 3D Artist
+					<spacer />
+					Lara Colson#Lead 3D Artist
+								#Rocks &amp; Terrain Modeling
+					<spacer />
+					Kindra Dantone#3D Environment Artist
+								#3D Narrative Art
+								#Architecture Modeling
+					<spacer />
+					Satrio Dewantono#Programmer
+					<spacer />
+					Laura Herzberg#Production Assistant
+					<spacer />
+					Ian Jacobson#Concept Artist
+								#Nomai Murals
+					<spacer />
+					Nicholas Kim#3D Artist
+								#Technical Art Support
+					<spacer />
+					Eilish Lambrechtsen#Lead 3D Artist
+								#Terrain &amp; Foliage Art
+								#Stranger Architecture Design
+								#Producer
+					<spacer />
+					Alena Leontyeva#Lead 3D Artist
+								#Hearthian &amp; Nomai Architecture
+					<spacer />
+					Alice Li#Visual Development
+					<spacer />
+					Wesley Martin#Art Director
+								#Visual Effects
+								#User Interface Art
+								#Additional 2D &amp; 3D Art
+					<spacer />
+					James Murlin#2D Artist
+								#Narrative Art
+								#Visual Development
+					<spacer />
+					Masi Oka#Executive Producer
+					<spacer />
+					Jon Oppenheimer#3D Environment Artist
+								#Visual Effects
+								#Architecture Modeling
+					<spacer />
+					Andrew Prahlow#Composer
+								#Sound Effects
+					<spacer />
+					Kelsey Rice#Producer
+					<spacer />
+					Adam Root#QA Manager
+					<spacer />
+					Sarah Scialli#Producer
+					<spacer />
+					Ana Solimano#Associate Producer
+					<spacer />
+					Avimaan Syam#Producer
+					<spacer />
+					Logan Ver Hoef#Graphics Engineer
+								#Game Programmer
+								#Tools Designer
+					<spacer />
+					Loan Verneau#Game Designer
+								#Producer
+								#Story Development
+					<spacer />
+					Katherine Wang#Producer
+					<spacer />
+					Jeffrey Yu#Software Engineer
+								#User Interface Programming
+								#Game Programmer
+					<spacer height = "295" />
+				</layout>
+			</section>
+			<section name = "JokeMobius" credits-type = "Krazy">
+				<layout type = "TwoColumnScrollAlignRightLeft" spacer-base-height = "10">
+					Alex Beachum#Guilty as Charged
+								#Kazoo Choir, 1st Chair
+					<spacer />
+					Kelsey Beachum#Nomaian Pun Scholar
+								#Kazoo Choir, 2nd Chair
+					<spacer />
+					Emily Blatnicky#Curator of Metal Tunes
+								#Gravelord
+					<spacer />
+					Lanaea Bowie#Stephe's Gal Pal
+								#Dead Dolphin
+					<spacer />
+					Lara Colson#Dirt &amp; Rock Boss
+								#Faloti Corp Representative
+								#Hey, Don't Make a Game On Spheres
+					<spacer />
+					Kindra Dantone#Rug Merchant
+								#Bird Documentarian
+					<spacer />
+					Satrio Dewantono#Pandemic Response Team
+								#Actually a Chatbot
+					<spacer />
+					Laura Herzberg#Angry Young Woman
+								#Signalscope Manufacturer
+					<spacer />
+					Ian Jacobson#A Nice Boy Who Tries His Best
+					<spacer />
+					Nicholas Kim#Project DIVA Engineer
+								#Magical Girl
+					<spacer />
+					Eilish Lambrechtsen#Plant Whisperer
+								#Pyramid Hair
+								#Defender Against the Dark Arts
+					<spacer />
+					Alena Leontyeva#Resident Chip Consultant
+								#Lead Chip Supervisor
+								#Research &amp; Development: Chips
+					<spacer />
+					Alice Li#Evangelist of the Church of the Angler &quot;Fred&quot; Fish
+								#Banana Inception Architect
+								#Not a Clown
+					<spacer />
+					Wesley Martin#Office Interior Designer
+								#Ghost Blogger
+								#Keeper of the Archives
+								#ACTUALLY IN A TIME LOOP - SEND HELP
+					<spacer />			
+					James Murlin#Artisinal Mancala Board Curator
+								#Torch Enthusiast
+					<spacer />
+					Masi Oka#Improv Commander
+					<spacer />
+					Jon Oppenheimer#The Man Behind the Curtain
+								#Toaster of Bread
+					<spacer />
+					Andrew Prahlow#&quot;It should be on a banjo!&quot;
+					<spacer />
+					Kelsey Rice#Spreadsheet Goblin
+								#Office Bard
+					<spacer />
+					Adam Root#The Eugene V. Debs of Quality Assurance
+					<spacer />
+					Sarah Scialli#Producer
+					<spacer />
+					Ana Solimano#Head of Security
+					<spacer />
+					Avimaan Syam#Office Dad
+								#Actual Dad
+								#Fell on the Sword
+					<spacer />
+					Akash Thakkar#Elk Whisperer
+								 #Electric Kazoo Technician
+					<spacer />
+					Logan Ver Hoef#Space Wizard
+								#Stabbing Enthusiast
+								#Underpaid 
+					<spacer />
+					Loan Verneau#Swiss Knife
+								#Devourer of Worlds and Breaker of the Wall
+					<spacer />
+					Katherine Wang#Office Interior Prospector
+					<spacer />
+					Jeffrey Yu#24 Hour Coffee Conduit
+								#Tank Platoon Leader
+								#Actual Aerospace Engineer
+					<spacer height = "295" />
+				</layout>
+			</section>
+			<layout type = "SingleColumnScrollCentered">
+				<title text-align = "UpperCenter" height = "105">Mobius Contractors</title>
+			</layout>
+			<layout type = "TwoColumnScrollAlignRightLeft" spacer-base-height = "2">
+				Rowan Cullen#Mobius Intern
+				<spacer />
+				Chelsea Hash#Character Rigger
+				<spacer />
+				Saiful Haque#Visual Development Artist
+				<spacer />
+				Trevor Johnson#Additional SFX
+				<spacer />
+				Sebastian Kings#Concept Artist
+				<spacer />
+				Ryan Neff#Player Character Animator
+				<spacer />
+				Val Reznitskaya#Character Rigger
+				<spacer />
+				Nicholas Roush#UI/UX Specialist
+				<spacer />
+				Chuck Russom#Sound Designer
+				<spacer />
+				Cory Schmitz#Logo &amp; 2D UI Design
+				<spacer />
+				James Taylor#UX Designer
+				<spacer />
+				Akash Thakkar#Sound Designer
+				<spacer />
+				Dan Valvo#3D Character Artist
+				<spacer />
+				Matt Whiting#Tech Support
+				<spacer />
+				Alexander Yao#Character Animator
+				<spacer height = "222" />
+			</layout>
+			<layout type = "SingleColumnScrollCentered">
+				<title text-align = "UpperCenter" height = "105">Vocalists</title>
+			</layout>
+			<layout type = "TwoColumnScrollAlignRightLeft" spacer-base-height = "2">
+				Buttons#Elk Choir, 1st Chair
+				<spacer />
+				Goodwyn#Elk Choir, 2nd Chair
+				<spacer />
+				Jessie#Elk Choir, 3rd Chair
+				<spacer />
+				Sarah#Elk Choir, 4th Chair
+				<spacer />
+				<spacer height = "222" />
+			</layout>
+			<layout type = "SingleColumnScrollCentered" spacer-base-height = "4">
+				<title text-align = "UpperCenter" height = "94">Business Development</title>
+				<heading text-align = "UpperCenter" height = "72">The Arsenal Agency</heading>
+				Tina Kowalewski
+				<spacer />
+				Caspar Gray
+				<spacer height = "224" />
+				<title text-align = "UpperCenter" height = "120">Annapurna Interactive</title>
+				Nathan Gary
+				<spacer />
+				Kelsey Hansen
+				<spacer />
+				Neale Hemrajani
+				<spacer />
+				Evan Icenbice
+				<spacer />
+				Jeff Legaspi
+				<spacer />
+				Deborah Mars
+				<spacer />
+				James Masi
+				<spacer />
+				Jon McElroy
+				<spacer />
+				Adam Root
+				<spacer />
+				Joshua Sarfaty
+				<spacer />
+				Nathan Vella
+				<spacer height = "228" />
+				<title>Third Party and Middleware</title>
+				<spacer height = "60" />
+			</layout>
+			<layout type = "SingleColumnScrollCentered">
+			<heading text-align = "UpperCenter" height = "75">Unity Technologies</heading>
+			</layout>
+			<layout type = "SingleColumnScrollCentered">
+				Created with Unity. Portions of this program © 2005-2020 Unity Technologies.
+				<spacer height = "60" />
+			</layout>
+			<layout type = "TwoColumnScrollAlignRightLeft" spacer-base-height = "2">
+				Gustavo Castro#Senior Software Development Consultant
+				<spacer />
+				Paul Capon#Software Developer
+				<spacer />
+				Jesse Flello#Software Developer
+				<spacer />
+				Jed Lang#Senior Software Developer
+				<spacer />
+				Patrick DeVarney#Senior Software Development Consultant
+				<spacer />
+				Cole Ingram#Senior Graphics Engineering Consultant
+				<spacer />
+				Ben Smith#Senior Software Development Consultant
+				<spacer />
+				Razvan Luta#Senior Technical Art Consultant
+				<spacer />
+				Utsav Jamwal#Technical Art Consultant
+				<spacer />
+				Richard Harrington#Senior Technical Art Consultant
+				<spacer />
+				Greg Amato#Senior Technical Art Consultant
+				<spacer />
+				Adrian Woods#Senior Technical Art Consultant
+				<spacer />
+				Carlo Nyte#Senior Solutions Engineer
+				<spacer />
+				Andrea Bobick#Lead Software Development Consultant
+				<spacer />
+				Ken Thurston#Technical Artist
+				<spacer />
+				Chris Demers#3D Artist
+				<spacer />
+				Chris Cruz#3D Artist
+				<spacer />
+				David McKay#Project Manager
+				<spacer />
+				Arthur Cormon#Senior Program Manager
+				<spacer />
+				Steve Meredith#Lead Software Test Technician
+				<spacer />
+				Jokubas Kondrackas#Software Engineer
+				<spacer />
+				Joanne Pan#Quality Assurance Analyst
+				<spacer />
+				Zackery Hagerty#Quality Assurance Analyst
+				<spacer height = "60" />
+			</layout>
+			<layout type = "SingleColumnScrollCentered">
+				Special Thanks to Additional Unity Developers and Engineers:
+				<spacer height = "45" />
+			</layout>
+			<layout type = "TwoColumnScrollAlignRightLeft" spacer-base-height = "2">
+				Joe Willmon#Italo Capasso
+				<spacer />
+				Alexander Cardona#Gustavo Castro
+				<spacer />
+				Julián Cruz#Andrew Dennison
+				<spacer />
+				Sergio Gomez#Juan Pablo Nieto
+				<spacer />
+				Raul Oses#Jason Page
+				<spacer />
+				Peter Pimley#Charles Sanglimsuwan
+				<spacer />
+				Adrian Smith#Joe Stephenson
+				<spacer />
+				Diki Thomas#Juan Diego Uran Correa
+				<spacer />
+				Oli Williams#Anthony Yakovlev
+				<spacer height = "60" />
+			</layout>
+			<layout type = "SingleColumnScrollCentered">
+			<heading text-align = "UpperCenter" height = "75">Tricky Fast LLC</heading>
+			</layout>
+			<layout type = "TwoColumnScrollAlignRightLeft" spacer-base-height = "2">
+				Connor Botts#Software Developer
+				<spacer />
+				Joe Jacir#Technical Artist
+				<spacer />
+				Joshua Mulligan#Software Developer
+				<spacer />
+				Ren Archbold#Quality Assurance
+				<spacer height = "60" />
+			</layout>
+			<layout type = "SingleColumnScrollCentered">
+			<heading text-align = "UpperCenter" height = "75">Skymap Games</heading>
+			</layout>
+			<layout type = "TwoColumnScrollAlignRightLeft" spacer-base-height = "2">
+				Neal Laurenza#
+				<spacer />
+				Mark Mayers#Software Developer
+				<spacer />
+				Jane Quigley#Quality Assurance
+				<spacer height = "60" />
+			</layout>
+			<layout type = "SingleColumnScrollCentered">
+			<heading text-align = "UpperCenter" height = "75">TTT Studios</heading>
+			</layout>
+			<layout type = "TwoColumnScrollCentered" spacer-base-height = "2">
+				Noel Feng#Software Developer
+				<spacer />
+				Harrold Paderan#Software Developer
+				<spacer height = "224" />
+			</layout>
+			<layout type = "SingleColumnScrollCentered">
+				<title text-align = "UpperCenter" height = "75">Technical Support</title>
+				<heading text-align = "UpperCenter" height = "75">Big Red Button</heading>
+				<spacer height = "60" />
+				<title text-align = "UpperCenter" height = "75">Quality Assurance</title>
+				<heading text-align = "UpperCenter" height = "75">HUWIZ QA/UX</heading>
+			</layout>
+			<layout type = "TwoColumnScrollCentered" spacer-base-height = "2">
+				Carolljo Maher#Cyril Laporte
+				<spacer />
+				Dominic Ducharme#Frédéric Renard
+				<spacer />
+				Guillaume Lanéel#Jast Aubin
+				<spacer />
+				Jean-Sébastien Léveillée#Jérémy Costa
+				<spacer />
+				Joey Chabot#Laura Cousillas
+				<spacer />
+				Louis St-Denis#Martin Gagnon
+				<spacer />
+				Maxime Lacoste#Mylène Roffi
+				<spacer />
+				Nicolas Lefebvre#Roxanne Gingras
+				<spacer />
+				Sandra Malenfant#Sébastien Pruneau
+				<spacer />
+				Tommy Lincourt#
+				<spacer height = "60" />
+			</layout>
+			<layout type = "SingleColumnScrollCentered">
+				<title text-align = "UpperCenter" height = "75">Localization</title>
+				<heading text-align = "UpperCenter" height = "75">Lionbridge</heading>
+				<spacer />
+				<heading text-align = "UpperCenter" height = "75">Turkish Localization by Wordarch Studio</heading>
+				<spacer height = "224" />
+				<title text-align = "UpperCenter" height = "75">Additional Visual Development</title>
+				<heading text-align = "UpperCenter" height = "75">Section Studios</heading>
+				<spacer height = "232" />
+				All fonts provided by Monotype under license, all rights reserved.
+				<spacer height = "217" />
+				<title text-align = "UpperCenter" height = "130">Alpha Development Team</title>
+			</layout>
+			<layout type = "TwoColumnScrollAlignRightLeft" spacer-base-height = "1">
+				Alex Beachum#Creator
+				<spacer />
+				Sarah Scialli#Producer
+				<spacer />
+				Kelsey Beachum#Writer
+				<spacer />
+				Evan Sforza#Logo Designer
+				<spacer />
+				Sanghee Oh#UX Designer
+				<spacer />
+				Andrew Prahlow#Music
+				<spacer />
+				Trevor Johnson#Audio SFX
+				<spacer height = "16" />
+			</layout>
+			<layout type = "SingleColumnScrollCentered">
+				<heading text-align = "UpperCenter" height = "75">Programmers</heading>
+			</layout>
+			<layout type = "TwoColumnScrollCentered">
+				Sam Mazer#Isabella Cheng
+				<spacer height = "1" />
+				Aaron Henehan#Abhinav Rathod
+				<spacer height = "20" />
+			</layout>
+			<layout type = "SingleColumnScrollCentered">
+				<heading text-align = "UpperCenter" height = "75">Designers</heading>
+			</layout>
+			<layout type = "TwoColumnScrollCentered">
+				Andrew Goldstein#Loan Verneau
+				<spacer height = "1" />
+				Bryan Zhang#Richard Emms
+				<spacer height = "20" />
+			</layout>
+			<layout type = "SingleColumnScrollCentered">
+				<heading text-align = "UpperCenter" height = "75">Artists</heading>
+			</layout>
+			<layout type = "TwoColumnScrollCentered" spacer-base-height = "1">
+				Michelle Hardy#Anya Starr
+				<spacer />
+				Leslie Wenglein#Jason Knetge
+				<spacer />
+				Michelle Hill#Joo Son
+				<spacer />
+				Fernando Montilla#Jose Ayala
+				<spacer />
+				Gabriel Cruz Vega#Jose Rodriguez
+				<spacer />
+				Christian Rodriguez#Gabriel García
+				<spacer />
+				Mayya Benitez#Francisco Rosario
+				<spacer />
+				Jesus Maddox Flores#Daniel Archilla
+				<spacer height = "220" />
+			</layout>
+			<layout type = "SingleColumnScrollCentered" spacer-base-height = "2">
+				<title text-align = "UpperCenter" height = "143">Fig</title>
+				<heading text-align = "UpperCenter" height = "96">Founder's Reward Tier</heading>
+				Matthew Steinhauer (mattman111)
+				<spacer />
+				Ben Etherington
+				<spacer />
+				QwertyuiopThePie
+				<spacer />
+				Jordan Frith
+				<spacer />
+				Tom Cummings
+				<spacer />
+				Sean (sharktemplar) Farrell
+				<spacer />
+				Steven Ursell
+				<spacer height = "45" />
+				<heading text-align = "UpperCenter" height = "96">Backer Thank You</heading>
+			</layout>
+			<layout type = "ThreeColumnScrollCentered" spacer-base-height = "3">
+				@k_e#◊Bobson Dugnutt◊#Aaron Grandy
+				<spacer />
+				Abhinav Rathod#Adam Anderson#Adam Cardoza
+				<spacer />
+				Adam Kidder#Adam Zima#Adi
+				<spacer />
+				Aduard#Aki#Alan Newhouse
+				<spacer />
+				Alex Kops#Alex Rigopulos#Alexa Kim
+				<spacer />
+				AlexisFR#Alon Torres#Amichai (MarmAmic) NM
+				<spacer />
+				Anders Franklin#Andrea Smith#Anton Norup Sørensen
+				<spacer />
+				Arlo Handley#Arnaud Bienvenu#Astrolight
+				<spacer />
+				Axe Studios # Ben Etherington (Contest Winner)#Ben Johnson
+				<spacer />
+				Ben Rosner#Benjamin Holmes#BigFriendlyDave
+				<spacer />
+				BinarySemaphore#Black Blade#Bob Ippolito
+				<spacer />
+				Bob Marvin#Brandon Boyer#Brendan Baerwalde
+				<spacer />
+				Brian and Lije Carpenter#Brian Fargo#Brian S.
+				<spacer />
+				Brian Small#Bryan Edelman#Bryan Zhang
+				<spacer />
+				Candi Mitchell#Capraise#Carmen Maria Marin
+				<spacer />
+				Casper Wong#Charlie_Foxtrot#ChefSledg
+				<spacer />
+				Chiffmonkey#Choupignougna#Chris (CDub) Williamson
+				<spacer />
+				Chris Lam#Chris Vaughn#Chris W
+				<spacer />
+				Christian#Christian Lau#Christoph Zürcher
+				<spacer />
+				Christopher Case#ClownWhosFeelnDown#coinop
+				<spacer />
+				Corey Willis#Corp chris#Cribbledirge
+				<spacer />
+				Dan Ceperley#Dan Sosnowski#Daniel Guyton
+				<spacer />
+				Daniel Willis#Darren Jones#David (Dudevid) Foster
+				<spacer />
+				David Gardtman#David Ginzberg#David Hicks
+				<spacer />
+				David McLaughlin#David Pittman#David Rey
+				<spacer />
+				David Russell#David Vediner#Davyn Abalone
+				<spacer />
+				Dianasaurus Rex#Dolnor Numbwit#Donato Sinicco, III
+				<spacer />
+				Doon#Douglas Hill#Drew Macrae
+				<spacer />
+				Duncan Boehle#Duncan Sample#eddybox
+				<spacer />
+				EdEN#Edvin Jacobsson#Eivind Skogen
+				<spacer />
+				Ekin#Elizabeth Lay#Elliot Trinidad
+				<spacer />
+				Erik Ward#Ethan Goss and Alexander#Feargus Urquhart
+				<spacer />
+				Flameofpast#Flipmode#François Blavoet
+				<spacer />
+				Freeman White#Fuzzygerbil#Gabe
+				<spacer />
+				Gabey#Gabriel Odorici#Gary Crook
+				<spacer />
+				Gary J.#George Zackrison#Gerco Dries
+				<spacer />
+				Gibberstein#Gina Ramirez#Giulio Harding
+				<spacer />
+				Giuseppe Giambanco#Glen Holdampf#Grant Volker
+				<spacer />
+				Hilma Rowe Martin#His Nibs, Duncan of Retriver#hujgup
+				<spacer />
+				hwmrocker#icotom#Ilya Shereshevsky
+				<spacer />
+				Ingy Syam#isrever#J. Todd Coleman
+				<spacer />
+				Jack Pritz#James L Martin#Jared Mills
+				<spacer />
+				Jason Mathias#jcgswims#Jeff Dixon
+				<spacer />
+				Jeffrey Guarnieri#Jennifer McMurray#Jennifer Sheu
+				<spacer />
+				Jesse Mills#jfis#Jim Redner
+				<spacer />
+				João Menezes Morais#Joel (Moleculor) King#John (Zombie John) Nelson
+				<spacer />
+				John Robertson#Jon Beyer#Jon Gill
+				<spacer />
+				Jon Moore#Jon Zorita Leza#Jonathan Chan
+				<spacer />
+				Jordan Frith#Jordan Vance#Jörn Huxhorn
+				<spacer />
+				Joseph Pease#Josh Scherr#Jud Bumpas
+				<spacer />
+				June Tate-Gans#Justin Bailey#Justin Beebe
+				<spacer />
+				Kalloreinder#Kelsey T. Jones#Ken Hipple
+				<spacer />
+				Keri Bailey#Kethro#Kev Moore
+				<spacer />
+				Kevin Glover#Kevin Lingerfelt#Khahil (heels) White
+				<spacer />
+				Kris Coleman#Kyano#Kyle Radue
+				<spacer />
+				Lairdo#Lani Aung#Laredo Cornelius sudo rm -rf
+				<spacer />
+				Lars Westergren#Lenurd#Leslie L
+				<spacer />
+				Lori Schroeder#Lorne Lanning#Luigifan2004
+				<spacer />
+				Luke Iannini#MacLøød#majestic
+				<spacer />
+				Malvasius#Marc Hellwig#Markus Pointner
+				<spacer />
+				Marshall Todd Mabie#Mastercylinder#Matthew LePain
+				<spacer />
+				Matthew Steinhauer (mattman111)#MattShea#Max Nilsson
+				<spacer />
+				Mell#Metz#Michael - Radiotype
+				<spacer />
+				Michael Annetta#Michael Crosgrey#Michael Ferstenfeld
+				<spacer />
+				Michael Kuroda#Michael Neylon#Michelle Hill
+				<spacer />
+				Michelle Hill and Graham Wong#Mike Carmody#Mike Maurer
+				<spacer />
+				Mike Shaver#Mikhail Schelkunov#Mikiko Matsunaga
+				<spacer />
+				Mikkel Dockweiler Sørensen#Miles and Rhys#MNINE
+				<spacer />
+				MrBungler#MW#Nabeel Hyatt
+				<spacer />
+				Nathan Leask#Neuro122 {VR}#Nick Covey
+				<spacer />
+				Nik Gustavson-Falck#Ohad Kanne#Oliver Barlow
+				<spacer />
+				Owen Hughes#Patrick King#Pauline Middelink
+				<spacer />
+				Pax The Sublime#PennePenney#Per Kristian Brastad
+				<spacer />
+				Peter Brinson#Peter Silk#Philip Schoemig
+				<spacer />
+				Philip Simonsen#PionFour#Prince Galidor
+				<spacer />
+				Rachel#Randy “Randygbk” Greenback#Ray Crook
+				<spacer />
+				Red Thomas#Reid Sawtell#Rob Dubbin
+				<spacer />
+				Rockotodd#RongoTheBold#rottendoubt
+				<spacer />
+				Ryan Cramer#Ryan Evans#Ryxtan
+				<spacer />
+				Sam Gawith#Sam Hughes#samlii
+				<spacer />
+				Samuel Bancroft#Scott Manley#Scott Pease
+				<spacer />
+				Scott R.#Sean 'Ariamaki' Riedinger#Sean (sharktemplar) Farrell
+				<spacer />
+				Seanny the J Flyy#Sébastien Delahaye#Seth Maset
+				<spacer />
+				Sharundaar#Shavenewok#Shawn Adams
+				<spacer />
+				Sheila Porter#Sheridan W. Layman II#Simon Dampier
+				<spacer />
+				Sirkku Kojola#Slimline#Steinbrew
+				<spacer />
+				Sten Darker#Steph Bates#Stephan Vladimir Bugaj
+				<spacer />
+				Stephen Emerick#Sterling Olson#Steve and Janet Beachum
+				<spacer />
+				Steve R#Steven Newcomb#Suddle D
+				<spacer />
+				Sunil#SuperTekCop#Sven 'Spartan190' Steinbach
+				<spacer />
+				Tandalus#Tangentric#ThatGuyBob
+				<spacer />
+				Thomas Crescen Constant#Tim (TheWizard) Harris#Tim L
+				<spacer />
+				Tim Mahrt#Tim Schafer#Tobias (Corben) Krummen
+				<spacer />
+				Tom#Tom C#Tom Grinnell
+				<spacer />
+				Tomas Quintana#ToraTiger#Torbjørn Grønnevik Dahle
+				<spacer />
+				Torsten Marek#Tory Republic#Tracy Fullerton
+				<spacer />
+				Tristan Chester#Troy (Wrongtown) Hall#Tucker
+				<spacer />
+				Tzepesh#Vann#VenerableMonster
+				<spacer />
+				Victor Romero#Vincent Mazza#Vintron
+				<spacer />
+				Waning Gibbous Games#Will Stevens#xMADMARDIGANx
+				<spacer />
+				Yann R. Fernandez#Zachary H.#Zanderfax
+				<spacer />
+				Zophar73#James Currie#
+				<spacer height = "218" />
+			</layout>
+			<layout type = "SingleColumnScrollCentered">
+				<title text-align = "UpperCenter" height = "143" >Special Thanks</title>
+				<heading text-align = "UpperCenter" height = "102" >Playtesters</heading>
+			</layout>
+			<layout type = "TwoColumnScrollCentered" spacer-base-height = "1">
+				Michelle Bol#Kittrell Boyd
+				<spacer />
+				Eric Butler#Austin Drexler
+				<spacer />
+				Philip Eberhart#Jake Hoffman
+				<spacer />
+				Desirée Karlsson#Mitchell Loofbourrow
+				<spacer />
+				Sam Mazer#Coby Moran
+				<spacer />
+				Casey Sakima#Zach R. D.
+				<spacer />
+				Debra Skinner#Shaka Smith
+				<spacer height = "152" />
+			</layout>
+			<layout type = "SingleColumnScrollCentered">
+				<heading text-align = "UpperCenter" height = "102" >Echoes of the Eye Playtesters</heading>
+			</layout>
+			<layout type = "ThreeColumnScrollCentered" spacer-base-height = "1">
+				Ricardo Andrés Acevedo#Alec Ackerman#Athene Allen
+				<spacer />
+				Andrei Botezatu (Mint Mint Lord)#Adam Bowser#Christopher Bradley
+				<spacer />
+				Theo Browne#Bryce Browner#Cameron Buck
+				<spacer />
+				Andrew Campbell#Max Campbell#Jack Carpenter
+				<spacer />	
+				Kevin "Dububs" Conrad#Patrick Cotter#Josh Cross
+				<spacer />
+				David R Edwards#Amelody Flowers#Bar Fórmaniak
+				<spacer />
+				Marek "Mark Morgan" Gollan#Will "The Button King" Harding#Jan Christian Heigl
+				<spacer />
+				Alex Huard#Jacob Jasek#Dara Kharabi
+				<spacer />
+				Michał Kluz#Luis León#Gabe Limotta
+				<spacer />
+				Fredo M. Lopez#Luca Macedo#Elliott Mahler
+				<spacer />
+				David ‘Miles’ McCormack#Matthew McFetters#Brandon Olive
+				<spacer />
+				Drew Perlman#QwertyuiopThePie#James Ridley
+				<spacer />
+				RyujinHawker#Nathan Savant#Clay &amp; Ashley Sears
+				<spacer />
+				Trevor Strunk#Aiden Valentine#Sofie Vos
+				<spacer />
+				Alex Zhang &amp; Maureen "Momo" Wang#Jake Weidner#Kathryn Yu
+				<spacer />
+				<spacer height = "152" />
+				</layout>
+			<layout type = "SingleColumnScrollCentered" spacer-base-height = "2">
+				<heading text-align = "UpperCenter" height = "72">Thesis Advisors</heading>
+				Peter Brinson
+				<spacer height = "3" />
+				Jeremy Gibson
+				<spacer height = "226" />
+				<heading text-align = "UpperCenter" height = "98">Annapurna Interactive Special Thanks</heading>
+				Megan Ellison
+				<spacer height = "28" />
+				Jordan Marks
+				<spacer />
+				Sam Kim
+				<spacer />
+				Tim Koh
+				<spacer />
+				Cornelis van Dijkhuizen, Caleb Bardgett, and Jason Paul
+				<spacer />
+				Everyone at Annapurna
+				<spacer />
+				Jon Gibson, Amanda White and everyone at iam8bit
+				<spacer />
+			</layout>
+			<section name = "EpicSpecificAPThanks1" platform = "Epic Microsoft Steam"> <!-- Annapurna platform-specific thanks pt.1 for anything not Sony -->
+				<layout type = "SingleColumnScrollCentered" spacer-base-height = "2">
+					Sibel Sunar, Laura Weir, Janelle Grai, Deanna Pe, Sarah Rudney, Dillon Arace and everyone at fortyseven 
+					communications
+					<spacer />
+				</layout>
+			</section>
+			<section name = "PS4SpecificAPThanks1" platform = "Sony"> <!-- Annapurna platform-specific thanks pt.1 for PS4 -->
+				<layout type = "SingleColumnScrollCentered" spacer-base-height = "2">
+					Sibel Sunar, Laura Weir, Mari Garcia, Janelle Grai, Sarah Rudney, Dillon Arace and everyone at fortyseven 
+					communications
+					<spacer />
+				</layout>
+			</section>
+			<layout type = "SingleColumnScrollCentered" spacer-base-height = "2">
+				Adam thanks: Garry, Sue, Lindsey, Sam, Adam, Heidi, Paul, Odie, Steph and Street Fight Radio.
+				<spacer />
+			</layout>
+			<section name = "EpicSpecificAPThanks2" platform = "Epic"> <!-- Annapurna platform-specific thanks pt.2 for Epic -->
+				<layout type = "SingleColumnScrollCentered" spacer-base-height = "2">
+					Steve Allison
+					<spacer />
+					Kimberly Rodatos
+					<spacer />
+					Joe Kreiner
+					<spacer />
+					Danny Block
+					<spacer />
+					Sergey Galyonkin
+					<spacer />
+					Mark Griffin
+					<spacer />
+					Everyone at Epic
+					<spacer />
+				</layout>
+			</section>
+			<section name = "XboxSpecificAPThanks2" platform = "Microsoft"> <!-- Annapurna platform-specific thanks pt.2 for Xbox -->
+				<layout type = "SingleColumnScrollCentered" spacer-base-height = "2">
+					Nate Ahearn
+					<spacer />
+					Chris Charla
+					<spacer />
+					Sarah Conde
+					<spacer />
+					Karen Mitchell
+					<spacer />
+					James Lewis
+					<spacer />
+					Glenn Gregory
+					<spacer />
+				</layout>
+			</section>
+			<section name = "PS4SpecificAPThanks2" platform = "Sony"> <!-- Annapurna platform-specific thanks pt.2 for PS4 -->
+				<layout type = "SingleColumnScrollCentered" spacer-base-height = "2">
+					Alissa Faber
+					<spacer />
+					Brian Silva
+					<spacer />
+					Shawne Benson
+					<spacer />
+					Julio Perez
+					<spacer />
+					John Vega
+					<spacer />
+					Matthew Sparks
+					<spacer />
+					Alvin Smajic
+					<spacer />
+					Akiko Goshi
+					<spacer />
+				</layout>
+			</section>
+			<section name = "SteamSpecificAPThanks2" platform = "Steam"> <!-- Annapurna platform-specific thanks pt.2 for Steam -->
+				<layout type = "SingleColumnScrollCentered" spacer-base-height = "2">
+					Matt Nickerson
+					<spacer />
+					Adam Klaff
+					<spacer />
+				</layout>
+			</section>
+			<layout type = "SingleColumnScrollCentered" spacer-base-height = "2">
+				All of our playtesters
+				<spacer height = "225" />
+			</layout>
+			<layout type = "SingleColumnScrollCentered" spacer-base-height = "18">
+				<heading text-align = "UpperCenter" height = "100" >Mobius Special Thanks</heading>
+				Bread Lounge, Pizzanista, Blue Star
+				<spacer />
+				~In loving memory of the American Tea Room~
+				<spacer />
+				Alex thanks: Peter Brinson, David Pierce, Loan Verneau, and Tracy Fullerton (wisdom), 
+				Masi Oka and everyone at Mobius (power), 
+				Janet, Steve, Kelsey, and Erin Beachum (courage)
+				<spacer />
+				Loan thanks: ma famille, la meilleure au monde parce que j'ai eut la chance de la choisir: Ylian, Anna, Michel, Valérie, 
+				Billy S., Sèv, Sarken, Justine, Damien, Alex et bien entendu Super Moine.
+				<spacer />
+				Wesley thanks: Hilma, James, Michael and Philip Martin, 
+				Michelle Bol, Mitchell Loofbourrow, Sandy Appleoff, The Elsinore Team.
+				<spacer />
+				Logan thanks: My parents, Ansel, and Jason; Alex Mathew and Jacob Pernell; Jeremy Gibson and Tracy Fullerton;
+				and Alex Beachum, Loan Verneau, and Avimaan Syam for pulling me aboard a train I thought I'd missed.
+				<spacer />
+				Jeffrey thanks: My family, especially my sister Kathryn
+				<spacer />
+				Lara thanks: Nora, Brian, and Shawn
+				<spacer />
+			</layout>
+			<section name = "LaraJokeThanks" credits-type = "Krazy">
+				<layout type = "SingleColumnScrollCentered" spacer-base-height = "18">
+				Lara also thanks FALOTI Executive Outcomes for all the laughs and camaraderie.
+				<spacer />
+				Lara anti-thanks the fact that all of the credit columns are permanantly center-justified and had to be aligned manually. Yeah 
+				you read that right. I manually added spaces to everything to make it look like normal credits. It looked reeeeaaally bad 
+				otherwise, man! It was totally unreadable!! So if you looked at this game's credits and went ''yeah these are just, your 
+				completely average regular credits'' that was me. But just that part, I didn't code the stuff that makes it scroll. Oh, while I'm 
+				chattin' up a storm, did you find my easter egg? My actual easter egg, not this!
+				
+				Credits Coder Note 1: ISSUE CLOSED COULD NOT REPRODUCE
+				<spacer />
+				</layout>
+			</section>
+			<layout type = "SingleColumnScrollCentered" spacer-base-height = "18">
+				Eilish thanks: Mum and Pop, and Emily.
+				<spacer />
+				Ian thanks: Mom and Dad, the rest of the fam, the homies.
+				<spacer />
+				Kelsey Beachum thanks: Jon Moore, Erin Beachum, Alex and Loan (you lunatics), Steve and Janet Beachum, 
+				and every last one of you who rooted for us to pull this off.
+				<spacer />
+				Satrio thanks: Mama, Papa, Ifan. My mentors: José, Peter, Richard, Andreas. 
+				In memory of Oom Erwin (1968 - 2021), uncle and inspiration.
+				<spacer />
+				Kelsey Rice thanks: My family as well as Elliott Mahler, Peter Brinson, Josh Scherr, Maureen McHugh, and David White. 
+				Y'all are the best!
+				<spacer />
+				Jon thanks: Mom, Dad, my brother Greg, Alex Freeman, Stacy Walker, and my cat Comet
+				<spacer />
+				Akash thanks: Max Duggan for additional sound design
+				<spacer height = "102" />
+			</layout>
+			<layout type = "SingleColumnScrollCentered" spacer-base-height = "0">
+				© 2019-2020 Mobius Digital, LLC
+				Published by Annapurna Interactive under exclusive license.
+				All rights reserved.
+				<spacer height = "476" />
+				<title>Thank you for playing Outer Wilds!</title>
+				<spacer height = "476" />
+			</layout>
+		</section>
+		<section name="post" type="fade">
+			<layout type = "SingleColumnFadeCentered">
+				<title>14.3 Billion Years Later</title>
+			</layout>
+		</section>
+	</section>
+	<section name = "CreditsFast" credits-type = "Fast">
+		<section name = "FastScrollSection" platform = "All" type="Scroll" scrollDuration = "107" spacing = "12" copy-content = "MainScrollSection"  width = "1590">
+		</section>
+	</section>
+	<section name = "CreditsKrazy" credits-type = "Krazy">
+		<section name = "KrazyScrollSection" platform = "All" type="Scroll" scrollDuration = "57" spacing = "12" copy-content = "MainScrollSection"  width = "1590">
+		</section>
+	</section>
+</Credits>
