@@ -2,12 +2,14 @@
 using OWML.Common;
 using OWML.ModHelper;
 using OWML.Utils;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
+using Random = UnityEngine.Random;
 
 namespace OWVoiceMod
 {
@@ -223,8 +225,7 @@ namespace OWVoiceMod
 			if (assetPaths.TryGetValue(FormatAssetName(assetName), out var assetPath))
 			{
 				ModHelper.Console.WriteLine($"Found audio for {assetName}", MessageType.Success);
-				if (Path.GetExtension(assetPath) == ".ogg") audioSource.clip = await GetOggAudio(assetPath);
-				else audioSource.clip = GetAudio(assetPath);
+				audioSource.clip = await GetAudio(assetPath);
 				if (volume > 0 && audioSource.clip != null) audioSource.Play();
 			}
 			else
@@ -240,7 +241,7 @@ namespace OWVoiceMod
 			audioSource.clip = null;
 		}
 
-		private static AudioClip GetAudio(string path)
+		private static AudioClip GetAudio_OLD(string path)
 		{
 			// Modified from https://github.com/amazingalek/owml/blob/master/src/OWML.ModHelper.Assets/ModAssets.cs#L99-L110
 			using var reader = new AudioFileReader(path);
@@ -258,11 +259,19 @@ namespace OWVoiceMod
 			return clip;
 		}
 
-		private static async Task<AudioClip> GetOggAudio(string path)
+		private static async Task<AudioClip> GetAudio(string path)
 		{
-			using var uwr = UnityWebRequestMultimedia.GetAudioClip(path, UnityEngine.AudioType.OGGVORBIS);
-			uwr.SendWebRequest();
+			var audioType = Path.GetExtension(path) switch
+			{
+				".ogg" => UnityEngine.AudioType.OGGVORBIS,
+				".wav" => UnityEngine.AudioType.WAV,
+				".mp3" => UnityEngine.AudioType.MPEG,
+				_ => throw new ArgumentOutOfRangeException()
+			};
 
+			using var uwr = UnityWebRequestMultimedia.GetAudioClip(path, audioType);
+
+			uwr.SendWebRequest();
 			while (!uwr.isDone) await Task.Yield();
 
 			if (uwr.isNetworkError || uwr.isHttpError)
