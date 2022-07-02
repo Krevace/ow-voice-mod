@@ -12,7 +12,7 @@ There's also addon support! Check [here](https://github.com/Krevace/ow-voice-mod
 
 `JohnCorby` Project Manager, Programmer
 
-`Trifid` Project Manager
+`Trifid` Project Moderator
 
 <br/>
 
