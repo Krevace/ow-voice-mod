@@ -8,7 +8,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
-using Random = UnityEngine.Random;
 
 namespace OWVoiceMod
 {
@@ -137,7 +136,7 @@ namespace OWVoiceMod
 			// Ensures that the correct ID is used if dialogue uses randomization (ex. Gabbro intro lines)
 			if (__instance._randomize)
 			{
-				randomDialogueNum = Random.Range(0, __instance._listTextBlocks.Count);
+				randomDialogueNum = UnityEngine.Random.Range(0, __instance._listTextBlocks.Count);
 				__result = __instance._listTextBlocks[randomDialogueNum].listPageText;
 				return false;
 			}
