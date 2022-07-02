@@ -1,5 +1,4 @@
-﻿using NAudio.Wave;
-using OWML.Common;
+﻿using OWML.Common;
 using OWML.ModHelper;
 using OWML.Utils;
 using System;
@@ -239,24 +238,6 @@ namespace OWVoiceMod
 			audioSource.Stop();
 			if (audioSource.clip != null) Destroy(audioSource.clip);
 			audioSource.clip = null;
-		}
-
-		private static AudioClip GetAudio_OLD(string path)
-		{
-			// Modified from https://github.com/amazingalek/owml/blob/master/src/OWML.ModHelper.Assets/ModAssets.cs#L99-L110
-			using var reader = new AudioFileReader(path);
-			var sampleCount = (int)(reader.Length * 8 / reader.WaveFormat.BitsPerSample);
-			var outputSamples = new float[sampleCount];
-			reader.Read(outputSamples, 0, sampleCount);
-
-			// normalize
-			// TODO remove after mixing, this is just for testing, lol
-			var max = outputSamples.Select(Mathf.Abs).Max();
-			for (var i = 0; i < outputSamples.Length; i++) outputSamples[i] /= max;
-
-			var clip = AudioClip.Create(path, sampleCount / reader.WaveFormat.Channels, reader.WaveFormat.Channels, reader.WaveFormat.SampleRate, false);
-			clip.SetData(outputSamples, 0);
-			return clip;
 		}
 
 		private static async Task<AudioClip> GetAudio(string path)
