@@ -1,4 +1,5 @@
-﻿using OWML.Common;
+﻿using HarmonyLib;
+using OWML.Common;
 using OWML.ModHelper;
 using OWML.Utils;
 using System;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
+using System.Reflection;
 
 namespace OWVoiceMod;
 
@@ -55,12 +57,7 @@ public class OWVoiceMod : ModBehaviour
 			titleAnimationController._optionsFadeSpacing = 0.001f;
 		}
 
-		ModHelper.HarmonyHelper.AddPrefix<DialogueText>(nameof(DialogueText.GetDisplayStringList), typeof(Patches.DialogueTextPatches), nameof(Patches.DialogueTextPatches.GetDisplayStringList));
-		ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>(nameof(NomaiTranslatorProp.DisplayTextNode), typeof(Patches.NomaiTranslatorPropPatches), nameof(Patches.NomaiTranslatorPropPatches.DisplayTextNode));
-		ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>(nameof(NomaiTranslatorProp.SetTargetingGhostText), typeof(Patches.NomaiTranslatorPropPatches), nameof(Patches.NomaiTranslatorPropPatches.SetTargetingGhostText));
-		ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>(nameof(NomaiTranslatorProp.SetTooCloseToTarget), typeof(Patches.NomaiTranslatorPropPatches), nameof(Patches.NomaiTranslatorPropPatches.SetTooCloseToTarget));
-		ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>(nameof(NomaiTranslatorProp.ClearNomaiText), typeof(Patches.NomaiTranslatorPropPatches), nameof(Patches.NomaiTranslatorPropPatches.ClearNomaiText));
-		ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>(nameof(NomaiTranslatorProp.OnUnequipTool), typeof(Patches.NomaiTranslatorPropPatches), nameof(Patches.NomaiTranslatorPropPatches.OnUnequipTool));
+		Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly());
 
 		LoadManager.OnCompleteSceneLoad += OnCompleteSceneLoad;
 	}
