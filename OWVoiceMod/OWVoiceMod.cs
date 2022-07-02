@@ -271,7 +271,7 @@ namespace OWVoiceMod
 
 			if (uwr.isNetworkError || uwr.isHttpError)
 			{
-				ModHelper.Console.WriteLine($"{uwr.error}");
+				ModHelper.Console.WriteLine(uwr.error, MessageType.Error);
 				return null;
 			}
 
