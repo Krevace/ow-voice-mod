@@ -16,20 +16,18 @@ public class OWVoiceMod : ModBehaviour
 	private new static IModHelper ModHelper;
 	private static readonly Dictionary<string, string> assetPaths = new();
 	private static string creditsAssetPath;
-	private static AudioSource audioSource;
+	public static AudioSource audioSource;
 
-	private static string currentTextName;
-	private static string oldTextName;
 	public static int randomDialogueNum = -1;
 
 	private static bool splashSkip;
 	private static bool conversations;
 	private static bool hearthianRecordings;
-	private static bool nomaiRecordings;
+	public static bool nomaiRecordings;
 	private static bool paperNotes;
-	private static bool nomaiScrolls;
-	private static bool nomaiComputers;
-	private static bool owlkWriting;
+	public static bool nomaiScrolls;
+	public static bool nomaiComputers;
+	public static bool owlkWriting;
 	private static float volume;
 
 	private void Start()
@@ -56,12 +54,13 @@ public class OWVoiceMod : ModBehaviour
 			titleAnimationController._optionsFadeDuration = 0.001f;
 			titleAnimationController._optionsFadeSpacing = 0.001f;
 		}
-		
-		ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>(nameof(NomaiTranslatorProp.DisplayTextNode), typeof(OWVoiceMod), nameof(DisplayTextNode));
-		ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>(nameof(NomaiTranslatorProp.SetTargetingGhostText), typeof(OWVoiceMod), nameof(SetTargetingGhostText));
-		ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>(nameof(NomaiTranslatorProp.SetTooCloseToTarget), typeof(OWVoiceMod), nameof(SetTooCloseToTarget));
-		ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>(nameof(NomaiTranslatorProp.ClearNomaiText), typeof(OWVoiceMod), nameof(ClearNomaiText));
-		ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>(nameof(NomaiTranslatorProp.OnUnequipTool), typeof(OWVoiceMod), nameof(OnUnequipTool));
+
+		ModHelper.HarmonyHelper.AddPrefix<DialogueText>(nameof(DialogueText.GetDisplayStringList), typeof(Patches.DialogueTextPatches), nameof(Patches.DialogueTextPatches.GetDisplayStringList));
+		ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>(nameof(NomaiTranslatorProp.DisplayTextNode), typeof(Patches.NomaiTranslatorPropPatches), nameof(Patches.NomaiTranslatorPropPatches.DisplayTextNode));
+		ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>(nameof(NomaiTranslatorProp.SetTargetingGhostText), typeof(Patches.NomaiTranslatorPropPatches), nameof(Patches.NomaiTranslatorPropPatches.SetTargetingGhostText));
+		ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>(nameof(NomaiTranslatorProp.SetTooCloseToTarget), typeof(Patches.NomaiTranslatorPropPatches), nameof(Patches.NomaiTranslatorPropPatches.SetTooCloseToTarget));
+		ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>(nameof(NomaiTranslatorProp.ClearNomaiText), typeof(Patches.NomaiTranslatorPropPatches), nameof(Patches.NomaiTranslatorPropPatches.ClearNomaiText));
+		ModHelper.HarmonyHelper.AddPrefix<NomaiTranslatorProp>(nameof(NomaiTranslatorProp.OnUnequipTool), typeof(Patches.NomaiTranslatorPropPatches), nameof(Patches.NomaiTranslatorPropPatches.OnUnequipTool));
 
 		LoadManager.OnCompleteSceneLoad += OnCompleteSceneLoad;
 	}
@@ -150,77 +149,7 @@ public class OWVoiceMod : ModBehaviour
 
 	private static void OnEndConversation() => UnloadAudio();
 
-	private static void DisplayTextNode(NomaiTranslatorProp __instance)
-	{
-		var nomaiText = __instance._nomaiTextComponent;
-		var currentTextID = __instance._currentTextID;
-
-		string currentAssetName;
-		if (nomaiText is NomaiComputer or NomaiVesselComputer)
-		{
-			if (!nomaiComputers) return;
-			if (nomaiText.gameObject.TryGetComponent<NomaiWarpComputerLogger>(out _)) currentAssetName = "NomaiWarpComputer";
-			else currentAssetName = nomaiText._nomaiTextAsset.name;
-			currentTextName = $"{currentAssetName} {currentTextID}";
-		}
-		else
-		{
-			if (!nomaiScrolls && nomaiText is NomaiWallText) return;
-			if (!nomaiRecordings && nomaiText is not NomaiWallText) return;
-			currentAssetName = nomaiText._nomaiTextAsset.name;
-			currentTextName = $"{currentAssetName} {currentTextID}";
-		}
-
-		if (currentTextName == oldTextName) return;
-
-		UnloadAudio();
-
-		if (nomaiText.IsTranslated(currentTextID))
-		{
-			LoadAudio(currentTextName);
-			oldTextName = currentTextName;
-		}
-		else
-		{
-			oldTextName = null;
-		}
-	}
-
-	private static void SetTargetingGhostText(NomaiTranslatorProp __instance, bool isTargetingGhostText)
-	{
-		if (__instance._isTargetingGhostText == isTargetingGhostText) return;
-		if (owlkWriting && isTargetingGhostText)
-		{
-			UnloadAudio();
-			audioSource.loop = true;
-			LoadAudio("OwlkStatic");
-		}
-	}
-
-	private static void SetTooCloseToTarget(NomaiTranslatorProp __instance, bool value)
-	{
-		if (__instance._isTooCloseToTarget == value) return;
-		if (value)
-		{
-			UnloadAudio();
-			oldTextName = null;
-		}
-	}
-
-	private static void ClearNomaiText(NomaiTranslatorProp __instance)
-	{
-		if (__instance._nomaiTextComponent == null) return;
-		UnloadAudio();
-		oldTextName = null;
-	}
-
-	private static void OnUnequipTool()
-	{
-		UnloadAudio();
-		oldTextName = null;
-	}
-
-	private static async void LoadAudio(string assetName)
+	public static async void LoadAudio(string assetName)
 	{
 		if (assetPaths.TryGetValue(FormatAssetName(assetName), out var assetPath))
 		{
@@ -234,7 +163,7 @@ public class OWVoiceMod : ModBehaviour
 		}
 	}
 
-	private static void UnloadAudio()
+	public static void UnloadAudio()
 	{
 		audioSource.Stop();
 		if (audioSource.clip != null) Destroy(audioSource.clip);

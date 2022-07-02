@@ -1,13 +1,9 @@
-﻿using Harmony;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace OWVoiceMod.Patches
 {
-	[HarmonyPatch]
 	public class DialogueTextPatches
     {
-		[HarmonyPrefix]
-		[HarmonyPatch(typeof(DialogueText), nameof(DialogueText.GetDisplayStringList))]
 		public static bool GetDisplayStringList(DialogueText __instance, ref List<string> __result)
 		{
 			// Ensures that the correct ID is used if dialogue uses randomization (ex. Gabbro intro lines)
