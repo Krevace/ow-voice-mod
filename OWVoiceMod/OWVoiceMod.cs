@@ -186,18 +186,17 @@ public class OWVoiceMod : ModBehaviour
 			currentTextName = $"{currentAssetName} {currentTextID}";
 		}
 
-		if (currentTextName != oldTextName)
-		{
+			if (currentTextName == oldTextName) return;
+
 			UnloadAudio();
 
-				if (nomaiText.IsTranslated(currentTextID))
-				{
-					LoadAudio(currentTextName);
-				}
-				else
-				{
-					oldTextName = null;
-				}
+			if (nomaiText.IsTranslated(currentTextID))
+			{
+				LoadAudio(currentTextName);
+			}
+			else
+			{
+				oldTextName = null;
 			}
 		}
 
