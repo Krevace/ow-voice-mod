@@ -194,7 +194,7 @@ namespace OWVoiceMod
 			{
 				UnloadAudio();
 
-				if (nomaiText.IsTranslated(currentTextID))
+				if (nomaiText.IsTranslated(currentTextID) || nomaiText is GhostWallText)
 				{
 					LoadAudio(currentTextName);
 
@@ -207,6 +207,14 @@ namespace OWVoiceMod
 			}
 		}
 
+		private static void SetTooCloseToTarget(NomaiTranslatorProp __instance, bool value)
+		{
+			if (__instance._isTooCloseToTarget == value) return;
+			if (!value) return;
+			UnloadAudio();
+			oldTextName = null;
+		}
+
 		private static void ClearNomaiText()
 		{
 			UnloadAudio();
@@ -215,14 +223,6 @@ namespace OWVoiceMod
 
 		private static void OnUnequipTool()
 		{
-			UnloadAudio();
-			oldTextName = null;
-		}
-
-		private static void SetTooCloseToTarget(NomaiTranslatorProp __instance, bool value)
-		{
-			if (__instance._isTooCloseToTarget == value) return;
-			if (!value) return;
 			UnloadAudio();
 			oldTextName = null;
 		}
