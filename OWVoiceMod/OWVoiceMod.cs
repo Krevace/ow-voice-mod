@@ -188,11 +188,12 @@ public class OWVoiceMod : ModBehaviour
 
 		if (currentTextName == oldTextName) return;
 
+		UnloadAudio();
+
 		if (nomaiText.IsTranslated(currentTextID))
 		{
-			UnloadAudio();
-			oldTextName = currentTextName;
 			LoadAudio(currentTextName);
+			oldTextName = currentTextName;
 		}
 		else
 		{
