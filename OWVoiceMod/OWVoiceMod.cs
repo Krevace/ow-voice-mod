@@ -62,7 +62,7 @@ public class OWVoiceMod : ModBehaviour
 		LoadManager.OnCompleteSceneLoad += OnCompleteSceneLoad;
 	}
 
-	private static string FormatAssetName(string assetName) => assetName.Replace(" ", "").ToLower();
+	private static string FormatAssetName(string assetName) => assetName.Replace(" ", "").Replace("_", "").ToLower();
 
 	public static void RegisterAssets(string assetsFolder)
 	{
