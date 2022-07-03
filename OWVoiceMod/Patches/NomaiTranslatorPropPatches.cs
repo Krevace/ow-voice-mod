@@ -78,7 +78,7 @@ public class NomaiTranslatorPropPatches
 
 	[HarmonyPrefix]
 	[HarmonyPatch(nameof(NomaiTranslatorProp.ClearNomaiText))]
-	public static void ClearNomaiText(NomaiTranslatorProp __instance)
+	public static void ClearNomaiText()
 	{
 		OWVoiceMod.UnloadAudio();
 		oldTextName = null;
