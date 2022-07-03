@@ -85,11 +85,9 @@ public class NomaiTranslatorPropPatches
 	}
 
 	[HarmonyPrefix]
-	[HarmonyPatch(typeof(NomaiTranslatorProp), nameof(NomaiTranslatorProp.OnEquipTool))]
-	public static void OnEquipTool(NomaiTranslatorProp __instance)
-	{
+	[HarmonyPatch(nameof(NomaiTranslatorProp.OnEquipTool))]
+	public static void OnEquipTool(NomaiTranslatorProp __instance) =>
 		__instance._isTargetingGhostText = false;
-	}
 
 	[HarmonyPrefix]
 	[HarmonyPatch(nameof(NomaiTranslatorProp.OnUnequipTool))]
