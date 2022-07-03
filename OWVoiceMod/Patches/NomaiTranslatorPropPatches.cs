@@ -71,6 +71,7 @@ public class NomaiTranslatorPropPatches
 		}
 		else
 		{
+			// Fixes ghost audio bugs when Translator Auto-Equip is disabled
 			__instance._isTargetingGhostText = false;
 		}
 	}
@@ -87,6 +88,7 @@ public class NomaiTranslatorPropPatches
 	[HarmonyPatch(typeof(NomaiTranslatorProp), nameof(NomaiTranslatorProp.OnEquipTool))]
 	public static void OnEquipTool(NomaiTranslatorProp __instance)
 	{
+		// Fixes ghost audio bugs when Translator Auto-Equip is disabled
 		__instance._isTargetingGhostText = false;
 	}
 
