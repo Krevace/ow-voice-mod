@@ -162,6 +162,7 @@ public class OWVoiceMod : ModBehaviour
 
 	public static void UnloadAudio()
 	{
+		if (audioSource.clip == null) return;
 		audioSource.Stop();
 		if (audioSource.clip != null) Destroy(audioSource.clip);
 		audioSource.clip = null;
