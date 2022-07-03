@@ -174,4 +174,4 @@ There's also addon support! Check [here](https://github.com/Krevace/ow-voice-mod
 
 # Known Bugs
 
-If you have the Translator Auto-Equip setting disabled, then pausing the game will fail to pause audio. Unfortunately, this is a vanilla issue and really doesn't matter enough to be fixed. 
+If you have the Translator Auto-Equip setting disabled, then pausing the game won't pause audio. Unfortunately, this is a vanilla issue and really doesn't matter enough to be fixed. 
