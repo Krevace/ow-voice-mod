@@ -51,7 +51,7 @@ public class NomaiTranslatorPropPatches
 	public static void SetTargetingGhostText(NomaiTranslatorProp __instance, bool isTargetingGhostText)
 	{
 		if (__instance._isTargetingGhostText == isTargetingGhostText) return;
-		if (OWVoiceMod.owlkWriting && isTargetingGhostText)
+		if (OWVoiceMod.owlkWriting && isTargetingGhostText && !__instance._isTooCloseToTarget)
 		{
 			OWVoiceMod.UnloadAudio();
 			OWVoiceMod.audioSource.loop = true;
@@ -68,6 +68,10 @@ public class NomaiTranslatorPropPatches
 		{
 			OWVoiceMod.UnloadAudio();
 			oldTextName = null;
+		}
+		else
+        {
+			__instance._isTargetingGhostText = false;
 		}
 	}
 
