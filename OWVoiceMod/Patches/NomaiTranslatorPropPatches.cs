@@ -2,14 +2,14 @@
 
 namespace OWVoiceMod.Patches;
 
-[HarmonyPatch]
+[HarmonyPatch(typeof(NomaiTranslatorProp))]
 public class NomaiTranslatorPropPatches
 {
 	private static string currentTextName;
 	private static string oldTextName;
 
 	[HarmonyPrefix]
-	[HarmonyPatch(typeof(NomaiTranslatorProp), nameof(NomaiTranslatorProp.DisplayTextNode))]
+	[HarmonyPatch(nameof(NomaiTranslatorProp.DisplayTextNode))]
 	public static void DisplayTextNode(NomaiTranslatorProp __instance)
 	{
 		var nomaiText = __instance._nomaiTextComponent;
@@ -47,7 +47,7 @@ public class NomaiTranslatorPropPatches
 	}
 
 	[HarmonyPrefix]
-	[HarmonyPatch(typeof(NomaiTranslatorProp), nameof(NomaiTranslatorProp.SetTargetingGhostText))]
+	[HarmonyPatch(nameof(NomaiTranslatorProp.SetTargetingGhostText))]
 	public static void SetTargetingGhostText(NomaiTranslatorProp __instance, bool isTargetingGhostText)
 	{
 		if (__instance._isTargetingGhostText == isTargetingGhostText) return;
@@ -60,7 +60,7 @@ public class NomaiTranslatorPropPatches
 	}
 
 	[HarmonyPrefix]
-	[HarmonyPatch(typeof(NomaiTranslatorProp), nameof(NomaiTranslatorProp.SetTooCloseToTarget))]
+	[HarmonyPatch(nameof(NomaiTranslatorProp.SetTooCloseToTarget))]
 	public static void SetTooCloseToTarget(NomaiTranslatorProp __instance, bool value)
 	{
 		if (__instance._isTooCloseToTarget == value) return;
@@ -70,13 +70,13 @@ public class NomaiTranslatorPropPatches
 			oldTextName = null;
 		}
 		else
-        {
+		{
 			__instance._isTargetingGhostText = false;
 		}
 	}
 
 	[HarmonyPrefix]
-	[HarmonyPatch(typeof(NomaiTranslatorProp), nameof(NomaiTranslatorProp.ClearNomaiText))]
+	[HarmonyPatch(nameof(NomaiTranslatorProp.ClearNomaiText))]
 	public static void ClearNomaiText(NomaiTranslatorProp __instance)
 	{
 		if (__instance._nomaiTextComponent == null) return;
@@ -85,7 +85,7 @@ public class NomaiTranslatorPropPatches
 	}
 
 	[HarmonyPrefix]
-	[HarmonyPatch(typeof(NomaiTranslatorProp), nameof(NomaiTranslatorProp.OnUnequipTool))]
+	[HarmonyPatch(nameof(NomaiTranslatorProp.OnUnequipTool))]
 	public static void OnUnequipTool()
 	{
 		OWVoiceMod.UnloadAudio();
