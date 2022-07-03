@@ -86,8 +86,9 @@ public class NomaiTranslatorPropPatches
 
 	[HarmonyPrefix]
 	[HarmonyPatch(nameof(NomaiTranslatorProp.OnEquipTool))]
-	public static void OnEquipTool(NomaiTranslatorProp __instance) => __instance._isTargetingGhostText = false;
-	// Fixes ghost audio bugs when Translator Auto-Equip is disabled
+	public static void OnEquipTool(NomaiTranslatorProp __instance) =>
+		// Fixes ghost audio bugs when Translator Auto-Equip is disabled
+		__instance._isTargetingGhostText = false;
 
 	[HarmonyPrefix]
 	[HarmonyPatch(nameof(NomaiTranslatorProp.OnUnequipTool))]
