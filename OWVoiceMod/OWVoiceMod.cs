@@ -133,9 +133,9 @@ public class OWVoiceMod : ModBehaviour
 		var xmlCharacterDialogueAsset = characterDialogueTree._xmlCharacterDialogueAsset;
 		var characterName = characterDialogueTree._characterName;
 
-		if (!conversations && characterName != "RECORDING" && characterName != "SIGN") return;
-		if (!hearthianRecordings && characterName == "RECORDING") return;
-		if (!paperNotes && characterName == "SIGN") return;
+		if (!conversations && characterName is not (CharacterDialogueTree.RECORDING_NAME or CharacterDialogueTree.SIGN_NAME)) return;
+		if (!hearthianRecordings && characterName is CharacterDialogueTree.RECORDING_NAME) return;
+		if (!paperNotes && characterName is CharacterDialogueTree.SIGN_NAME) return;
 
 		UnloadAudio();
 
