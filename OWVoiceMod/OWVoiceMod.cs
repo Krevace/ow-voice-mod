@@ -165,7 +165,6 @@ public class OWVoiceMod : ModBehaviour
 		if (audioSource.clip == null) return;
 		audioSource.Stop();
 		Destroy(audioSource.clip);
-		audioSource.clip = null;
 		audioSource.loop = false;
 	}
 
