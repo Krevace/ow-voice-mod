@@ -27,7 +27,6 @@ public class OWVoiceMod : ModBehaviour
 	private static bool hearthianRecordings;
 	public static bool nomaiRecordings;
 	private static bool paperNotes;
-	private static bool quantamSigns;
 	public static bool nomaiScrolls;
 	public static bool nomaiComputers;
 	public static bool owlkWriting;
@@ -94,7 +93,6 @@ public class OWVoiceMod : ModBehaviour
 		hearthianRecordings = config.GetSettingsValue<bool>("hearthianRecordings");
 		nomaiRecordings = config.GetSettingsValue<bool>("nomaiRecordings");
 		paperNotes = config.GetSettingsValue<bool>("paperNotes");
-		quantamSigns = config.GetSettingsValue<bool>("quantamSigns");
 		nomaiScrolls = config.GetSettingsValue<bool>("nomaiScrolls");
 		nomaiComputers = config.GetSettingsValue<bool>("nomaiComputers");
 		owlkWriting = config.GetSettingsValue<bool>("owlkWriting");
@@ -135,10 +133,9 @@ public class OWVoiceMod : ModBehaviour
 		var xmlCharacterDialogueAsset = characterDialogueTree._xmlCharacterDialogueAsset;
 		var characterName = characterDialogueTree._characterName;
 
-		if (!conversations && characterName != "RECORDING" && characterName != "NOTE" && characterName != "SIGN") return;
+		if (!conversations && characterName != "RECORDING" && characterName != "SIGN") return;
 		if (!hearthianRecordings && characterName == "RECORDING") return;
-		if (!paperNotes && characterName == "NOTE") return;
-		if (!quantamSigns && characterName == "SIGN") return;
+		if (!paperNotes && characterName == "SIGN") return;
 
 		UnloadAudio();
 

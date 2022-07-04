@@ -26,11 +26,6 @@
 			"type": "toggle",
 			"value": true
 		},
-		"quantamSigns": {
-			"title": "Quantam Signs",
-			"type": "toggle",
-			"value": true
-		},
 		"nomaiScrolls": {
 			"title": "Nomai Scrolls",
 			"type": "toggle",
