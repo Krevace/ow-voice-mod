@@ -66,22 +66,26 @@ public class OWVoiceMod : ModBehaviour
 
 	public static void RegisterAssets(string assetsFolder)
 	{
-		foreach (var assetPath in Directory.EnumerateFiles(assetsFolder, "credits.xml", SearchOption.AllDirectories))
+		try
 		{
-			creditsAssetPath = assetPath;
-			break;
-		}
-
-		foreach (var assetPath in Directory.EnumerateFiles(assetsFolder, "*.mp3", SearchOption.AllDirectories)
-					.Concat(Directory.EnumerateFiles(assetsFolder, "*.wav", SearchOption.AllDirectories))
-					.Concat(Directory.EnumerateFiles(assetsFolder, "*.ogg", SearchOption.AllDirectories)))
-		{
-			// Conjoins audio files of the same content with different names using &
-			foreach (var assetName in Path.GetFileNameWithoutExtension(assetPath).Split('&'))
+			foreach (var assetPath in Directory.EnumerateFiles(assetsFolder, "credits.xml", SearchOption.AllDirectories))
 			{
-				assetPaths[FormatAssetName(assetName)] = assetPath;
+				creditsAssetPath = assetPath;
+				break;
+			}
+
+			foreach (var assetPath in Directory.EnumerateFiles(assetsFolder, "*.mp3", SearchOption.AllDirectories)
+						.Concat(Directory.EnumerateFiles(assetsFolder, "*.wav", SearchOption.AllDirectories))
+						.Concat(Directory.EnumerateFiles(assetsFolder, "*.ogg", SearchOption.AllDirectories)))
+			{
+				// Conjoins audio files of the same content with different names using &
+				foreach (var assetName in Path.GetFileNameWithoutExtension(assetPath).Split('&'))
+				{
+					assetPaths[FormatAssetName(assetName)] = assetPath;
+				}
 			}
 		}
+		catch { ModHelper.Console.WriteLine("Error finding and registering assests!", MessageType.Error); }
 	}
 
 	public override object GetApi() => new OWVoiceModAPI();
