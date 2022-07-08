@@ -182,6 +182,8 @@ public class OWVoiceMod : ModBehaviour
 			_ => throw new ArgumentOutOfRangeException()
 		};
 
+		path = $"file:///{path.Replace("+", "%2B")}";
+		ModHelper.Console.WriteLine(path);
 		using var uwr = UnityWebRequestMultimedia.GetAudioClip(path, audioType);
 
 		uwr.SendWebRequest();
