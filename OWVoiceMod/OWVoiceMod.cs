@@ -183,7 +183,6 @@ public class OWVoiceMod : ModBehaviour
 		};
 
 		path = $"file:///{path.Replace("+", "%2B")}";
-		ModHelper.Console.WriteLine(path);
 		using var uwr = UnityWebRequestMultimedia.GetAudioClip(path, audioType);
 
 		uwr.SendWebRequest();
