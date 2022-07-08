@@ -3,7 +3,7 @@
   "author": "Krevace",
   "name": "Voice Acting Mod",
   "uniqueName": "Krevace.VoiceMod",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "owmlVersion": "2.5.2",
   "priorityLoad": true
 }
