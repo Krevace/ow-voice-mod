@@ -1,3 +1,8 @@
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/Krevace/ow-voice-mod?style=for-the-badge&color=02a68c)
+![GitHub Release Date](https://img.shields.io/github/release-date/Krevace/ow-voice-mod?label=last%20release&style=for-the-badge&color=02a68c)
+![GitHub all releases](https://img.shields.io/github/downloads/Krevace/ow-voice-mod/total?style=for-the-badge&color=fd7d34)
+![GitHub release (latest by date)](https://img.shields.io/github/downloads/Krevace/ow-voice-mod/latest/total?style=for-the-badge&color=fd7d34)
+
 ![VoiceModLogo](https://user-images.githubusercontent.com/55517452/163519692-3d447d2b-e6c8-4b66-ae29-ec2c8151a78e.png)
 
 # Outer Wilds Voice Acting Mod
