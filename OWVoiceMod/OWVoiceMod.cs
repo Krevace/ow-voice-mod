@@ -119,8 +119,6 @@ public class OWVoiceMod : ModBehaviour
 			{
 				audioSource = Locator.GetPlayerBody().gameObject.AddComponent<AudioSource>();
 				audioSource.volume = volume;
-				audioSource.outputAudioMixerGroup = Locator.GetAudioMixer().GetAudioMixerGroup(OWAudioMixer.TrackName.Environment);
-				// Placed on the Environment track to get environmental effects like reverb
 
 				var characterDialogueTrees = Resources.FindObjectsOfTypeAll<CharacterDialogueTree>();
 				foreach (var characterDialogueTree in characterDialogueTrees)
