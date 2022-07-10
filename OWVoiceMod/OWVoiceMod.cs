@@ -118,7 +118,8 @@ public class OWVoiceMod : ModBehaviour
 			ModHelper.Events.Unity.FireOnNextUpdate(() =>
 			{
 				audioSource = Locator.GetPlayerBody().gameObject.AddComponent<AudioSource>();
-				audioSource.volume = volume * Locator.GetAudioMixer()._masterVolume._value;
+				audioSource.volume = volume;
+				audioSource.outputAudioMixerGroup = Locator.GetAudioMixer().GetAudioMixerGroup(OWAudioMixer.TrackName.Player);
 				// Scales based on master volume
 
 				var characterDialogueTrees = Resources.FindObjectsOfTypeAll<CharacterDialogueTree>();
