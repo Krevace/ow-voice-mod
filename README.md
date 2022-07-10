@@ -11,7 +11,7 @@ This mod will soon add voice acting to all Outer Wilds characters! Hearthians, N
 
 There's also addon support! Check [here](https://github.com/Krevace/ow-voice-mod-template) if you want to add your own voice lines. 
 
-# Credits
+## Credits
 
 `Krevace` Project Director, Programmer
 
@@ -177,7 +177,7 @@ There's also addon support! Check [here](https://github.com/Krevace/ow-voice-mod
 
 `Chronarch` Yarrow VA
 
-# Known Bugs
+## Known Bugs
 
 If you have the Translator Auto-Equip setting disabled, then pausing the game won't pause audio. Unfortunately, this is a vanilla issue and really doesn't matter enough to be fixed. 
 
