@@ -194,16 +194,6 @@ public class OWVoiceMod : ModBehaviour
 			return null;
 		}
 
-		var clip = DownloadHandlerAudioClip.GetContent(uwr);
-
-		// normalize
-		// TODO remove after mixing
-		var samples = new float[clip.samples * clip.channels];
-		clip.GetData(samples, 0);
-		var max = samples.Select(Mathf.Abs).Max();
-		for (var i = 0; i < samples.Length; i++) samples[i] /= max;
-		clip.SetData(samples, 0);
-
-		return clip;
+		return DownloadHandlerAudioClip.GetContent(uwr);
 	}
 }
