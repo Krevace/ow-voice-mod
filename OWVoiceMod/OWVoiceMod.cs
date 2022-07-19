@@ -17,7 +17,7 @@ public class OWVoiceMod : ModBehaviour
 {
 	private new static IModHelper ModHelper;
 	private static readonly Dictionary<string, string> assetPaths = new();
-	private static string assetFolderPath;
+	private static string creditsAssetPath;
 	public static AudioSource audioSource;
 
 	public static int randomDialogueNum = -1;
@@ -36,8 +36,7 @@ public class OWVoiceMod : ModBehaviour
 	{
 		ModHelper = base.ModHelper;
 
-		assetFolderPath = Path.Combine(ModHelper.Manifest.ModFolderPath, "Assets");
-		RegisterAssets(assetFolderPath);
+		RegisterAssets(Path.Combine(ModHelper.Manifest.ModFolderPath, "Assets"));
 
 		if (splashSkip)
 		{
@@ -69,6 +68,12 @@ public class OWVoiceMod : ModBehaviour
 	{
 		try
 		{
+			foreach (var assetPath in Directory.EnumerateFiles(assetsFolder, "credits.xml", SearchOption.AllDirectories))
+			{
+				creditsAssetPath = assetPath;
+				break;
+			}
+
 			foreach (var assetPath in Directory.EnumerateFiles(assetsFolder, "*.mp3", SearchOption.AllDirectories)
 						.Concat(Directory.EnumerateFiles(assetsFolder, "*.wav", SearchOption.AllDirectories))
 						.Concat(Directory.EnumerateFiles(assetsFolder, "*.ogg", SearchOption.AllDirectories)))
@@ -104,7 +109,7 @@ public class OWVoiceMod : ModBehaviour
 		if (loadScene is OWScene.Credits_Fast or OWScene.Credits_Final)
 		{
 			var creditsAsset = FindObjectOfType<Credits>()._creditsAsset;
-			try { creditsAsset.xml = new TextAsset(File.ReadAllText(Path.Combine(assetFolderPath, "credits.xml"))); }
+			try { creditsAsset.xml = new TextAsset(File.ReadAllText(creditsAssetPath)); }
 			catch { ModHelper.Console.WriteLine("Credits file not found!", MessageType.Error); }
 		}
 		else if (loadScene is OWScene.SolarSystem or OWScene.EyeOfTheUniverse)
