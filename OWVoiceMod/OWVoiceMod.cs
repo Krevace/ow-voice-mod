@@ -1,7 +1,6 @@
 ﻿using HarmonyLib;
 using OWML.Common;
 using OWML.ModHelper;
-using OWML.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -22,7 +21,6 @@ public class OWVoiceMod : ModBehaviour
 
 	public static int randomDialogueNum = -1;
 
-	private static bool splashSkip;
 	private static bool conversations;
 	private static bool hearthianRecordings;
 	public static bool nomaiRecordings;
@@ -37,25 +35,6 @@ public class OWVoiceMod : ModBehaviour
 		ModHelper = base.ModHelper;
 
 		RegisterAssets(Path.Combine(ModHelper.Manifest.ModFolderPath, "Assets"));
-
-		if (splashSkip)
-		{
-			// Copied from https://github.com/Vesper-Works/OuterWildsOnline/blob/master/OuterWildsOnline/ConnectionController.cs#L106-L119
-			// Skip flash screen.
-			var titleScreenAnimation = FindObjectOfType<TitleScreenAnimation>();
-			titleScreenAnimation._fadeDuration = 0;
-			titleScreenAnimation._gamepadSplash = false;
-			titleScreenAnimation._introPan = false;
-			titleScreenAnimation.Invoke("FadeInTitleLogo");
-
-			// Skip menu fade.
-			var titleAnimationController = FindObjectOfType<TitleAnimationController>();
-			titleAnimationController._logoFadeDelay = 0.001f;
-			titleAnimationController._logoFadeDuration = 0.001f;
-			titleAnimationController._optionsFadeDelay = 0.001f;
-			titleAnimationController._optionsFadeDuration = 0.001f;
-			titleAnimationController._optionsFadeSpacing = 0.001f;
-		}
 
 		Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly());
 
@@ -92,7 +71,6 @@ public class OWVoiceMod : ModBehaviour
 
 	public override void Configure(IModConfig config)
 	{
-		splashSkip = config.GetSettingsValue<bool>("splashSkip");
 		conversations = config.GetSettingsValue<bool>("conversations");
 		hearthianRecordings = config.GetSettingsValue<bool>("hearthianRecordings");
 		nomaiRecordings = config.GetSettingsValue<bool>("nomaiRecordings");

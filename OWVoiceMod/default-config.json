@@ -1,11 +1,6 @@
 {
 	"enabled": true,
 	"settings": {
-		"splashSkip": {
-			"title": "Skip Splash Screen",
-			"type": "toggle",
-			"value": true
-		},
 		"conversations": {
 			"title": "Conversations",
 			"type": "toggle",
