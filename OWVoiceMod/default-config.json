@@ -42,11 +42,6 @@
 			"value": "1",
 			"min": 0,
 			"max": 1
-		},
-		"splashSkip": {
-			"title": "Skip Splash Screen",
-			"type": "toggle",
-			"value": false
 		}
 	}
 }
