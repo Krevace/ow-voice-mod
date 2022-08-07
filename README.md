@@ -119,6 +119,8 @@ There's also addon support! Check [here](https://github.com/Krevace/ow-voice-mod
 
 `Trifid` Moraine VA
 
+`The Lore Explorer` Museum VA
+
 `Speedbun` Neem VA
 
 `Laundryjx` Old Nomai Computers VA
