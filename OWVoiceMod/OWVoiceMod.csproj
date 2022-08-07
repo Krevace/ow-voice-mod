@@ -14,7 +14,7 @@
   <ItemGroup>
     <PackageReference Include="HarmonyX" Version="2.10.0" />
     <PackageReference Include="OWML" Version="2.5.2" />
-    <PackageReference Include="OuterWildsGameLibs" Version="1.1.12.168" />
+    <PackageReference Include="OuterWildsGameLibs" Version="1.1.12.201" />
   </ItemGroup>
   <ItemGroup>
     <None Include="default-config.json">
