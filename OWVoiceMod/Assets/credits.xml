@@ -143,6 +143,7 @@
 			padding-bottom = "8" spacing = "20">
 			<layout type = "SingleColumnFadeCentered">
 				Producers
+				<header>Jackie Kreitzberg</header>
 				<header>Kelsey Rice</header>
 				<header>Avimaan Syam</header>
 				<header>Katherine Wang</header>
@@ -152,6 +153,7 @@
 			padding-bottom = "8" spacing = "20">
 			<layout type = "SingleColumnFadeCentered">
 				Associate Producers
+				<header>Nathaniel Colburn</header>
 				<header>Laura Herzberg</header>
 				<header>Ana Solimano</header>
 			</layout>
@@ -351,12 +353,16 @@
 					<spacer />
 					Lanaea Bowie#Junior 3D Artist
 					<spacer />
+					Nathaniel Colburn#Associate Producer
+					<spacer />
 					Lara Colson#Lead 3D Artist
 								#Rocks &amp; Terrain Modeling
 					<spacer />
 					Kindra Dantone#3D Environment Artist
 								#3D Narrative Art
 								#Architecture Modeling
+					<spacer />
+					Zach R. D.#Additional Programming
 					<spacer />
 					Satrio Dewantono#Programmer
 					<spacer />
@@ -367,6 +373,8 @@
 					<spacer />
 					Nicholas Kim#3D Artist
 								#Technical Art Support
+					<spacer />
+					Jackie Kreitzberg#Producer
 					<spacer />
 					Eilish Lambrechtsen#Lead 3D Artist
 								#Terrain &amp; Foliage Art
@@ -436,12 +444,19 @@
 					Lanaea Bowie#Stephe's Gal Pal
 								#Dead Dolphin
 					<spacer />
+ 					Nathaniel Colburn#Stay at Home Bomb Squad
+ 								#The Mobius Digital Team
+ 								#Boba Buddy
+					<spacer />
 					Lara Colson#Dirt &amp; Rock Boss
 								#Faloti Corp Representative
 								#Hey, Don't Make a Game On Spheres
 					<spacer />
 					Kindra Dantone#Rug Merchant
 								#Bird Documentarian
+					<spacer />
+					Zach R. D.#Technically Did More Than Playtesting
+								#Just Happy to Be Here
 					<spacer />
 					Satrio Dewantono#Pandemic Response Team
 								#Actually a Chatbot
@@ -453,6 +468,9 @@
 					<spacer />
 					Nicholas Kim#Project DIVA Engineer
 								#Magical Girl
+					<spacer />
+					Jackie Kreitzberg#Destroyer of Network Solutions
+								     #Fiber Internet Diet
 					<spacer />
 					Eilish Lambrechtsen#Plant Whisperer
 								#Pyramid Hair
@@ -497,9 +515,9 @@
 					Akash Thakkar#Elk Whisperer
 								 #Electric Kazoo Technician
 					<spacer />
-					Logan Ver Hoef#Space Wizard
-								#Stabbing Enthusiast
-								#Underpaid 
+					Logan Ver Hoef#Weaver of Spacetime
+								#Lead Tormentor
+								#Still Not Paid Enough To Put Up With These Knuckleheads
 					<spacer />
 					Loan Verneau#Swiss Knife
 								#Devourer of Worlds and Breaker of the Wall
@@ -517,6 +535,8 @@
 			</layout>
 			<layout type = "TwoColumnScrollAlignRightLeft" spacer-base-height = "2">
 				Rowan Cullen#Mobius Intern
+				<spacer />
+				Ed Earl#Porting Engineer
 				<spacer />
 				Chelsea Hash#Character Rigger
 				<spacer />
@@ -569,21 +589,47 @@
 				Caspar Gray
 				<spacer height = "224" />
 				<title text-align = "UpperCenter" height = "120">Annapurna Interactive</title>
+				Lisa Aquilino
+				<spacer />
+				Michael Booker
+				<spacer />
+				Richard Cambier
+				<spacer />
+				Megan Ellison
+				<spacer />
+				Cosimo Galluzzi
+				<spacer />
 				Nathan Gary
 				<spacer />
+				Nate Grove
+				<spacer />
 				Kelsey Hansen
+				<spacer />
+				Chelsea Hash
+				<spacer />
+				Evan Hembacher
 				<spacer />
 				Neale Hemrajani
 				<spacer />
 				Evan Icenbice
 				<spacer />
+				Tim Koh
+				<spacer />
+				Brett Lajzer
+				<spacer />
 				Jeff Legaspi
+				<spacer />
+				Jordan Marks
 				<spacer />
 				Deborah Mars
 				<spacer />
 				James Masi
 				<spacer />
 				Jon McElroy
+				<spacer />
+				Sam Osburn
+				<spacer />
+				Maile Robertson
 				<spacer />
 				Adam Root
 				<spacer />
@@ -700,7 +746,7 @@
 			<layout type = "SingleColumnScrollCentered">
 			<heading text-align = "UpperCenter" height = "75">TTT Studios</heading>
 			</layout>
-			<layout type = "TwoColumnScrollCentered" spacer-base-height = "2">
+			<layout type = "TwoColumnScrollAlignRightLeft" spacer-base-height = "10">
 				Noel Feng#Software Developer
 				<spacer />
 				Harrold Paderan#Software Developer
@@ -710,29 +756,65 @@
 				<title text-align = "UpperCenter" height = "75">Technical Support</title>
 				<heading text-align = "UpperCenter" height = "75">Big Red Button</heading>
 				<spacer height = "60" />
+			</layout>
+			<section name = "EpicSpecificEdThanks" platform = "Epic Steam"> <!-- Ed platform-specific thanks for anything not Sony or Microsoft -->
+                <layout type = "SingleColumnScrollCentered">
+                <title text-align = "UpperCenter" height = "75">PS5™ and Xbox Series X|S Ports</title>
+                <heading text-align = "UpperCenter" height = "75">Skeleton Pet Shop</heading>
+                </layout>
+            </section>
+            <section name = "SonySpecificEdThanks" platform = "Sony"> <!-- Ed platform-specific thanks for Sony -->
+                <layout type = "SingleColumnScrollCentered">
+                <title text-align = "UpperCenter" height = "75">PS5™ Port</title>
+                <heading text-align = "UpperCenter" height = "75">Skeleton Pet Shop</heading>
+                </layout>
+            </section>
+            <section name = "MicrosoftSpecificEdThanks" platform = "Microsoft"> <!-- Ed platform-specific thanks for Microsoft -->
+                <layout type = "SingleColumnScrollCentered">
+                <title text-align = "UpperCenter" height = "75">Xbox Series X|S Port</title>
+                <heading text-align = "UpperCenter" height = "75">Skeleton Pet Shop</heading>
+                </layout>
+            </section>        
+            <layout type = "TwoColumnScrollAlignRightLeft" spacer-base-height = "10">
+                Ed Earl#Director and Lead Programmer
+                <spacer height = "60" />
+            </layout>			
+			<layout type = "SingleColumnScrollCentered">
 				<title text-align = "UpperCenter" height = "75">Quality Assurance</title>
 				<heading text-align = "UpperCenter" height = "75">HUWIZ QA/UX</heading>
 			</layout>
 			<layout type = "TwoColumnScrollCentered" spacer-base-height = "2">
-				Carolljo Maher#Cyril Laporte
+				Alexis Delarosbil#Carolljo Maher
 				<spacer />
-				Dominic Ducharme#Frédéric Renard
+				Catherine Lalande#Chloé Chabot
+				<spacer />
+				Christopher Sauvé#Cyril Laporte
+				<spacer />
+				Danaé Blanchard#Dominic Ducharme
+				<spacer />
+				Frédéric Renard#Geoffrey Gervais-Tremblay
 				<spacer />
 				Guillaume Lanéel#Jast Aubin
 				<spacer />
 				Jean-Sébastien Léveillée#Jérémy Costa
 				<spacer />
-				Joey Chabot#Laura Cousillas
+				Jonathan D. Loyer#Kariane Lacharité
+				<spacer />
+				Kevin Furtado#Laura Cousillas
 				<spacer />
 				Louis St-Denis#Martin Gagnon
 				<spacer />
 				Maxime Lacoste#Mylène Roffi
 				<spacer />
-				Nicolas Lefebvre#Roxanne Gingras
+				Nicolas Lefebvre#Normand Chartier-Prévost
 				<spacer />
-				Sandra Malenfant#Sébastien Pruneau
+				Olivier Deslauriers#Roxanne Gingras
 				<spacer />
-				Tommy Lincourt#
+				Sandra Malenfant#Tammy-Lee Stevenson
+				<spacer />
+				Sébastien Pruneau#Tommy Lincourt
+				<spacer />
+				Viviane Larivière-Arsenault#
 				<spacer height = "60" />
 			</layout>
 			<layout type = "SingleColumnScrollCentered">
@@ -1080,7 +1162,7 @@
 				<spacer />
 				Trevor Strunk#Aiden Valentine#Sofie Vos
 				<spacer />
-				Alex Zhang &amp; Maureen "Momo" Wang#Jake Weidner#Kathryn Yu
+				Alex Zhang &amp; Maureen "Momo" Wang#Jake Weidner#Beatrix Wun#Kathryn Yu
 				<spacer />
 				<spacer height = "152" />
 				</layout>
@@ -1091,13 +1173,7 @@
 				Jeremy Gibson
 				<spacer height = "226" />
 				<heading text-align = "UpperCenter" height = "98">Annapurna Interactive Special Thanks</heading>
-				Megan Ellison
-				<spacer height = "28" />
-				Jordan Marks
-				<spacer />
 				Sam Kim
-				<spacer />
-				Tim Koh
 				<spacer />
 				Cornelis van Dijkhuizen, Caleb Bardgett, and Jason Paul
 				<spacer />
@@ -1108,14 +1184,14 @@
 			</layout>
 			<section name = "EpicSpecificAPThanks1" platform = "Epic Microsoft Steam"> <!-- Annapurna platform-specific thanks pt.1 for anything not Sony -->
 				<layout type = "SingleColumnScrollCentered" spacer-base-height = "2">
-					Sibel Sunar, Laura Weir, Janelle Grai, Deanna Pe, Sarah Rudney, Dillon Arace and everyone at fortyseven 
+					Sibel Sunar, Laura Weir, Janelle Grai, Deanna Pe, Sarah Rudney, Dillon Arace, Jules Engel and everyone at fortyseven 
 					communications
 					<spacer />
 				</layout>
 			</section>
 			<section name = "PS4SpecificAPThanks1" platform = "Sony"> <!-- Annapurna platform-specific thanks pt.1 for PS4 -->
 				<layout type = "SingleColumnScrollCentered" spacer-base-height = "2">
-					Sibel Sunar, Laura Weir, Mari Garcia, Janelle Grai, Sarah Rudney, Dillon Arace and everyone at fortyseven 
+					Sibel Sunar, Laura Weir, Mari Garcia, Janelle Grai, Sarah Rudney, Dillon Arace, Jules Engel and everyone at fortyseven 
 					communications
 					<spacer />
 				</layout>
@@ -1128,7 +1204,23 @@
 				<layout type = "SingleColumnScrollCentered" spacer-base-height = "2">
 					Steve Allison
 					<spacer />
+					Brian Silva
+					<spacer />
+					Leo Tan
+					<spacer />
+					Doug Payne
+					<spacer />
+					Sharon Hackney
+					<spacer />
 					Kimberly Rodatos
+					<spacer />
+					Brandon Kling
+					<spacer />
+					Jeff Sullivan
+					<spacer />
+					Joe Graf
+					<spacer />
+					Matt Sparks
 					<spacer />
 					Joe Kreiner
 					<spacer />
@@ -1146,6 +1238,8 @@
 				<layout type = "SingleColumnScrollCentered" spacer-base-height = "2">
 					Nate Ahearn
 					<spacer />
+					Phil Spencer
+					<spacer />
 					Chris Charla
 					<spacer />
 					Sarah Conde
@@ -1156,6 +1250,16 @@
 					<spacer />
 					Glenn Gregory
 					<spacer />
+					Chloe Giusti
+					<spacer />
+					Brian Weiss
+					<spacer />
+					Iain MacIntyre
+					<spacer />
+					Adam Heath
+					<spacer />
+					Nik Dighe
+					<spacer />
 				</layout>
 			</section>
 			<section name = "PS4SpecificAPThanks2" platform = "Sony"> <!-- Annapurna platform-specific thanks pt.2 for PS4 -->
@@ -1165,6 +1269,14 @@
 					Brian Silva
 					<spacer />
 					Shawne Benson
+					<spacer />
+					Alice Liang 
+					<spacer />
+					Greg Rice
+					<spacer />
+					Joshua Platt
+					<spacer />
+					Andrew Wong
 					<spacer />
 					Julio Perez
 					<spacer />
@@ -1183,6 +1295,8 @@
 					Matt Nickerson
 					<spacer />
 					Adam Klaff
+					<spacer />
+					Augusta Butlin
 					<spacer />
 				</layout>
 			</section>
@@ -1248,7 +1362,7 @@
 				<spacer height = "102" />
 			</layout>
 			<layout type = "SingleColumnScrollCentered" spacer-base-height = "0">
-				© 2019-2020 Mobius Digital, LLC
+				© 2019-2022 Mobius Digital, LLC
 				Published by Annapurna Interactive under exclusive license.
 				All rights reserved.
 				<spacer height = "476" />
