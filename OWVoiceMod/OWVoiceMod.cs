@@ -54,8 +54,8 @@ public class OWVoiceMod : ModBehaviour
 			}
 
 			foreach (var assetPath in Directory.EnumerateFiles(assetsFolder, "*.mp3", SearchOption.AllDirectories)
-						.Concat(Directory.EnumerateFiles(assetsFolder, "*.wav", SearchOption.AllDirectories))
-						.Concat(Directory.EnumerateFiles(assetsFolder, "*.ogg", SearchOption.AllDirectories)))
+				.Concat(Directory.EnumerateFiles(assetsFolder, "*.wav", SearchOption.AllDirectories))
+				.Concat(Directory.EnumerateFiles(assetsFolder, "*.ogg", SearchOption.AllDirectories)))
 			{
 				// Conjoins audio files of the same content with different names using &
 				foreach (var assetName in Path.GetFileNameWithoutExtension(assetPath).Split('&'))
