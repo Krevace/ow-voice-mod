@@ -8,14 +8,15 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Networking;
 
 namespace OWVoiceMod;
 
 public class OWVoiceMod : ModBehaviour
 {
-	private new static IModHelper ModHelper;
-	private static readonly Dictionary<string, string> assetPaths = new();
+	public new static IModHelper ModHelper;
+	public static readonly Dictionary<string, string> assetPaths = new();
 	private static string creditsAssetPath;
 	public static AudioSource audioSource;
 
@@ -41,7 +42,7 @@ public class OWVoiceMod : ModBehaviour
 		LoadManager.OnCompleteSceneLoad += OnCompleteSceneLoad;
 	}
 
-	private static string FormatAssetName(string assetName) => assetName.Replace(" ", "").Replace("_", "").ToLower();
+	public static string FormatAssetName(string assetName) => assetName.Replace(" ", "").Replace("_", "").ToLower();
 
 	public static void RegisterAssets(string assetsFolder)
 	{
@@ -173,5 +174,11 @@ public class OWVoiceMod : ModBehaviour
 		}
 
 		return DownloadHandlerAudioClip.GetContent(uwr);
+	}
+
+
+	private void Update()
+	{
+		if (Keyboard.current[Key.NumpadEnter].wasPressedThisFrame) LineTester.Run();
 	}
 }
