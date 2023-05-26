@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OWML.Common;
+using System;
 using UnityEngine;
 using static OWVoiceMod.OWVoiceMod;
 
@@ -12,7 +13,7 @@ public static class LineTester
 		foreach (var characterDialogueTree in Resources.FindObjectsOfTypeAll<CharacterDialogueTree>())
 		{
 			if (!characterDialogueTree || !characterDialogueTree._xmlCharacterDialogueAsset || characterDialogueTree._xmlCharacterDialogueAsset.text == null) continue;
-			
+
 			var xmlCharacterDialogueAsset = characterDialogueTree._xmlCharacterDialogueAsset;
 
 			string nodeName = null;
@@ -40,7 +41,7 @@ public static class LineTester
 
 				var assetName = $"{xmlCharacterDialogueAsset.name} {nodeName} {pageNum}";
 				if (!assetPaths.TryGetValue(FormatAssetName(assetName), out _))
-					ModHelper.Console.WriteLine($"MISSING {assetName}");
+					ModHelper.Console.WriteLine($"MISSING {assetName}", MessageType.Error);
 			}
 		}
 
@@ -49,7 +50,7 @@ public static class LineTester
 		foreach (var nomaiText in Resources.FindObjectsOfTypeAll<NomaiText>())
 		{
 			if (!nomaiText || !nomaiText._nomaiTextAsset || nomaiText._nomaiTextAsset.text == null) continue;
-			
+
 			var nomaiTextAsset = nomaiText._nomaiTextAsset;
 
 			var currentTextID = -1;
@@ -82,7 +83,7 @@ public static class LineTester
 					assetName = $"{assetName} {currentTextID}";
 				}
 				if (!assetPaths.TryGetValue(FormatAssetName(assetName), out _))
-					ModHelper.Console.WriteLine($"MISSING {assetName}");
+					ModHelper.Console.WriteLine($"MISSING {assetName}", MessageType.Error);
 			}
 		}
 	}
