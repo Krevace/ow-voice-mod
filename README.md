@@ -7,7 +7,7 @@
 
 # Outer Wilds Voice Acting Mod
 
-This mod will soon add voice acting to all Outer Wilds characters! Hearthians, Nomai, the Prisoner, and even you. The mod's not yet finished. All characters are fully voiced, but the files are currently being mixed for the final version. Check [here](https://docs.google.com/spreadsheets/d/1pPjC9oSxANbBamzQGVdnupMIg8SeinYtDk-5qQ6TY9g/edit#gid=0) for progress updates on the mixing. All voice acting has been gathered by the community. The [Discord](https://discord.gg/daHHqkKChm) is where it all went down. 
+This mod will soon add voice acting to all Outer Wilds characters! Hearthians, Nomai, the Prisoner, and even you. The mod's not yet finished. All characters are fully voiced, but the files are currently being mixed for the final version. Check [here](https://docs.google.com/spreadsheets/d/14SZpWTWc8xiw4vrPcUv-d_RIr9UxRdhbUiVI4vVK04o) for progress updates on the mixing. All voice acting has been gathered by the community. The [Discord](https://discord.gg/daHHqkKChm) is where it all went down. 
 
 There's also addon support! Check [here](https://github.com/Krevace/ow-voice-mod-template) if you want to add your own voice lines. 
 
