@@ -1,4 +1,5 @@
-![VoiceModLogo](https://user-images.githubusercontent.com/55517452/163519692-3d447d2b-e6c8-4b66-ae29-ec2c8151a78e.png)
+![VoiceModLogo - New](https://github.com/Krevace/ow-voice-mod/assets/55517452/82095f78-1816-411a-bc54-450ef5fb3e16)
+
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/Krevace/ow-voice-mod?style=for-the-badge&color=02a68c)
 ![GitHub Release Date](https://img.shields.io/github/release-date/Krevace/ow-voice-mod?label=last%20release&style=for-the-badge&color=02a68c)
@@ -18,6 +19,8 @@ There's also addon support! Check [here](https://github.com/Krevace/ow-voice-mod
 `JohnCorby` Project Manager, Programmer
 
 `Trifid` Project Moderator
+
+`Evalka` Logo Designer, (upcoming) Trailer Creator
 
 <br/>
 
@@ -180,7 +183,5 @@ There's also addon support! Check [here](https://github.com/Krevace/ow-voice-mod
 `Chronarch` Yarrow VA
 
 ## Known Bugs
-
-If you have the Translator Auto-Equip setting disabled, then pausing the game won't pause audio. Unfortunately, this is a vanilla issue and really doesn't matter enough to be fixed. 
 
 Having white space URL escape codes in the asset filepath such as `%20` or `%2B` makes Unity Web Request 404. Just don't include weird strings in your folder names psycho.
