@@ -24,13 +24,13 @@ There's also addon support! Check [here](https://github.com/Krevace/ow-voice-mod
 
 <br/>
 
-`Speedbun` Mixer
+`Speedbun` Mixing Engineer
 
-`Gambiller` Mixer
+`Gambiller` Mixing Engineer
 
-`Sneezycat` Mixer
+`Sneezycat` Mixing Engineer
 
-`Embor12` Mixer
+`Embor12` Mixing Engineer
 
 <br/>
 
