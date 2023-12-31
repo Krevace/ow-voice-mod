@@ -24,6 +24,16 @@ There's also addon support! Check [here](https://github.com/Krevace/ow-voice-mod
 
 <br/>
 
+`Speedbun` Mixer
+
+`Gambiller` Mixer
+
+`Sneezycat` Mixer
+
+`Embor12` Mixer
+
+<br/>
+
 `JustARogueAI` Annona VA
 
 `Kiki Willows` Arkose VA
