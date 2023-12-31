@@ -57,11 +57,8 @@ public class OWVoiceMod : ModBehaviour
 				.Concat(Directory.EnumerateFiles(assetsFolder, "*.wav", SearchOption.AllDirectories))
 				.Concat(Directory.EnumerateFiles(assetsFolder, "*.ogg", SearchOption.AllDirectories)))
 			{
-				// Conjoins audio files of the same content with different names using &
-				foreach (var assetName in Path.GetFileNameWithoutExtension(assetPath).Split('&'))
-				{
-					assetPaths[FormatAssetName(assetName)] = assetPath;
-				}
+				var assetName = Path.GetFileNameWithoutExtension(assetPath);
+				assetPaths[FormatAssetName(assetName)] = assetPath;
 			}
 		}
 		catch { ModHelper.Console.WriteLine("Error finding and registering assests!", MessageType.Error); }
