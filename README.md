@@ -20,7 +20,7 @@ There's also addon support! Check [here](https://github.com/Krevace/ow-voice-mod
 
 `Trifid` Project Moderator
 
-`Evalka` Logo Designer, (upcoming) Trailer Creator
+`Evalka` Logo Designer, Trailer Creator
 
 <br/>
 
