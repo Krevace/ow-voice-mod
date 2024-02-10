@@ -32,7 +32,7 @@ There's also addon support! Check [here](https://github.com/Krevace/ow-voice-mod
 
 `Sneezycat` Mixing Engineer
 
-`Embor12` Mixing Engineer
+`Matthew Bragg` Mixing Engineer
 
 <br/>
 
