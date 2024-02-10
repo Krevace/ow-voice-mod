@@ -92,7 +92,7 @@ There's also addon support! Check [here](https://github.com/Krevace/ow-voice-mod
 
 `Speedbun` Eye Museum Chorus VA
 
-`Embor12` Eye Museum Chorus VA
+`Matthew Bragg` Eye Museum Chorus VA
 
 `Jenywlfersn` Feldspar VA
 
@@ -146,7 +146,7 @@ There's also addon support! Check [here](https://github.com/Krevace/ow-voice-mod
 
 `ImFloof` Phlox VA
 
-`Embor12` Plume VA
+`Matthew Bragg` Plume VA
 
 `sunshinemcgee` Poke VA
 
@@ -164,7 +164,7 @@ There's also addon support! Check [here](https://github.com/Krevace/ow-voice-mod
 
 `Sasquatch` Rhus VA
 
-`Embor12` Riebeck VA
+`Matthew Bragg` Riebeck VA
 
 `matak12m` Root VA
 
@@ -188,7 +188,7 @@ There's also addon support! Check [here](https://github.com/Krevace/ow-voice-mod
 
 `Shiloh Kae` Tephra VA
 
-`Embor12` Thatch VA
+`Matthew Bragg` Thatch VA
 
 `Asleep0natra1n` Tuff VA
 
